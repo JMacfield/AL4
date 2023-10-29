@@ -6,7 +6,7 @@ void MoveGround::Initialize(Model* model, Vector3 translation, Vector3 Scale) {
 	worldTransform_.translation_ = translation;
 	worldTransform_.scale_ = Scale;
 	groundModel_ = model;
-	groundModel_->SetColor({ 0.0f,1.0f,0.0f,1.0f });
+	groundModel_->SetColor({ 0.0f,0.0f,1.0f,1.0f });
 	move_ = { 0.0f,0.0f,0.2f };
 }
 

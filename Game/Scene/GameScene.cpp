@@ -19,7 +19,7 @@ void GameScene::Initialize()
 	viewProjection_.Initialize();
 	viewProjection_.translation_ = { 0.0f,0.0f,-5.0f };
 
-	playerModel_.reset(Model::CreateModelFromObj("Resource", "saikoro.obj"));
+	playerModel_.reset(Model::CreateModelFromObj("Resource", "OBB.obj"));
 	player_ = make_unique<Player>();
 	player_->Initialize(playerModel_.get());
 	
@@ -40,8 +40,8 @@ void GameScene::Initialize()
 	goal_->Initialize({0.0f,2.0f,62.0f},{1.0f,1.0f,1.0f});
 	
 	enemy_ = make_unique<Enemy>();
-	enemyBodyModel.reset(Model::CreateModelFromObj("Resource", "saikoro.obj"));
-	enemyHeadModel.reset(Model::CreateModelFromObj("Resource", "saikoro.obj"));
+	enemyBodyModel.reset(Model::CreateModelFromObj("Resource", "OBB.obj"));
+	enemyHeadModel.reset(Model::CreateModelFromObj("Resource", "OBB.obj"));
 	enemyL_armModel.reset(Model::CreateModelFromObj("Resource", "float_L_arm.obj"));
 	enemyR_armModel.reset(Model::CreateModelFromObj("Resource", "float_R_arm.obj"));
 	
