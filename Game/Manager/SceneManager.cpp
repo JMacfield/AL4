@@ -16,7 +16,7 @@ void SceneManager::Run() {
 
 	while (true) {
 		// メッセージ処理
-		if (winApp_->Procesmessage()) {
+		if (winApp_->ProcessMessage()) {
 			break;
 		}
 

@@ -56,7 +56,7 @@ WinApp* WinApp::GetInstance()
 	return &instance;
 }
 
-bool WinApp::Procesmessage() {
+bool WinApp::ProcessMessage() {
 	MSG msg{};
 
 		if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
@@ -74,8 +74,3 @@ void WinApp::Finalize()
 {
 	debugController_->Release();
 }
-
-
-//HWND WinApp::hwnd_;
-//UINT WinApp::windowStyle_;
-//ID3D12Debug1*WinApp:: debugController_;
