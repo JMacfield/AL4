@@ -1,6 +1,8 @@
 #include "Model.h"
+
 #include<fstream>
 #include<sstream>
+
 void Model::Initialize( const std::string& directoryPath, const std::string& filename)
 {
     dxCommon_ = DirectXCommon::GetInstance();
@@ -9,7 +11,7 @@ void Model::Initialize( const std::string& directoryPath, const std::string& fil
     modelData_ = LoadObjFile(directoryPath, filename);
     texture_ = textureManager_->Load(modelData_.material.textureFilePath);
   directionalLight_ = DirectionalLight::GetInstance();
-	CreateVartexData();
+	CreateVertexData();
 	SetColor();
     
 }
@@ -55,6 +57,7 @@ Model* Model::CreateModelFromObj(const std::string& directoryPath, const std::st
     model->Initialize(directoryPath, filename);
     return model;
 }
+
 ModelData Model::LoadObjFile(const std::string& directoryPath, const std::string& filename)
 {
     ModelData modelData;//構築するモデルデータ
@@ -151,11 +154,9 @@ MaterialData Model::LoadMaterialTemplateFile(const std::string& directoryPath, c
     return materialData;
 }
 
-void Model::CreateVartexData()
-{
+void Model::CreateVertexData() {
 	
 	vertexResource = dxCommon_->CreateBufferResource(dxCommon_->GetDevice().Get(), sizeof(VertexData) * modelData_.vertices.size());
-
 
 	vertexBufferView.BufferLocation = vertexResource->GetGPUVirtualAddress();
 

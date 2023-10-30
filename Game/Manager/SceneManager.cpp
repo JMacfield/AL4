@@ -8,7 +8,6 @@ SceneManager::SceneManager() {
 SceneManager::~SceneManager() {
 	imguiManager_->Finalize();
 	audio_->xAudio2.Reset();
-	audio_->SoundUnload(&audio_->soundDatas[0]);
 }
 
 void SceneManager::Run() {

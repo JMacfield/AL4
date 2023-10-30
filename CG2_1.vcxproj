@@ -46,6 +46,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(SolutionDir)/;$(ProjectDir)/Engine/3d;$(ProjectDir)/Engine/base;$(ProjectDir)/Engine/2d;$(ProjectDir)/Engine/MyUtility;$(ProjectDir)/Engine/Manager/Texture;$(ProjectDir)/Engine/Manager/Input;$(ProjectDir)/Engine/Manager/Audio;$(ProjectDir)/Engine/Manager/Collision;$(ProjectDir)/externals/nlohmann;$(ProjectDir)/Engine/Manager/GlobalVariables;$(ProjectDir)/Engine/Math;$(ProjectDir)/Engine/Manager/Lights;$(ProjectDir)/game/Objects/SkyDome;$(ProjectDir)/game/Objects/Player;$(ProjectDir)/game/camera;$(ProjectDir)/game/Objects/ground;$(ProjectDir)/game/Objects/ground/manager;$(ProjectDir)/game/Objects/Goal;$(ProjectDir)/game/Objects;$(ProjectDir)/game/Objects/Enemy</IncludePath>
+    <IntDir>$(SolutionDir)..\Generated\Obj\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)..\Generated\Outputs\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(SolutionDir)/;$(ProjectDir)/Engine/3d;$(ProjectDir)/Engine/base;$(ProjectDir)/Engine/2d;$(ProjectDir)/Engine/MyUtility;$(ProjectDir)/Engine/Manager/Texture;$(ProjectDir)/Engine/Manager/Input;$(ProjectDir)/Engine/Manager/Audio;$(ProjectDir)/Engine/Manager/Collision;$(ProjectDir)/externals/nlohmann;$(ProjectDir)/Engine/Manager/GlobalVariables;$(ProjectDir)/Engine/Math;$(ProjectDir)/Engine/Manager/Lights;$(ProjectDir)/game/Objects/SkyDome;$(ProjectDir)/game/Objects/Player;$(ProjectDir)/game/camera;$(ProjectDir)/game/Objects/ground;$(ProjectDir)/game/Objects/ground/manager;$(ProjectDir)/game/Objects/Goal;$(ProjectDir)/game/Objects;$(ProjectDir)/game/Objects/Enemy</IncludePath>

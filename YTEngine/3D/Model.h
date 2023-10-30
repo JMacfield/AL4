@@ -42,7 +42,7 @@ private:
 	
 	
 private:
-	void CreateVartexData();
+	void CreateVertexData();
 	void SetColor();
 	void TransformMatrix();
 

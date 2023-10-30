@@ -4,7 +4,7 @@
 Input* Input::GetInstance()
 {
 	if (!input_) {
-		input_=new Input();
+		input_ = new Input();
 	}
 	return input_;
 }
