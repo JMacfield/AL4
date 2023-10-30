@@ -106,12 +106,6 @@
     <Filter Include="ヘッダー ファイル\Game">
       <UniqueIdentifier>{3e44b02f-d04c-4448-aa55-0efc3eee1082}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\Game\Camera">
-      <UniqueIdentifier>{e59990d8-05ab-49d1-a8b1-c12f53f19838}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Game\Camera">
-      <UniqueIdentifier>{56eae0bb-a6e2-4339-a922-b1642e479c8c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Game\Scene">
       <UniqueIdentifier>{205fe5e3-5f87-4cbd-802b-561243fe830a}</UniqueIdentifier>
     </Filter>
@@ -123,48 +117,6 @@
     </Filter>
     <Filter Include="ヘッダー ファイル\Game\Manager">
       <UniqueIdentifier>{f873bc1f-53aa-431d-b9a4-2a5b95a6f19a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Game\Object">
-      <UniqueIdentifier>{d161a214-d95d-44a1-816b-0f051f6adfb6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Game\Object">
-      <UniqueIdentifier>{4ac001bb-d2f8-4068-9d6e-b6f520679e9a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Game\Object\Enemy">
-      <UniqueIdentifier>{49eafc25-deea-4885-b48a-bb2b2c5f37e2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Game\Object\Enemy">
-      <UniqueIdentifier>{d47de41c-edef-46df-8e59-2fee81e522a3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Game\Object\Goal">
-      <UniqueIdentifier>{0f62e3eb-58d9-446c-8fe0-787e73374ae5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Game\Object\Goal">
-      <UniqueIdentifier>{0bc73a29-3acd-4ccf-9b6e-80e962eb9b00}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Game\Object\Player">
-      <UniqueIdentifier>{e3ddb4c7-a5d1-471c-a9c2-48bea1084db3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Game\Object\Player">
-      <UniqueIdentifier>{1ec66160-b29d-46b4-a28b-004b108ff5dc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Game\Object\SkyDome">
-      <UniqueIdentifier>{c8d64186-3776-41bb-8ea5-31bab1e0ad71}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Game\Object\SkyDome">
-      <UniqueIdentifier>{a917b9df-6763-4fa0-b727-18c250f8d9b9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Game\Object\Ground">
-      <UniqueIdentifier>{b768b960-66ad-468d-a600-90ac94aa161b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Game\Object\Ground">
-      <UniqueIdentifier>{a8d69059-090e-469d-9698-63474822e308}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Game\Object\Ground\Manager">
-      <UniqueIdentifier>{59495a29-6237-4403-adfd-8387f7cedd14}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Game\Object\Ground\Manager">
-      <UniqueIdentifier>{9a76607f-68e8-45c0-b38d-c4e95b34fee1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -246,9 +198,6 @@
     <ClCompile Include="YTEngine\MyUtility\Convert.cpp">
       <Filter>ソース ファイル\YTEngine\EngineManager\MyUtilities</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Camera\FollowCamera.cpp">
-      <Filter>ソース ファイル\Game\Camera</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Scene\GameScene.cpp">
       <Filter>ソース ファイル\Game\Scene</Filter>
     </ClCompile>
@@ -258,35 +207,11 @@
     <ClCompile Include="Game\Scene\TitleScene.cpp">
       <Filter>ソース ファイル\Game\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Manager\SceneManager.cpp">
-      <Filter>ソース ファイル\Game\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Object\ICharacter.cpp">
-      <Filter>ソース ファイル\Game\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Object\Enemy\Enemy.cpp">
-      <Filter>ソース ファイル\Game\Object\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Object\Goal\Goal.cpp">
-      <Filter>ソース ファイル\Game\Object\Goal</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Object\Player\Player.cpp">
-      <Filter>ソース ファイル\Game\Object\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Object\SkyDome\SkyDome.cpp">
-      <Filter>ソース ファイル\Game\Object\SkyDome</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Object\Ground\MoveGround.cpp">
-      <Filter>ソース ファイル\Game\Object\Ground</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Object\Ground\Ground.cpp">
-      <Filter>ソース ファイル\Game\Object\Ground</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Object\Ground\Manager\GroundManager.cpp">
-      <Filter>ソース ファイル\Game\Object\Ground\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Manager\SceneManager.cpp">
+      <Filter>ソース ファイル\Game\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -377,9 +302,6 @@
     <ClInclude Include="YTEngine\MyUtility\Convert.h">
       <Filter>ヘッダー ファイル\YTEngine\EngineManager\MyUtilities</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Camera\FollowCamera.h">
-      <Filter>ヘッダー ファイル\Game\Camera</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Scene\TitleScene.h">
       <Filter>ヘッダー ファイル\Game\Scene</Filter>
     </ClInclude>
@@ -391,30 +313,6 @@
     </ClInclude>
     <ClInclude Include="Game\Manager\SceneManager.h">
       <Filter>ヘッダー ファイル\Game\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Object\ICharacter.h">
-      <Filter>ヘッダー ファイル\Game\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Object\Enemy\Enemy.h">
-      <Filter>ヘッダー ファイル\Game\Object\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Object\Goal\Goal.h">
-      <Filter>ヘッダー ファイル\Game\Object\Goal</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Object\Player\Player.h">
-      <Filter>ヘッダー ファイル\Game\Object\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Object\SkyDome\SkyDome.h">
-      <Filter>ヘッダー ファイル\Game\Object\SkyDome</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Object\Ground\Ground.h">
-      <Filter>ヘッダー ファイル\Game\Object\Ground</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Object\Ground\MoveGround.h">
-      <Filter>ヘッダー ファイル\Game\Object\Ground</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Object\Ground\Manager\GroundManager.h">
-      <Filter>ヘッダー ファイル\Game\Object\Ground\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
