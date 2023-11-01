@@ -7,18 +7,16 @@
 
 
 
-DirectXCommon::~DirectXCommon()
-{
+DirectXCommon::~DirectXCommon() {
+
 }
 
-DirectXCommon* DirectXCommon::GetInstance()
-{
+DirectXCommon* DirectXCommon::GetInstance() {
 	static DirectXCommon instance;
 	return &instance;
 }
 
-void DirectXCommon::Initialize(WinApp* win, int32_t backBufferWidth, int32_t backBufferHeight)
-{
+void DirectXCommon::Initialize(WinApp* win, int32_t backBufferWidth, int32_t backBufferHeight) {
 	InitializeFixFPS();
 
 	winApp_ = win;
@@ -41,7 +39,6 @@ void DirectXCommon::Initialize(WinApp* win, int32_t backBufferWidth, int32_t bac
 	CreateDepthStensil();
 	// フェンス生成
 	CreateFence();
-
 }
 
 // FPS値の修正
@@ -76,13 +73,11 @@ void DirectXCommon::UpdateFixFPS() {
 //デバイスの作成
 void DirectXCommon::InitializeDXGIDevice() {
 	dxgiFactory_ = nullptr;
-	//HRESULTはWindows系のエラーコードであり
-	// 関数が成功したかどうかをSUCCEDEDマクロで判定できる
+	
 	hr_ = CreateDXGIFactory(IID_PPV_ARGS(&dxgiFactory_));
-	//初期化の根本的な部分でエラーが出た場合はプログラムが間違っているか、
-	// どうにもできない場合が多いのでassertにしておく
 	assert(SUCCEEDED(hr_));
-	//使用するアダプタ用の変数。さいしょにnullptrを入れておく
+	
+	//使用するアダプタ用の変数。最初にnullptrを入れておく
 	useAdapter_ = nullptr;
 	//いい順にアダプタを頼む
 	for (UINT i = 0; dxgiFactory_->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE,
@@ -100,6 +95,7 @@ void DirectXCommon::InitializeDXGIDevice() {
 		}
 		useAdapter_ = nullptr;//ソフトウェアアダプタの場合見なかったことにする
 	}
+
 	//適切なアダプタが見つからなかったので起動できない
 	assert(useAdapter_ != nullptr);
 	device_ = nullptr;
