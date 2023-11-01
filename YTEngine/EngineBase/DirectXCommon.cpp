@@ -17,9 +17,9 @@ DirectXCommon* DirectXCommon::GetInstance()
 	return &instance;
 }
 
-void DirectXCommon::Initialize(WinApp* win, int32_t backBufferWidth, int32_t backBufferHeight)
-{
-	//resourceLeak = new LeakCheck();
+void DirectXCommon::Initialize(WinApp* win, int32_t backBufferWidth, int32_t backBufferHeight) {
+	InitializeFixFPS();
+
 	winApp_ = win;
 	backBufferWidth_ = backBufferWidth;
 	backBufferHeight_ = backBufferHeight;
@@ -40,8 +40,36 @@ void DirectXCommon::Initialize(WinApp* win, int32_t backBufferWidth, int32_t bac
 	CreateDepthStensil();
 	// フェンス生成
 	CreateFence();
-	
 }
+
+void DirectXCommon::InitializeFixFPS() {
+	// 現在時刻を記録
+	reference_ = std::chrono::steady_clock::now();
+}
+
+void DirectXCommon::UpdateFixFPS() {
+	// 1/60秒ぴったりの時間
+	const std::chrono::microseconds kMinTime(uint64_t(1000000.0f / 60.0f));
+	// 1/60秒より僅かに短い時間
+	const std::chrono::microseconds kMinCheckTime(uint64_t(1000000.0f / 65.0f));
+
+	//現在時刻を取得する
+	std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+	// 前回記録からの経過時間を取得する
+	std::chrono::microseconds elapsed = std::chrono::duration_cast<std::chrono::microseconds>(now - reference_);
+
+	// 1/60秒(より僅かに短い時間)経っていない場合
+	if (elapsed < kMinTime) {
+		// 1/60秒刑かするまで微小なスリープを繰り返す
+		while (std::chrono::steady_clock::now() - reference_ < kMinTime) {
+			// 1マイクロ秒スリープ
+			std::this_thread::sleep_for(std::chrono::microseconds(1));
+		}
+	}
+
+	reference_ = std::chrono::steady_clock::now();
+}
+
 //デバイスの作成
 void DirectXCommon::InitializeDXGIDevice() {
 	dxgiFactory_ = nullptr;
@@ -225,19 +253,22 @@ void DirectXCommon::PostDraw() {
 	commandQueue_->Signal(fence_.Get(), fenceVal_);
 
 	//Fenceの値が指定したSignal値にたどりつうてるじゃ確認する
-//GetCompletevaluseの初期値はFence作成時に渡した初期値
+    //GetCompletevaluseの初期値はFence作成時に渡した初期値
+	
 	if (fence_->GetCompletedValue() < fenceVal_) {
 		//指定したSignalにたどり着いていないので、たどり着くまで待つようにイベントを設定する
 		fence_->SetEventOnCompletion(fenceVal_, fenceEvent_);
 		//イベント待つ
 		WaitForSingleObject(fenceEvent_, INFINITE);
 	}
+	
+	UpdateFixFPS();
+
 	//次のフレーム用のコマンドリストを準備
 	hr_ = commandAllocator_->Reset();
 	assert(SUCCEEDED(hr_));
 	hr_ = commandList_->Reset(commandAllocator_.Get(), nullptr);
 	assert(SUCCEEDED(hr_));
-
 }
 
 void DirectXCommon::ClearRenderTarget()

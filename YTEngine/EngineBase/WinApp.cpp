@@ -37,6 +37,9 @@ void WinApp::CreateGameWindow(const wchar_t* title, int32_t clientWidth, int32_t
 		wc_.hInstance,//インスタンスハンドル
 		nullptr//オプション
 	);
+
+	timeBeginPeriod(1);
+
 #ifdef _DEBUG
      debugController_ = nullptr;
 	if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController_)))) {
@@ -46,8 +49,8 @@ void WinApp::CreateGameWindow(const wchar_t* title, int32_t clientWidth, int32_t
 		debugController_->SetEnableGPUBasedValidation(true);
 	}
 #endif  
+
 	ShowWindow(hwnd_, SW_SHOW);
-	
 }
 
 WinApp* WinApp::GetInstance()

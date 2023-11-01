@@ -4,11 +4,11 @@
 #include <cstdlib>
 #include <dxgi1_6.h>
 
-
 #include <wrl.h>
 #include <dxgidebug.h>
 #include<memory>
 #pragma endregion
+
 #include "WinApp.h"
 #include "MyUtility/Convert.h"
 
@@ -25,6 +25,9 @@ public:
 	void Initialize(
 		WinApp* win, int32_t backBufferWidth = WinApp::kClientWidth,
 		int32_t backBufferHeight = WinApp::kClientHeight);
+
+	void InitializeFixFPS();
+	void UpdateFixFPS();
 
 	void PreDraw();
 	void PostDraw();
@@ -93,16 +96,18 @@ private:
 	
 	Microsoft::WRL::ComPtr<ID3D12Resource>  depthStencilResource;
 
-private:
+	std::chrono::steady_clock::time_point reference_;
 
-	
+private:
 	void InitializeDXGIDevice();
 	void CreateSwapChain();
 	void InitializeCommand();
 	void CreateFinalRenderTargets();
 	void CreateFence();
 	void CreateSrvheap();
+	
 	Microsoft::WRL::ComPtr<ID3D12Resource> CreateDepthStenciltextureResource(ID3D12Device* device, int32_t width, int32_t height);
+	
 	void CreateDepthStensil();
 	void CreateDebug();
 };
