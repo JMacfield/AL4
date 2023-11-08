@@ -16,7 +16,7 @@ void Player::Update() {
 	if (worldTransform_.translation_.y < -10.0f) {
 		gameOver = true;
 	}
-	if (!isHit_||worldTransform_.GetWorldPos().y < 1.0f) {
+	if (!isHit_||worldTransform_.GetWorldPosition().y < 1.0f) {
 		IsFall();
 	}
 	else {
@@ -24,10 +24,10 @@ void Player::Update() {
 	}
 	
 	model_->SetColor(color);
-	structSphere_.center = worldTransform_.GetWorldPos();
+	structSphere_.center = worldTransform_.GetWorldPosition();
 	structSphere_.radius = 1.5f;
 	Move();
-	Vector3 a = worldTransform_.GetWorldPos();
+	Vector3 a = worldTransform_.GetWorldPosition();
 	
 	worldTransform_.UpdateMatrix();
 	
@@ -61,7 +61,7 @@ void Player::IsCollision(const WorldTransform& worldtransform)
 	if (!worldTransform_.parent_) {
 		
 		worldTransform_.translation_.y = worldtransform.translation_.y+worldtransform.scale_.y+worldTransform_.scale_.y;
-		Vector3 worldPos = worldTransform_.GetWorldPos();
+		Vector3 worldPos = worldTransform_.GetWorldPosition();
 		Vector3 objectWorldPos = { worldtransform.matWorld_.m[3][0],worldtransform.matWorld_.m[3][1],worldtransform.matWorld_.m[3][2] };
 		Vector3 Position = worldPos - objectWorldPos;
 	
@@ -77,7 +77,7 @@ void Player::IsCollision(const WorldTransform& worldtransform)
 void Player::DeleteParent()
 {
 	if (worldTransform_.parent_) {
-		worldTransform_.translation_ = worldTransform_.GetWorldPos();
+		worldTransform_.translation_ = worldTransform_.GetWorldPosition();
 		worldTransform_.parent_ = nullptr;
 	}
 }

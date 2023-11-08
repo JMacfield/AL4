@@ -32,20 +32,25 @@ struct SoundData {
 	unsigned int bufferSize;
 };
 
-class Audio
-{
+class Audio {
 public:
 	static Audio* GetInstance();
 
 	void Initialize();
 
-	// 音声データの読み込み
+	/// <summary> 音声データの読み込み </summary>
+	/// <param name="filename"></param>
+	/// <returns></returns>
 	SoundData SoundLoadWave(const char* filename);
 
-	// 音声データ解放
+	/// <summary> 音声データの解放 </summary>
+	/// <param name="soundData"></param>
+	/// <returns></returns>
 	void SoundUnload(SoundData* soundData);
 
-	// 音声再生
+	/// <summary> 音声再生 </summary>
+	/// <param name="xAudio2"></param>
+	/// <param name="soundData"></param>
 	void SoundPlayWave(IXAudio2* xAudio2, const SoundData& soundData);
 
 	Microsoft::WRL::ComPtr<IXAudio2> xAudio2;

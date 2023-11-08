@@ -1,29 +1,31 @@
 #include "WinApp.h"
 
 #include<string>
-LRESULT  WinApp::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
-{
-	if (ImGui_ImplWin32_WndProcHandler(hwnd, msg, wparam, lparam)) {
 
+LRESULT  WinApp::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
+	if (ImGui_ImplWin32_WndProcHandler(hwnd, msg, wparam, lparam)) {
 		return true;
 	}
-	switch (msg)
-	{
+
+	switch (msg) {
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		return 0;
 	}
+
 	return DefWindowProc(hwnd, msg, wparam, lparam);
 }
-void WinApp::CreateGameWindow(const wchar_t* title, int32_t clientWidth, int32_t clientheight)
-{
 
+void WinApp::CreateGameWindow(const wchar_t* title, int32_t clientWidth, int32_t clientheight) {
 	wc_.lpfnWndProc =WindowProc;
 	wc_.lpszClassName = L"CG2WINDOWClass";
 	wc_.hInstance = GetModuleHandle(nullptr);
 	wc_.hCursor = LoadCursor(nullptr, IDC_ARROW);
+	
 	RegisterClass(&wc_);
+	
 	AdjustWindowRect(&wrc_, WS_OVERLAPPEDWINDOW, false);
+	
 	hwnd_ = CreateWindow(
 		wc_.lpszClassName,
 		title,
@@ -53,8 +55,7 @@ void WinApp::CreateGameWindow(const wchar_t* title, int32_t clientWidth, int32_t
 	ShowWindow(hwnd_, SW_SHOW);
 }
 
-WinApp* WinApp::GetInstance()
-{
+WinApp* WinApp::GetInstance() {
 	static WinApp instance;
 	return &instance;
 }
@@ -62,23 +63,19 @@ WinApp* WinApp::GetInstance()
 bool WinApp::Procesmessage() {
 	MSG msg{};
 
-		if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-		}
-		if (msg.message == WM_QUIT) // 終了メッセージが来たらループを抜ける
-		{
-			return true;
-		}
+	if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+	
+	// 終了メッセージを受けたらループを離脱
+	if (msg.message == WM_QUIT) {
+		return true;
+	}
+
 	return false;
 }
 
-void WinApp::Finalize()
-{
+void WinApp::Finalize() {
 	debugController_->Release();
 }
-
-
-//HWND WinApp::hwnd_;
-//UINT WinApp::windowStyle_;
-//ID3D12Debug1*WinApp:: debugController_;

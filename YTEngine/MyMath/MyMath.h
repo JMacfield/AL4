@@ -74,6 +74,7 @@ struct OBB {
 	Vector3 orientation[3];
 	Vector3 size;
 };
+
 struct StructSphere {
 	Vector3 center;
 	float radius;

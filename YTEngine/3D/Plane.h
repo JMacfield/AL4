@@ -22,7 +22,7 @@ private:
 	TextureManager* textureManager_;
 
 	Microsoft::WRL::ComPtr<ID3D12Resource> materialResource_;
-	DirectXCommon* direct_;
+	DirectXCommon* directXCommon_;
 	VertexData* vertexData_;
 	Microsoft::WRL::ComPtr<ID3D12Resource> vertexResource_;
 	D3D12_VERTEX_BUFFER_VIEW vertexBufferView_;
@@ -33,4 +33,3 @@ private:
 	DirectionalLight* directionalLight_;
 
 };
-

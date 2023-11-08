@@ -1,17 +1,18 @@
 #pragma once
+
 #include "DirectXCommon.h"
-class ImGuiManger
-{
+
+class ImGuiManger {
 public:
 	static ImGuiManger* GetInstance();
-	void Initialize(WinApp* winApp, DirectXCommon* dxCommon);
+
+	void Initialize(WinApp* winApp, DirectXCommon* directXCommon);
+	void Draw();
 	void Finalize();
+		
 	void Begin();
 	void End();
-	void Draw();
-	
-private:
-	DirectXCommon* dxCommon_;
-	
-};
 
+private:
+	DirectXCommon* directXCommon_;
+};

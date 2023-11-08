@@ -1,4 +1,5 @@
 #pragma once
+
 #pragma region standardInclude
 #include <chrono>
 #include <cstdlib>
@@ -6,7 +7,7 @@
 
 #include <wrl.h>
 #include <dxgidebug.h>
-#include<memory>
+#include <memory>
 #pragma endregion
 
 #include "WinApp.h"
@@ -17,13 +18,14 @@
 #pragma comment(lib, "dxguid.lib")
 #pragma comment(lib, "Winmm.lib")
 
-class DirectXCommon
-{
+class DirectXCommon {
 public:
 	~DirectXCommon();
+
 	static DirectXCommon* GetInstance();
+	
 	void Initialize(
-		WinApp* win, int32_t backBufferWidth = WinApp::kClientWidth,
+		WinApp* winApp, int32_t backBufferWidth = WinApp::kClientWidth,
 		int32_t backBufferHeight = WinApp::kClientHeight);
 
 	void InitializeFixFPS();
@@ -33,13 +35,17 @@ public:
 	void PostDraw();
 	void ClearRenderTarget();
 	void Finalize();
+	
 	HRESULT GetHr() { return  hr_; }
+	
 	void SetHr(HRESULT a) { this->hr_ = a; }
 	
 	Microsoft::WRL::ComPtr<ID3D12Device>GetDevice() { return device_; }
 	
 	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList>GetCommandList() { return commandList_; }
+	
 	static Microsoft::WRL::ComPtr <ID3D12Resource> CreateBufferResource(ID3D12Device* device, size_t sizeInBytes);
+	
 	WinApp* GetWin() { return winApp_; }
 	UINT GetbackBufferCount() { return swapChainDesc.BufferCount; }
 	
@@ -49,7 +55,6 @@ public:
 	
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> GetDsvHeap() { return dsvDescriptorHeap_; }
 	D3D12_RENDER_TARGET_VIEW_DESC getRtvDesc() { return rtvDesc; }
-
 
 private:
 	D3D12_RENDER_TARGET_VIEW_DESC rtvDesc{};
@@ -61,23 +66,23 @@ private:
 	
 	Microsoft::WRL::ComPtr<IDXGIAdapter4> useAdapter_;
 	
-	Microsoft::WRL::ComPtr<IDXGIFactory7>dxgiFactory_;
+	Microsoft::WRL::ComPtr<IDXGIFactory7> dxgiFactory_;
 	
-	Microsoft::WRL::ComPtr<ID3D12Device>device_;
+	Microsoft::WRL::ComPtr<ID3D12Device> device_;
 	
-	Microsoft::WRL::ComPtr<ID3D12CommandQueue>commandQueue_;
+	Microsoft::WRL::ComPtr<ID3D12CommandQueue> commandQueue_;
 	
-	Microsoft::WRL::ComPtr<ID3D12CommandAllocator>commandAllocator_;
+	Microsoft::WRL::ComPtr<ID3D12CommandAllocator> commandAllocator_;
 
 	
-	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList>commandList_;
+	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList_;
 
 	
-	Microsoft::WRL::ComPtr<IDXGISwapChain4>swapChain_;
+	Microsoft::WRL::ComPtr<IDXGISwapChain4> swapChain_;
 	DXGI_SWAP_CHAIN_DESC1 swapChainDesc{};
 
-	
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> rtvDescriptorHeap_;
+	
 	//RTVを２つ作るのでディスクリプタを２つ用意
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvhandle;
 
@@ -88,8 +93,8 @@ private:
 	int32_t backBufferWidth_;
 	int32_t backBufferHeight_;
 	D3D12_RESOURCE_BARRIER barrier_{};
+
 	//初期値０でFenceを作る
-	
 	Microsoft::WRL::ComPtr<ID3D12Fence> fence_;
 	HANDLE fenceEvent_;
 	HRESULT hr_;
@@ -111,4 +116,3 @@ private:
 	void CreateDepthStensil();
 	void CreateDebug();
 };
-

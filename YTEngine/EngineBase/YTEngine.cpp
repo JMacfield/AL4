@@ -2,9 +2,9 @@
 #include <assert.h>
 
 void YTEngine::Initialize(int32_t width, int32_t height) {
-	win_ = WinApp::GetInstance();
-	direct_ = DirectXCommon::GetInstance();
-	direct_->Initialize(win_, win_->kClientWidth, win_->kClientHeight);
+	winApp_ = WinApp::GetInstance();
+	directXCommon_ = DirectXCommon::GetInstance();
+	directXCommon_->Initialize(winApp_, winApp_->kClientWidth, winApp_->kClientHeight);
 
 	PSO2DCount_ = 0;
 	InitializeDxcCompiler();
@@ -38,10 +38,10 @@ IDxcBlob* YTEngine::CompileShader(const std::wstring& filePath, const wchar_t* p
 	
 	//hlslファイルを読む
 	IDxcBlobEncoding* shaderSource = nullptr;
-	direct_->SetHr(dxcUtils->LoadFile(filePath.c_str(), nullptr, &shaderSource));
+	directXCommon_->SetHr(dxcUtils->LoadFile(filePath.c_str(), nullptr, &shaderSource));
 	
 	//読めなかったら決める
-	assert(SUCCEEDED(direct_->GetHr()));
+	assert(SUCCEEDED(directXCommon_->GetHr()));
 	
 	//読み込んだファイルの内容を設定する
 	DxcBuffer shaderSourceBuffer;
@@ -60,7 +60,7 @@ IDxcBlob* YTEngine::CompileShader(const std::wstring& filePath, const wchar_t* p
 	
 	//実際にShaderをコンパイルする
 	IDxcResult* shaderResult = nullptr;
-	direct_->SetHr(dxcCompiler->Compile(
+	directXCommon_->SetHr(dxcCompiler->Compile(
 		&shaderSourceBuffer,//読み込んだファイル
 		arguments,//コンパイルオプション
 		_countof(arguments),//コンパイルオプションの数
@@ -69,7 +69,7 @@ IDxcBlob* YTEngine::CompileShader(const std::wstring& filePath, const wchar_t* p
 	));
 	
 	//コンパイルエラーではなくdxcが起動できないなど致命的な状況
-	assert(SUCCEEDED(direct_->GetHr()));
+	assert(SUCCEEDED(directXCommon_->GetHr()));
 
 	//警告・エラーが出たらログに出して止める
 	IDxcBlobUtf8* shaderError = nullptr;
@@ -83,8 +83,8 @@ IDxcBlob* YTEngine::CompileShader(const std::wstring& filePath, const wchar_t* p
 	
 	//コンパイル結果から実行用のバイナリ部分を取得
 	IDxcBlob* shaderBlob = nullptr;
-	direct_->SetHr(shaderResult->GetOutput(DXC_OUT_OBJECT, IID_PPV_ARGS(&shaderBlob), nullptr));
-	assert(SUCCEEDED(direct_->GetHr()));
+	directXCommon_->SetHr(shaderResult->GetOutput(DXC_OUT_OBJECT, IID_PPV_ARGS(&shaderBlob), nullptr));
+	assert(SUCCEEDED(directXCommon_->GetHr()));
 	
 	//成功したログを出す
 	Log(ConvertString(std::format(L"Compile Succeeded, path:{},profile:{}\n", filePath, profile)));
@@ -112,6 +112,7 @@ void YTEngine::InitializeDxcCompiler() {
 	hr = dxcUtils_->CreateDefaultIncludeHandler(&includeHandler_);
 	assert(SUCCEEDED(hr));
 }
+
 void YTEngine::CreateRootSignature3D() {
 	//RootSignature作成
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
@@ -166,13 +167,13 @@ void YTEngine::CreateRootSignature3D() {
 	HRESULT hr;
 	hr = D3D12SerializeRootSignature(&descriptionRootSignature,
 		D3D_ROOT_SIGNATURE_VERSION_1, &signatureBlob3D_, &errorBlob3D_);
-	if (FAILED(direct_->GetHr())) {
+	if (FAILED(directXCommon_->GetHr())) {
 		Log(reinterpret_cast<char*>(errorBlob3D_->GetBufferPointer()));
 		assert(false);
 	}
 
 	//バイナリを元に生成
-	hr = direct_->GetDevice()->CreateRootSignature(0, signatureBlob3D_->GetBufferPointer(),
+	hr = directXCommon_->GetDevice()->CreateRootSignature(0, signatureBlob3D_->GetBufferPointer(),
 		signatureBlob3D_->GetBufferSize(), IID_PPV_ARGS(&rootSignature3D_));
 	assert(SUCCEEDED(hr));
 }
@@ -295,7 +296,7 @@ void YTEngine::InitializePSO3D() {
 	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
 	
 	//実際に生成
-	HRESULT hr = direct_->GetDevice()->CreateGraphicsPipelineState(&graphicsPipelineStateDesc, IID_PPV_ARGS(&graphicsPipelineState3D_));
+	HRESULT hr = directXCommon_->GetDevice()->CreateGraphicsPipelineState(&graphicsPipelineStateDesc, IID_PPV_ARGS(&graphicsPipelineState3D_));
 	assert(SUCCEEDED(hr));
 }
 
@@ -322,7 +323,7 @@ void YTEngine::InitializePSO3DWireFrame() {
 	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
 	//実際に生成
-	HRESULT hr = direct_->GetDevice()->CreateGraphicsPipelineState(&graphicsPipelineStateDesc, IID_PPV_ARGS(&graphicsPipelineState3DWireFrame_));
+	HRESULT hr = directXCommon_->GetDevice()->CreateGraphicsPipelineState(&graphicsPipelineStateDesc, IID_PPV_ARGS(&graphicsPipelineState3DWireFrame_));
 	assert(SUCCEEDED(hr));
 }
 
@@ -355,20 +356,20 @@ YTEngine* YTEngine::GetInstance() {
 	return &instance;
 }
 
-void YTEngine::variableInitialize() {
+void YTEngine::VariableInitialize() {
 	
 }
 
 void YTEngine::BeginFrame() {
-	direct_->GetCommandList()->RSSetViewports(1, &viewport_);//viewportを設定
-	direct_->GetCommandList()->RSSetScissorRects(1, &scissorRect_);//scirssorを設定
+	directXCommon_->GetCommandList()->RSSetViewports(1, &viewport_);//viewportを設定
+	directXCommon_->GetCommandList()->RSSetScissorRects(1, &scissorRect_);//scirssorを設定
 	//RootSignatureを設定。PS0に設定しているけど別途設定が必要
 	
-	direct_->PreDraw();
+	directXCommon_->PreDraw();
 }
 
 void YTEngine::EndFrame() {
-	direct_->PostDraw();
+	directXCommon_->PostDraw();
 }
 
 void YTEngine::Finalize() {
@@ -380,22 +381,22 @@ YTEngine::~YTEngine() {
 	vertexShaderBlob3D_->Release();
 	pixelShaderBlob2D_->Release();
 	vertexShaderBlob2D_->Release();
-	direct_->Finalize();
+	directXCommon_->Finalize();
 }
 
 void YTEngine::ModelPreDraw() {
-	direct_->GetCommandList()->SetGraphicsRootSignature(rootSignature3D_.Get());
-	direct_->GetCommandList()->SetPipelineState(graphicsPipelineState3D_.Get());//PS0を設定
+	directXCommon_->GetCommandList()->SetGraphicsRootSignature(rootSignature3D_.Get());
+	directXCommon_->GetCommandList()->SetPipelineState(graphicsPipelineState3D_.Get());//PS0を設定
 }
 
 void YTEngine::ModelPreDrawWireFrame() {
-	direct_->GetCommandList()->SetGraphicsRootSignature(rootSignature3D_.Get());
-	direct_->GetCommandList()->SetPipelineState(graphicsPipelineState3DWireFrame_.Get());//PS0を設定
+	directXCommon_->GetCommandList()->SetGraphicsRootSignature(rootSignature3D_.Get());
+	directXCommon_->GetCommandList()->SetPipelineState(graphicsPipelineState3DWireFrame_.Get());//PS0を設定
 }
 
 void YTEngine::SpritePreDraw() {
-	direct_->GetCommandList()->SetGraphicsRootSignature(rootSignature2D_.Get());
-	direct_->GetCommandList()->SetPipelineState(graphicsPipelineState2D_[kBlendModeNormal].Get());//PS0を設定
+	directXCommon_->GetCommandList()->SetGraphicsRootSignature(rootSignature2D_.Get());
+	directXCommon_->GetCommandList()->SetPipelineState(graphicsPipelineState2D_[kBlendModeNormal].Get());//PS0を設定
 }
 
 void YTEngine::SetBlendMode(int BlendModeNum) {
@@ -406,8 +407,8 @@ void YTEngine::SetBlendMode(int BlendModeNum) {
 		BlendModeNum = 0;
 	}
 
-	direct_->GetCommandList()->SetGraphicsRootSignature(rootSignature2D_.Get());
-	direct_->GetCommandList()->SetPipelineState(graphicsPipelineState2D_[BlendModeNum].Get());//PS0を設定
+	directXCommon_->GetCommandList()->SetGraphicsRootSignature(rootSignature2D_.Get());
+	directXCommon_->GetCommandList()->SetPipelineState(graphicsPipelineState2D_[BlendModeNum].Get());//PS0を設定
 }
 
 #pragma region 2D用のパイプライン
@@ -435,7 +436,7 @@ void YTEngine::InitializePSO2D() {
 	
 	//実際に生成
 	graphicsPipelineState2D_[PSO2DCount_] = nullptr;
-	HRESULT hr = direct_->GetDevice()->CreateGraphicsPipelineState(&graphicsPipelineStateDesc, IID_PPV_ARGS(&graphicsPipelineState2D_[PSO2DCount_]));
+	HRESULT hr = directXCommon_->GetDevice()->CreateGraphicsPipelineState(&graphicsPipelineStateDesc, IID_PPV_ARGS(&graphicsPipelineState2D_[PSO2DCount_]));
 	assert(SUCCEEDED(hr));
 
 	PSO2DCount_++;
@@ -503,14 +504,14 @@ void YTEngine::CreateRootSignature2D() {
 	HRESULT hr;
 	hr = D3D12SerializeRootSignature(&descriptionRootSignature, D3D_ROOT_SIGNATURE_VERSION_1, &signatureBlob2D_, &errorBlob2D_);
 
-	if (FAILED(direct_->GetHr())) {
+	if (FAILED(directXCommon_->GetHr())) {
 		Log(reinterpret_cast<char*>(errorBlob2D_->GetBufferPointer()));
 		assert(false);
 	}
 
 	//バイナリを元に生成
 	rootSignature2D_ = nullptr;
-	hr = direct_->GetDevice()->CreateRootSignature(0, signatureBlob2D_->GetBufferPointer(), signatureBlob2D_->GetBufferSize(), IID_PPV_ARGS(&rootSignature2D_));
+	hr = directXCommon_->GetDevice()->CreateRootSignature(0, signatureBlob2D_->GetBufferPointer(), signatureBlob2D_->GetBufferSize(), IID_PPV_ARGS(&rootSignature2D_));
 	assert(SUCCEEDED(hr));
 }
 

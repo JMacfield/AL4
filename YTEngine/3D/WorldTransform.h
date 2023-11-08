@@ -6,6 +6,7 @@
 struct ConstBufferDataWorldTransform {
 	Matrix4x4 matWorld; // ローカル → ワールド変換行列
 };
+
 struct WorldTransform {
 	// 定数バッファ
 	Microsoft::WRL::ComPtr<ID3D12Resource> constBuff_;
@@ -26,20 +27,24 @@ struct WorldTransform {
 	/// 初期化
 	/// </summary>
 	void Initialize();
+
 	/// <summary>
 	/// 定数バッファ生成
 	/// </summary>
 	void CreateConstBuffer();
+	
 	/// <summary>
 	/// マッピングする
 	/// </summary>
 	void Map();
+	
 	/// <summary>
 	/// 行列を転送する
 	/// </summary>
+	/// 
 	void TransferMatrix();
 
 	void UpdateMatrix();
 
-	Vector3 GetWorldPos();
+	Vector3 GetWorldPosition();
 };

@@ -1,8 +1,7 @@
 #include "Input.h"
 #include "EngineBase/ImGuiManager.h"
 
-Input* Input::GetInstance()
-{
+Input* Input::GetInstance() {
 	if (!input_) {
 		input_=new Input();
 	}
@@ -27,19 +26,16 @@ void Input::Initialize(WinApp* winApp) {
 	count = 0;
 }
 
-void Input::Update()
-{
+void Input::Update() {
 	preKeys = keys;
 	//キーボード情報の取得開始
 	keyboard->Acquire();
 	keys = {};
 	//全てのキーの入力状態を取得する
 	keyboard->GetDeviceState(sizeof(keys), &keys);
-	
 }
 
-bool Input::PushKey(uint8_t keyNumber)const
-{
+bool Input::PushKey(uint8_t keyNumber) const {
 	if (!keys[keyNumber]  && preKeys[keyNumber] ) {
 		return true;
 	}
@@ -47,8 +43,8 @@ bool Input::PushKey(uint8_t keyNumber)const
 		return false;
 	}
 }
-bool Input::PressKey(uint8_t keyNumber)const
-{
+
+bool Input::PressKey(uint8_t keyNumber) const {
 	if (keys[keyNumber] ) {
 		return true;
 	}
@@ -57,9 +53,7 @@ bool Input::PressKey(uint8_t keyNumber)const
 	}
 }
 
-
-bool Input::IsReleseKey(uint8_t keyNumber)const
-{
+bool Input::IsReleseKey(uint8_t keyNumber) const {
 	if (keys[keyNumber]  && !preKeys[keyNumber] ) {
 		return true;
 	}
@@ -68,8 +62,7 @@ bool Input::IsReleseKey(uint8_t keyNumber)const
 	}
 }
 
-bool Input::GetJoystickState(int32_t stickNo, XINPUT_STATE& out) const
-{
+bool Input::GetJoystickState(int32_t stickNo, XINPUT_STATE& out) const {
 	DWORD result;
 	result = XInputGetState(stickNo, &out);
 
@@ -82,29 +75,31 @@ bool Input::GetJoystickState(int32_t stickNo, XINPUT_STATE& out) const
 	}
 }
 
-void Input::SetJoyStickDeadZone(int32_t stickNo, XINPUT_STATE& out)const
-{
+void Input::SetJoyStickDeadZone(int32_t stickNo, XINPUT_STATE& out) const {
 	int LstickX =static_cast<int>( out.Gamepad.sThumbLX);
 	int LstickY = static_cast<int>(out.Gamepad.sThumbLY);
 	int RstickX = static_cast<int>(out.Gamepad.sThumbRX);
 	int RstickY = static_cast<int>(out.Gamepad.sThumbRY);
+
 	if (abs(LstickX) < DEADZONE) {
 		LstickX = 0;
 		out.Gamepad.sThumbLX = LstickX;
 	}
+
 	if (abs(LstickY) < DEADZONE) {
 		LstickY = 0;
 		out.Gamepad.sThumbLY = LstickY;
 	}
+	
 	if (abs(RstickX) < DEADZONE) {
 		RstickX = 0;
 		out.Gamepad.sThumbRX = RstickX;
 	}
+	
 	if (abs(RstickY) < DEADZONE) {
 		RstickY = 0;
 		out.Gamepad.sThumbRY = RstickY;
 	}
-	
 }
 
 Input* Input::input_ = nullptr;

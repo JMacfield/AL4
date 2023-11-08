@@ -1,62 +1,61 @@
 #include "Model.h"
+
 #include<fstream>
 #include<sstream>
-void Model::Initialize( const std::string& directoryPath, const std::string& filename)
-{
-    dxCommon_ = DirectXCommon::GetInstance();
+
+void Model::Initialize( const std::string& directoryPath, const std::string& filename) {
+    directXCommon_ = DirectXCommon::GetInstance();
 	engine_ = YTEngine::GetInstance();
+    
     textureManager_ = TextureManager::GetInstance();
     modelData_ = LoadObjFile(directoryPath, filename);
-    texture_ = textureManager_->Load(modelData_.material.textureFilePath);
-  directionalLight_ = DirectionalLight::GetInstance();
-	CreateVartexData();
-	SetColor();
     
+    texture_ = textureManager_->Load(modelData_.material.textureFilePath);
+    directionalLight_ = DirectionalLight::GetInstance();
+	
+    CreateVartexData();
+	SetColor();
 }
 
-void Model::Draw(const WorldTransform& transform, const ViewProjection& viewProjection)
-{
+void Model::Draw(const WorldTransform& transform, const ViewProjection& viewProjection) {
     Transform uvTransform = { { 1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f}, {0.0f,0.0f,0.0f} };
 
     Matrix4x4 uvtransformMtrix = MakeScaleMatrix(uvTransform.scale);
     uvtransformMtrix = Multiply(uvtransformMtrix, MakeRotateZMatrix(uvTransform.rotate.z));
     uvtransformMtrix = Multiply(uvtransformMtrix, MakeTranslateMatrix(uvTransform.translate));
 
-   
-    *material_ = { color,true };
+    *material_ = { color_,true };
     material_->uvTransform = uvtransformMtrix;
   
-    dxCommon_->GetCommandList()->IASetVertexBuffers(0, 1, &vertexBufferView); 
+    directXCommon_->GetCommandList()->IASetVertexBuffers(0, 1, &vertexBufferView); 
     //形状を設定。PS0にせっていしているものとはまた別。同じものを設定すると考えておけばいい
-    dxCommon_->GetCommandList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+    directXCommon_->GetCommandList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
     //material
-    dxCommon_->GetCommandList()->SetGraphicsRootConstantBufferView(0, materialResource_->GetGPUVirtualAddress());
+    directXCommon_->GetCommandList()->SetGraphicsRootConstantBufferView(0, materialResource_->GetGPUVirtualAddress());
     //worldTransform
-    dxCommon_->GetCommandList()->SetGraphicsRootConstantBufferView(1, transform.constBuff_->GetGPUVirtualAddress());
+    directXCommon_->GetCommandList()->SetGraphicsRootConstantBufferView(1, transform.constBuff_->GetGPUVirtualAddress());
     //viewProjection
-    dxCommon_->GetCommandList()->SetGraphicsRootConstantBufferView(4, viewProjection.constBuff_->GetGPUVirtualAddress());
+    directXCommon_->GetCommandList()->SetGraphicsRootConstantBufferView(4, viewProjection.constBuff_->GetGPUVirtualAddress());
     //Light
-    dxCommon_->GetCommandList()->SetGraphicsRootConstantBufferView(3, directionalLight_->GetResource()->GetGPUVirtualAddress());
+    directXCommon_->GetCommandList()->SetGraphicsRootConstantBufferView(3, directionalLight_->GetResource()->GetGPUVirtualAddress());
     //texture
-    dxCommon_->GetCommandList()->SetGraphicsRootDescriptorTable(2, textureManager_->GetGPUHandle(texture_));
+    directXCommon_->GetCommandList()->SetGraphicsRootDescriptorTable(2, textureManager_->GetGPUHandle(texture_));
     //Draw
-    dxCommon_->GetCommandList()->DrawInstanced(UINT(modelData_.vertices.size()), 1, 0, 0);
-
-
+    directXCommon_->GetCommandList()->DrawInstanced(UINT(modelData_.vertices.size()), 1, 0, 0);
 }
-void Model::Finalize()
-{
+
+void Model::Finalize() {
    
 }
 
-Model* Model::CreateModelFromObj(const std::string& directoryPath, const std::string& filename)
-{
+Model* Model::CreateModelFromObj(const std::string& directoryPath, const std::string& filename) {
     Model* model = new Model();
     model->Initialize(directoryPath, filename);
+
     return model;
 }
-ModelData Model::LoadObjFile(const std::string& directoryPath, const std::string& filename)
-{
+
+ModelData Model::LoadObjFile(const std::string& directoryPath, const std::string& filename) {
     ModelData modelData;//構築するモデルデータ
     std::vector<Vector4> positions;//位置
     std::vector<Vector3> normals;//法線
@@ -65,8 +64,8 @@ ModelData Model::LoadObjFile(const std::string& directoryPath, const std::string
 
     std::ifstream file(directoryPath + "/" + filename);
     assert(file.is_open());
-    while (std::getline(file,line))
-    {
+
+    while (std::getline(file, line)) {
         std::string identifier;
         std::istringstream s(line);
         s >> identifier;//先頭の識別子を読む
@@ -90,20 +89,24 @@ ModelData Model::LoadObjFile(const std::string& directoryPath, const std::string
             s >> normal.x >> normal.y >> normal.z;
             normal.z *= -1.0f;
             normals.push_back(normal);
-        }else if (identifier == "f") {
+        }
+        else if (identifier == "f") {
             VertexData triangle[3];
             //面は三角形限定 その他は未対応
             for (int32_t faceVertex = 0; faceVertex < 3; ++faceVertex) {
                 std::string vertexDefinition;
                 s >> vertexDefinition;
+                
                 //頂点の要素へのIndexは[位置/UV/法線]で格納されているので、分解してIndexを取得する
                 std::istringstream v(vertexDefinition);
                 uint32_t elementIndeices[3];
+                
                 for (int32_t element = 0; element < 3; ++element) {
                     std::string index;
                     std::getline(v, index, '/');//  /区切りでIndexを積んでいく
                     elementIndeices[element] = std::stoi(index);
                 }
+                
                 //要素へのIndexから、実際の要素の値を取得して、頂点を構築する
                 Vector4 position = positions[elementIndeices[0] - 1];
                 Vector2 texcoord = texcoords[elementIndeices[1] - 1];
@@ -111,11 +114,11 @@ ModelData Model::LoadObjFile(const std::string& directoryPath, const std::string
                 VertexData vertex = { position,texcoord,normal };
                 modelData.vertices.push_back(vertex);
                 triangle[faceVertex] = { position,texcoord,normal };
-               
             }
+
             modelData.vertices.push_back(triangle[2]);
-                modelData.vertices.push_back(triangle[1]);
-                modelData.vertices.push_back(triangle[0]);
+            modelData.vertices.push_back(triangle[1]);
+            modelData.vertices.push_back(triangle[0]);
         }
         else if (identifier == "mtllib") {
             //materialTemplateLibraryファイルの名前を取得
@@ -124,8 +127,8 @@ ModelData Model::LoadObjFile(const std::string& directoryPath, const std::string
             //基本的にobjファイルと同一階層にmtlは存在させるから、ディレクトリ名とファイル名を渡す
             modelData.material = LoadMaterialTemplateFile(directoryPath, materialFilname);
         }
-       
-    } 
+    }
+
     return modelData;
 }
 
@@ -151,11 +154,8 @@ MaterialData Model::LoadMaterialTemplateFile(const std::string& directoryPath, c
     return materialData;
 }
 
-void Model::CreateVartexData()
-{
-	
-	vertexResource = dxCommon_->CreateBufferResource(dxCommon_->GetDevice().Get(), sizeof(VertexData) * modelData_.vertices.size());
-
+void Model::CreateVartexData() {
+	vertexResource = directXCommon_->CreateBufferResource(directXCommon_->GetDevice().Get(), sizeof(VertexData) * modelData_.vertices.size());
 
 	vertexBufferView.BufferLocation = vertexResource->GetGPUVirtualAddress();
 
@@ -168,20 +168,15 @@ void Model::CreateVartexData()
 	std::memcpy(vertexData_, modelData_.vertices.data(), sizeof(VertexData) * modelData_.vertices.size());
 }
 
-void Model::SetColor()
-{
-	materialResource_ = DirectXCommon::CreateBufferResource(dxCommon_->GetDevice().Get(), sizeof(Material));
+void Model::SetColor() {
+	materialResource_ = DirectXCommon::CreateBufferResource(directXCommon_->GetDevice().Get(), sizeof(Material));
 
 	materialResource_->Map(0, nullptr, reinterpret_cast<void**>(&material_));
 	material_->uvTransform = MakeIdentity4x4();
-
 }
 
-void Model::TransformMatrix()
-{
-	wvpResource_ = DirectXCommon::CreateBufferResource(dxCommon_->GetDevice().Get(), sizeof(Transformmatrix));
+void Model::TransformMatrix() {
+	wvpResource_ = DirectXCommon::CreateBufferResource(directXCommon_->GetDevice().Get(), sizeof(Transformmatrix));
 	wvpResource_->Map(0, NULL, reinterpret_cast<void**>(&wvpData_));
 	wvpData_->WVP = MakeIdentity4x4();
 }
-
-

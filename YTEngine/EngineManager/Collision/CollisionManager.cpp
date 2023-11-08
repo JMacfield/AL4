@@ -19,8 +19,8 @@ void CollisionManager::CheckCollisionPair(Collider* colliderA, Collider* collide
 		!(colliderB->GetCollisionAttribute() & colliderA->GetCollisionMask())) {
 		return;
 	}
-	Vector3 posA = colliderA->GetWorldTransform().GetWorldPos();
-	Vector3 posB = colliderB->GetWorldTransform().GetWorldPos();
+	Vector3 posA = colliderA->GetWorldTransform().GetWorldPosition();
+	Vector3 posB = colliderB->GetWorldTransform().GetWorldPosition();
 	float radA = colliderA->Getradius();
 	float radB = colliderB->Getradius();
 	Vector3 Distance = {

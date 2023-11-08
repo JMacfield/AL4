@@ -18,9 +18,9 @@ public:
 private:
 	TextureManager* textureManager_;
 	DirectionalLight* directionalLight_; 
-	DirectXCommon* dxCommon_;
-	D3D12_VERTEX_BUFFER_VIEW vertexBufferView{};
-	Microsoft::WRL::ComPtr<ID3D12Resource> vertexResource;
+	DirectXCommon* directXCommon_;
+	D3D12_VERTEX_BUFFER_VIEW vertexBufferView_{};
+	Microsoft::WRL::ComPtr<ID3D12Resource> vertexResource_;
 	VertexData* vertexData_;
 	
 	Microsoft::WRL::ComPtr<ID3D12Resource> wvpResource_;
@@ -32,8 +32,8 @@ private:
 	
 	const float pi = 3.14159265358979f;
 	
-	uint32_t kSubDivision;
-	uint32_t vertexCount;
+	uint32_t kSubDivision_;
+	uint32_t vertexCount_;
 	
 private:
 	void CreateVartexData();

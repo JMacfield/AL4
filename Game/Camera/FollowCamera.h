@@ -1,4 +1,5 @@
 #pragma once
+
 #include "3D/ViewProjection.h"
 #include "3D/WorldTransform.h"
 #include "EngineManager/Input/Input.h"
@@ -9,8 +10,10 @@ public:
 
 	void Update();
 	void SetTarget(const WorldTransform* target);
+	
 	const ViewProjection& GetViewProjection() { return viewprojection_; }
-	Vector3 GettargetWordPos();
+	Vector3 GetTargetWorldPosition();
+
 private:
 	ViewProjection viewprojection_;
 	const WorldTransform* target_ = nullptr;

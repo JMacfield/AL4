@@ -34,7 +34,9 @@ void SceneManager::Run() {
 			sceneArr_[sceneNumber_]->Initialize();
 			
 		}
+
 		sceneArr_[sceneNumber_]->Update();
+		
 		if (input_->PushKey(DIK_1)) {
 			audio_->SoundPlayWave(audio_->xAudio2.Get(), audio_->soundDatas[0]);
 		}
@@ -42,6 +44,7 @@ void SceneManager::Run() {
 		sceneArr_[sceneNumber_]->Draw();
 		
 		imguiManager_->End();
+
 #ifdef _DEBUG
 imguiManager_->Draw();
 #endif // DEBUG

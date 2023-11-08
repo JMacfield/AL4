@@ -8,24 +8,24 @@ void FollowCamera::Initialize() {
 }
 
 void FollowCamera::Update() {
-
 	Move();
 	Rotate();
+
 	viewprojection_.UpdateViewMatrix();
 	viewprojection_.TransferMatrix();
 }
 
 void FollowCamera::SetTarget(const WorldTransform* target) {
-
 	target_ = target;
 }
 
-Vector3 FollowCamera::GettargetWordPos()
-{
+Vector3 FollowCamera::GetTargetWorldPosition() {
 	Vector3 result;
+
 	result.x = target_->matWorld_.m[3][0];
 	result.y = target_->matWorld_.m[3][1];
 	result.z = target_->matWorld_.m[3][2];
+	
 	return result;
 }
 
@@ -37,7 +37,7 @@ void FollowCamera::Move() {
 		Matrix4x4 rotateMatrix = MakeRotateMatrix(viewprojection_.rotation_);
 
 		offset = TransformNormal(offset, rotateMatrix);
-		viewprojection_.translation_ = Add(GettargetWordPos(), offset);
+		viewprojection_.translation_ = Add(GetTargetWorldPosition(), offset);
 	}
 }
 

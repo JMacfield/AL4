@@ -1,14 +1,15 @@
 #pragma once
 
-
 #include "DirectXCommon.h"
-
 #include"MyMath/MyMath.h"
+
 #pragma region standardInclude
 #include <dxcapi.h>
 #include<vector>
+
 #pragma comment(lib,"dxcompiler.lib")
 #pragma endregion
+
 enum BlendMode {
 	//通常のαブレンド
 	kBlendModeNormal,
@@ -21,38 +22,35 @@ enum BlendMode {
 	//スクリーンブレンド
 	kBlendModeScreen,
 };
-class YTEngine
-{
+
+class YTEngine {
 public:
+	~YTEngine();
 
 	static YTEngine* GetInstance();
 
-	void variableInitialize();
+	void VariableInitialize();
+
 	void Initialize(int32_t width, int32_t height);
+	
 	void BeginFrame();
 	void EndFrame();
+	
 	void Finalize();
-	/*void Update();
-	void Draw();*/
-	~YTEngine();
-
-	DirectXCommon* GetDirectXCommon() { return direct_; }
-
+	
+	DirectXCommon* GetDirectXCommon() { return directXCommon_; }
 
 	void ModelPreDraw();
 	void ModelPreDrawWireFrame();
+
 	void SpritePreDraw();
 	void SetBlendMode(int BlendModeNum);
+
 private:
-
-
-	WinApp* win_;
-	DirectXCommon* direct_;
+	WinApp* winApp_;
+	DirectXCommon* directXCommon_;
 
 	D3D12_DEPTH_STENCIL_DESC depthStencilDesc{};
-	
-
-
 
 	IDxcUtils* dxcUtils_;
 	IDxcCompiler3* dxcCompiler_;
@@ -60,34 +58,41 @@ private:
 
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc_{};
 	D3D12_BLEND_DESC blendDesc_[5]{};
+
 	//3Dパイプライン
 	Microsoft::WRL::ComPtr<ID3DBlob>signatureBlob3D_;
 	Microsoft::WRL::ComPtr<ID3DBlob>errorBlob3D_;
 	Microsoft::WRL::ComPtr<ID3D12RootSignature>rootSignature3D_;
+	
 	IDxcBlob* vertexShaderBlob3D_;
 	IDxcBlob* pixelShaderBlob3D_;
 	Microsoft::WRL::ComPtr<ID3D12PipelineState>graphicsPipelineState3D_;
+	
 	//3Dパイプラインワイヤーフレーム
 	Microsoft::WRL::ComPtr<ID3D12PipelineState>graphicsPipelineState3DWireFrame_;
+	
 	//2Dパイプライン
 	Microsoft::WRL::ComPtr<ID3DBlob>signatureBlob2D_;
 	Microsoft::WRL::ComPtr<ID3DBlob>errorBlob2D_;
 	Microsoft::WRL::ComPtr<ID3D12RootSignature>rootSignature2D_;
+	
 	IDxcBlob* vertexShaderBlob2D_;
 	IDxcBlob* pixelShaderBlob2D_;
 	Microsoft::WRL::ComPtr<ID3D12PipelineState>graphicsPipelineState2D_[5];
-D3D12_RASTERIZER_DESC rasterizerDesc2D_{};
-D3D12_INPUT_ELEMENT_DESC inputElementDescs2D_[2];
-D3D12_INPUT_LAYOUT_DESC inputLayoutDesc2D_{};
-D3D12_RASTERIZER_DESC rasterizerDesc3D_{};
-D3D12_RASTERIZER_DESC rasterizerDesc3DWireFrame_{};
+
+	D3D12_RASTERIZER_DESC rasterizerDesc2D_{};
+    D3D12_INPUT_ELEMENT_DESC inputElementDescs2D_[2];
+    D3D12_INPUT_LAYOUT_DESC inputLayoutDesc2D_{};
+    D3D12_RASTERIZER_DESC rasterizerDesc3D_{};
+    D3D12_RASTERIZER_DESC rasterizerDesc3DWireFrame_{};
+
 	D3D12_VIEWPORT viewport_{};
 	D3D12_RECT scissorRect_{};
 	D3D12_INPUT_ELEMENT_DESC inputElementDescs_[3];
+	
 	//頂点リソースにデータを書き込む
 	Vector4* vertexData_;
 	int PSO2DCount_;
-
 
 	IDxcBlob* CompileShader(
 		//CompileShaderするShaderファイルへのパス
@@ -99,22 +104,23 @@ D3D12_RASTERIZER_DESC rasterizerDesc3DWireFrame_{};
 		IDxcCompiler3* dxcCompiler,
 		IDxcIncludeHandler* includeHandler
 	);
+
 	void InitializeDxcCompiler();
+	void InitializePSO3D();
+	void InitializePSO2D();
+	void InitializePSO3DWireFrame();
+
 	void CreateRootSignature3D();
+	void CreateRootSignature2D();
+
+	void CreateInputlayOut2D();
 	void CreateInputlayOut();
+	
 	void SettingBlendState();
 	void SettingRasterizerState3D();
-	void InitializePSO3D();
-	void InitializePSO3DWireFrame();
+	void SettingRasterizerState2D();
+	
 	void SettingViePort();
 	void SettingScissor();
 	void SettingDepth();
-
-	void CreateRootSignature2D();
-	void SettingRasterizerState2D();
-	void InitializePSO2D();
-	void CreateInputlayOut2D();
 };
-
-
-

@@ -17,22 +17,39 @@ public:
 	static Input* GetInstance();
 	void Initialize(WinApp* winApp);
 	void Update();
+
 	const int DEADZONE = 7849;
-	/// 押した時
+	
+	/// <summary> キーを押した時 </summary>
+	/// <param name="keyNumber"></param>
+	/// <returns></returns>
 	bool PushKey(uint8_t keyNumber)const;
-	/// 押している間
+	
+	/// <summary> キーを押している間 </summary>
+	/// <param name="keyNumber"></param>
+	/// <returns></returns>
 	bool PressKey(uint8_t keyNumber)const;
-	/// 離した時
+	
+	/// <summary> キーを離した時 </summary>
+	/// <param name="keyNumber"></param>
+	/// <returns></returns>
 	bool IsReleseKey(uint8_t keyNumber)const;
-	//joystateがつながっているかどうか
+	
+	/// <summary> ジョイスティックをの状態を取得 </summary>
+	/// <param name="stickNo"></param>
+	/// <param name="out"></param>
+	/// <returns></returns>
 	bool GetJoystickState(int32_t stickNo, XINPUT_STATE& out) const;
-	//デッドゾーンの設定
+	
+	/// <summary> ジョイスティックのデッドゾーンのセット </summary>
+	/// <param name="stickNo"></param>
+	/// <param name="out"></param>
 	void SetJoyStickDeadZone(int32_t stickNo, XINPUT_STATE& out)const;
 
 private:
 	static Input* input_;
 	
-	Microsoft::WRL::ComPtr<IDirectInput8>directInput = nullptr;
+	Microsoft::WRL::ComPtr<IDirectInput8> directInput = nullptr;
 	Microsoft::WRL::ComPtr<IDirectInputDevice8> keyboard = nullptr;
 	
 	std::array<BYTE, 256> keys;

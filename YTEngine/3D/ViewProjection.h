@@ -12,8 +12,7 @@ struct ConstBufferDataViewProjection {
 	Vector3 cameraPos;    // カメラ座標（ワールド座標）
 };
 
-struct ViewProjection
-{
+struct ViewProjection {
 	// 定数バッファ
 	Microsoft::WRL::ComPtr<ID3D12Resource> constBuff_;
 	// マッピング済みアドレス
@@ -71,4 +70,3 @@ struct ViewProjection
 	/// </summary>
 	void UpdateProjectionMatrix();
 };
-

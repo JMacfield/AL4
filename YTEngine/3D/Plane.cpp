@@ -2,73 +2,65 @@
 #include <assert.h>
 #include "EngineBase/YTEngine.h"
 
-void Plane::Initialize()
-{
-	direct_ = DirectXCommon::GetInstance();
+void Plane::Initialize() {
+	directXCommon_ = DirectXCommon::GetInstance();
 
 	textureManager_ = TextureManager::GetInstance();
 
 	directionalLight_ = DirectionalLight::GetInstance();
+
 	SettingVertex();
 	SetColor();
-	
 }
-void Plane::TransformMatrix()
-{
-	wvpResource_ = DirectXCommon::CreateBufferResource(direct_->GetDevice().Get(), sizeof(Transformmatrix));
+
+void Plane::TransformMatrix() {
+	wvpResource_ = DirectXCommon::CreateBufferResource(directXCommon_->GetDevice().Get(), sizeof(Transformmatrix));
 
 	wvpResource_->Map(0, NULL, reinterpret_cast<void**>(&wvpData_));
 	wvpData_->WVP = MakeIdentity4x4();
-
 }
+
 void Plane::SetColor() {
-	materialResource_ = DirectXCommon::CreateBufferResource(direct_->GetDevice().Get(), sizeof(Material));
+	materialResource_ = DirectXCommon::CreateBufferResource(directXCommon_->GetDevice().Get(), sizeof(Material));
 
 	materialResource_->Map(0, nullptr, reinterpret_cast<void**>(&materialData_));
-
 }
 
-void Plane::Draw(const WorldTransform& transform, const ViewProjection& viewProjection, const Vector4& material, uint32_t index)
-{
+void Plane::Draw(const WorldTransform& transform, const ViewProjection& viewProjection, const Vector4& material, uint32_t index) {
 	Transform uvTransform = { { 1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f}, {0.0f,0.0f,0.0f} };
 
 	Matrix4x4 uvtransformMtrix = MakeScaleMatrix(uvTransform.scale);
 	uvtransformMtrix = Multiply(uvtransformMtrix, MakeRotateZMatrix(uvTransform.rotate.z));
 	uvtransformMtrix = Multiply(uvtransformMtrix, MakeTranslateMatrix(uvTransform.translate));
 
-
-
 	*materialData_ = { material,false };
 	materialData_->uvTransform = uvtransformMtrix;
 	
-	direct_->GetCommandList()->IASetVertexBuffers(0, 1, &vertexBufferView_);//VBVを設定
+	directXCommon_->GetCommandList()->IASetVertexBuffers(0, 1, &vertexBufferView_);//VBVを設定
 	//形状を設定。PS0にせっていしているものとはまた別。同じものを設定すると考えておけばいい
-	direct_->GetCommandList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	directXCommon_->GetCommandList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	//material
-	direct_->GetCommandList()->SetGraphicsRootConstantBufferView(0, materialResource_->GetGPUVirtualAddress());
+	directXCommon_->GetCommandList()->SetGraphicsRootConstantBufferView(0, materialResource_->GetGPUVirtualAddress());
 	//worldTransform
-	direct_->GetCommandList()->SetGraphicsRootConstantBufferView(1, transform.constBuff_->GetGPUVirtualAddress());
+	directXCommon_->GetCommandList()->SetGraphicsRootConstantBufferView(1, transform.constBuff_->GetGPUVirtualAddress());
 
-	direct_->GetCommandList()->SetGraphicsRootConstantBufferView(4, viewProjection.constBuff_->GetGPUVirtualAddress());
+	directXCommon_->GetCommandList()->SetGraphicsRootConstantBufferView(4, viewProjection.constBuff_->GetGPUVirtualAddress());
 	//Light
-	direct_->GetCommandList()->SetGraphicsRootConstantBufferView(3, directionalLight_->GetResource()->GetGPUVirtualAddress());
+	directXCommon_->GetCommandList()->SetGraphicsRootConstantBufferView(3, directionalLight_->GetResource()->GetGPUVirtualAddress());
 
 	//texture
-	direct_->GetCommandList()->SetGraphicsRootDescriptorTable(2, textureManager_->GetGPUHandle(index));
-
+	directXCommon_->GetCommandList()->SetGraphicsRootDescriptorTable(2, textureManager_->GetGPUHandle(index));
 
 	//描画！(DrawCall/ドローコール)・3頂点で1つのインスタンス。インスタンスについては今後
-	direct_->GetCommandList()->DrawInstanced(6, 1, 0, 0);
-
+	directXCommon_->GetCommandList()->DrawInstanced(6, 1, 0, 0);
 }
-void Plane::Finalize()
-{
+
+void Plane::Finalize() {
 	
 }
 
 void Plane::SettingVertex() {
-
-	vertexResource_ = DirectXCommon::CreateBufferResource(direct_->GetDevice().Get(), sizeof(VertexData) * 6);
+	vertexResource_ = DirectXCommon::CreateBufferResource(directXCommon_->GetDevice().Get(), sizeof(VertexData) * 6);
 	//リソースの先頭のアドレスから使う
 	vertexBufferView_.BufferLocation = vertexResource_->GetGPUVirtualAddress();
 	//使用するリソースのサイズは頂点3つ分のサイズ
@@ -94,6 +86,7 @@ void Plane::SettingVertex() {
 	vertexData_[3].texcoord = { 0.0f,0.0f };
 	vertexData_[4].texcoord = { 1.0f,0.0f };
 	vertexData_[5].texcoord = { 1.0f,1.0f };
+
 	for (int i = 0; i < 6; i++) {
 		vertexData_[i].normal = { 0.0f,0.0f,-1.0f };
 	}

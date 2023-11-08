@@ -5,16 +5,17 @@
 #include "MyMath/MyMath.h"
 #include "EngineBase/DirectXCommon.h" 
 
-class DirectionalLight
-{
+class DirectionalLight {
 public:
 	static DirectionalLight* GetInstance();
+	
 	void Initialize();
 	void Update();
+	
 	ID3D12Resource* GetResource() { return Resource.Get(); }
+
 private:
 	DirectXCommon* directXCommon_=nullptr;
 	Microsoft::WRL::ComPtr<ID3D12Resource> Resource = nullptr;
 	DirectionalLightData* directionalLightData = nullptr;
 };
-
