@@ -25,5 +25,5 @@ private:
 	unique_ptr<MoveGround> moveGround_;
 	unique_ptr<Model> model_;
 	unique_ptr<Model> movemodel_;
-	s Obb_[3];
+	OBB Obb_[3];
 };
