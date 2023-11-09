@@ -7,8 +7,8 @@ void GroundManager::Initialize() {
 	}
 
 	moveGround_ = make_unique<MoveGround>();
-	movemodel_.reset(Model::CreateModelFromObj("Resource", "move.obj"));
-	model_.reset(Model::CreateModelFromObj("Resource", "CUBE.obj"));
+	movemodel_.reset(Model::CreateModelFromObj("Resource/Move", "move.obj"));
+	model_.reset(Model::CreateModelFromObj("Resource/CUBE", "CUBE.obj"));
 	ground_[0]->Initialize(model_.get(), { 0.0f,0.0f,-5.0f }, { 20.0f,1.0f,17.0f });
 	ground_[1]->Initialize(model_.get(), { 0.0f,0.0f,55.0f }, { 20.0f,1.0f,17.0f });
 	moveGround_->Initialize(movemodel_.get(), { 0.0f,0.0f,25.0f }, { 1.0f,1.0f,1.0f });
