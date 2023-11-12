@@ -16,8 +16,6 @@ public:
 
 	virtual void Draw(const ViewProjection& view);
 
-
-
 protected:
 	std::vector<Model*> models_;
 	WorldTransform worldTransform_;

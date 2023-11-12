@@ -23,6 +23,8 @@ struct WorldTransform {
 	// 親となるワールド変換へのポインタ
 	const WorldTransform* parent_ = nullptr;
 
+	Quaternion quaternion_;
+
 	/// <summary>
 	/// 初期化
 	/// </summary>
@@ -47,4 +49,8 @@ struct WorldTransform {
 	void UpdateMatrix();
 
 	Vector3 GetWorldPosition();
+
+	void UpdateRotateMatrix(const Matrix4x4& rotateMat);
+
+	void UpdateQuaternionMatrix();
 };
