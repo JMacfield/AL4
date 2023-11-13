@@ -163,6 +163,9 @@
     <Filter Include="ソース ファイル\Game\Object\Ground\Manager">
       <UniqueIdentifier>{9a76607f-68e8-45c0-b38d-c4e95b34fee1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="リソース ファイル\Icon">
+      <UniqueIdentifier>{0942f794-5286-4122-99a5-67c667cf5236}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp">
@@ -445,8 +448,8 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="resource.rc">
-      <Filter>リソース ファイル</Filter>
+    <ResourceCompile Include="YTEngine\EngineManager\Icon\Icon.rc">
+      <Filter>リソース ファイル\Icon</Filter>
     </ResourceCompile>
   </ItemGroup>
 </Project>

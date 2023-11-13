@@ -1,5 +1,5 @@
 #include "WinApp.h"
-#include "resource.h"
+#include "EngineManager/Icon/Icon.h"
 
 #include <string>
 
@@ -25,7 +25,6 @@ void WinApp::CreateGameWindow(const wchar_t* title, int32_t clientWidth, int32_t
 	
 	HICON loadedIcon = LoadIcon(wc_.hInstance, MAKEINTRESOURCE(IDI_ICON1));
 	wc_.hIcon = loadedIcon;
-	//wc_.hIconSm = loadedIcon;
 
 	RegisterClass(&wc_);
 	
