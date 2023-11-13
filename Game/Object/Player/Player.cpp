@@ -27,7 +27,7 @@ void Player::Initialize(const std::vector<Model*>& models) {
 	worldTransform_.translation_ = { 1.0f,2.5f,1.0f };
 	GlobalVariables* globalVariables{};
 	globalVariables = GlobalVariables::GetInstance();
-	quaternion_ = createQuaternion(0.0f, { 0.0f,1.0f,0.0f });
+	quaternion_ = CreateQuaternion(0.0f, { 0.0f,1.0f,0.0f });
 	quaternion_ = Normalize(quaternion_);
 	const char* groupName = "Player";
 	GlobalVariables::GetInstance()->CreateGroup(groupName);
@@ -200,7 +200,7 @@ void Player::Move()
 			Vector3 newPos = Subtract(Add(worldTransformBody_.translation_, move), worldTransformBody_.translation_);
 			Vector3 Direction;
 			//プレイヤーの現在の向き
-			Direction = TransformNormal({ 1.0f,0.0f,0.0f }, quaternionToMatrix(quaternion_));
+			Direction = TransformNormal({ 1.0f,0.0f,0.0f }, QuaternionToMatrix(quaternion_));
 
 			Direction = Normalise(Direction);
 			Vector3 newDirection = Normalise(newPos);
@@ -209,7 +209,7 @@ void Player::Move()
 			//行きたい方向のQuaternionの作成
 			Quaternion newquaternion_;
 
-			newquaternion_ = createQuaternion(cosin, { 0.0f,1.0f,0.0f });
+			newquaternion_ = CreateQuaternion(cosin, { 0.0f,1.0f,0.0f });
 
 			//quaternionの合成
 			quaternion_ = Normalize(quaternion_);
@@ -218,7 +218,7 @@ void Player::Move()
 			quaternion_ = Multiply(quaternion_, newquaternion_);
 			if (CompereQuaternion(quaternion_, preQuaternion_) && !CompereVector3(move, preMove_)) {
 				cosin = -1.0f;
-				quaternion_ = Multiply(quaternion_, createQuaternion(cosin, { 0.0f,1.0f,0.0f }));
+				quaternion_ = Multiply(quaternion_, CreateQuaternion(cosin, { 0.0f,1.0f,0.0f }));
 				//preQuaternion_ = quaternion_;
 			}
 
@@ -384,7 +384,7 @@ void Player::BehaviorDashUpdate()
 		//行きたい方向のQuaternionの作成
 		Quaternion newquaternion_;
 
-		newquaternion_ = createQuaternion(cosin, { 0.0f,1.0f,0.0f });
+		newquaternion_ = CreateQuaternion(cosin, { 0.0f,1.0f,0.0f });
 
 		//quaternionの合成
 		quaternion_ = Normalize(quaternion_);

@@ -262,12 +262,12 @@ inline Vector4 MakeQuaternion(Vector3 axis, float radian) {
 
 	return quaternion;
 }
-Quaternion createQuaternion(float Radian, Vector3 axis);
+Quaternion CreateQuaternion(float Radian, Vector3 axis);
 
 // クォータニオンからオイラー角への変換
-Vector3 quaternionToEulerAngles(const Quaternion& quat);
+Vector3 QuaternionToEulerAngles(const Quaternion& quat);
 
-inline Matrix4x4 quaternionToMatrix(const Quaternion& quat) {
+inline Matrix4x4 QuaternionToMatrix(const Quaternion& quat) {
 	Matrix4x4 result;
 	float xx = quat.x * quat.x;
 	float xy = quat.x * quat.y;
@@ -302,7 +302,7 @@ inline Matrix4x4 quaternionToMatrix(const Quaternion& quat) {
 	result.m[3][3] = 1.0f;
 	return result;
 }
-inline Vector3 matrixToEulerAngles(const Matrix4x4 mat) {
+inline Vector3 MatrixToEulerAngles(const Matrix4x4 mat) {
 	float pitch;
 	float yaw;
 	float roll;
@@ -341,7 +341,7 @@ inline Quaternion Normalize(const Quaternion& q) {
 		return q;
 	}
 }
-inline Vector3 extractEulerAnglesFromRotationMatrix(const Matrix4x4& rotationMatrix) {
+inline Vector3 ExtractEulerAnglesFromRotationMatrix(const Matrix4x4& rotationMatrix) {
 	Vector3 eulerAngle;
 
 	// 回転行列の各要素を抽出

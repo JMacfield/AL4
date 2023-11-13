@@ -614,7 +614,7 @@ Matrix4x4 DirectiontoDirection(const Vector3& to, const Vector3& from)
 	result.m[3][3] = 1;
 	return result;
 }
-Quaternion createQuaternion(float Radian, Vector3 axis)
+Quaternion CreateQuaternion(float Radian, Vector3 axis)
 {
 	Quaternion quat;
 	float halfAngle = Radian * 0.5f;
