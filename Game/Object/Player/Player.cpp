@@ -375,7 +375,7 @@ void Player::BehaviorDashUpdate()
 		Vector3 newPos = Subtract(Add(worldTransformBody_.translation_, workDash_.move_), worldTransformBody_.translation_);
 		Vector3 Direction;
 		//プレイヤーの現在の向き
-		Direction = TransformNormal({ 1.0f,0.0f,0.0f }, quaternionToMatrix(quaternion_));
+		Direction = TransformNormal({ 1.0f,0.0f,0.0f }, QuaternionToMatrix(quaternion_));
 
 		Direction = Normalise(Direction);
 		Vector3 newDirection = Normalise(newPos);
