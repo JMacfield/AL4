@@ -47,12 +47,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(SolutionDir)/;$(ProjectDir)/Engine/3d;$(ProjectDir)/Engine/base;$(ProjectDir)/Engine/2d;$(ProjectDir)/Engine/MyUtility;$(ProjectDir)/Engine/Manager/Texture;$(ProjectDir)/Engine/Manager/Input;$(ProjectDir)/Engine/Manager/Audio;$(ProjectDir)/Engine/Manager/Collision;$(ProjectDir)/externals/nlohmann;$(ProjectDir)/Engine/Manager/GlobalVariables;$(ProjectDir)/Engine/Math;$(ProjectDir)/Engine/Manager/Lights;$(ProjectDir)/game/Objects/SkyDome;$(ProjectDir)/game/Objects/Player;$(ProjectDir)/game/camera;$(ProjectDir)/game/Objects/ground;$(ProjectDir)/game/Objects/ground/manager;$(ProjectDir)/game/Objects/Goal;$(ProjectDir)/game/Objects;$(ProjectDir)/game/Objects/Enemy</IncludePath>
     <OutDir>$(SolutionDir)..\Generated\Outputs\$(Configuration)\</OutDir>
-    <IntDir>$(Platform)..\Generated\Obj\$(ProjectName)\$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)..\Generated\Obj\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(SolutionDir)/;$(ProjectDir)/Engine/3d;$(ProjectDir)/Engine/base;$(ProjectDir)/Engine/2d;$(ProjectDir)/Engine/MyUtility;$(ProjectDir)/Engine/Manager/Texture;$(ProjectDir)/Engine/Manager/Input;$(ProjectDir)/Engine/Manager/Audio;$(ProjectDir)/Engine/Manager/Collision;$(ProjectDir)/externals/nlohmann;$(ProjectDir)/Engine/Manager/GlobalVariables;$(ProjectDir)/Engine/Math;$(ProjectDir)/Engine/Manager/Lights;$(ProjectDir)/game/Objects/SkyDome;$(ProjectDir)/game/Objects/Player;$(ProjectDir)/game/camera;$(ProjectDir)/game/Objects/ground;$(ProjectDir)/game/Objects/ground/manager;$(ProjectDir)/game/Objects/Goal;$(ProjectDir)/game/Objects;$(ProjectDir)/game/Objects/Enemy</IncludePath>
     <OutDir>$(SolutionDir)..\Generated\Outputs\$(Configuration)\</OutDir>
-    <IntDir>$(Platform)..\Generated\Obj\$(ProjectName)\$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)..\Generated\Obj\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
