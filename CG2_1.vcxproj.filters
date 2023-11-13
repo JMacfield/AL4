@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="base">
-      <UniqueIdentifier>{9b5ed66e-2450-4e58-bd1e-496326d595bf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="imgui">
       <UniqueIdentifier>{cfd9c7c9-4710-42b3-aca1-f60d4c7600a3}</UniqueIdentifier>
     </Filter>
@@ -416,6 +413,9 @@
     <ClInclude Include="Game\Object\Ground\Manager\GroundManager.h">
       <Filter>ヘッダー ファイル\Game\Object\Ground\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="externals\imgui\LICENSE.txt">
@@ -443,5 +443,10 @@
     <FxCompile Include="YTEngine\Shader\Object3d.VS.hlsl">
       <Filter>リソース ファイル\Shader</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resource.rc">
+      <Filter>リソース ファイル</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

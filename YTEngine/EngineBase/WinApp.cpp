@@ -1,6 +1,7 @@
 #include "WinApp.h"
+#include "resource.h"
 
-#include<string>
+#include <string>
 
 LRESULT  WinApp::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
 	if (ImGui_ImplWin32_WndProcHandler(hwnd, msg, wparam, lparam)) {
@@ -22,6 +23,10 @@ void WinApp::CreateGameWindow(const wchar_t* title, int32_t clientWidth, int32_t
 	wc_.hInstance = GetModuleHandle(nullptr);
 	wc_.hCursor = LoadCursor(nullptr, IDC_ARROW);
 	
+	HICON loadedIcon = LoadIcon(wc_.hInstance, MAKEINTRESOURCE(IDI_ICON1));
+	wc_.hIcon = loadedIcon;
+	//wc_.hIconSm = loadedIcon;
+
 	RegisterClass(&wc_);
 	
 	AdjustWindowRect(&wrc_, WS_OVERLAPPEDWINDOW, false);

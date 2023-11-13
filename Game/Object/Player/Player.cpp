@@ -352,11 +352,12 @@ void Player::BehaviorDashUpdate()
 {
 	const uint32_t behaviorDashTime = 30;
 	XINPUT_STATE joystate;
+
 	if (!isDash_) {
 		isDash_ = true;
 		workDash_.currentcooltime_ = 0;
+		
 		if (Input::GetInstance()->GetJoystickState(0, joystate)) {
-
 			workDash_.move_ = {
 				(float)joystate.Gamepad.sThumbLX / SHRT_MAX, 0.0f,
 				(float)joystate.Gamepad.sThumbLY / SHRT_MAX };
@@ -368,8 +369,6 @@ void Player::BehaviorDashUpdate()
 	}
 	else {
 		//移動方向に合わせてダッシュ
-
-
 		worldTransform_.translation_ = Add(workDash_.move_, worldTransform_.translation_);
 		worldTransformBody_.translation_ = worldTransform_.translation_;
 		//プレイヤーの行きたい方向
