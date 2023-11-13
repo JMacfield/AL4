@@ -64,16 +64,17 @@ void Player::Update()
 	if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER) {
 		behaviorRequest_ = Behavior::kAtack;
 	}
-	if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_A) {
+
+	if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER) {
 		if (workDash_.cooltime_ <= workDash_.currentcooltime_) {
 			behaviorRequest_ = Behavior::kDash;
-
 		}
-
 	}
+
 	if (!isDash_) {
 		workDash_.currentcooltime_++;
 	}
+
 	if (behaviorRequest_) {
 		behavior_ = behaviorRequest_.value();
 		switch (behavior_) {
@@ -113,12 +114,11 @@ void Player::Update()
 
 }
 
-void Player::Draw(const ViewProjection& view)
-{
+void Player::Draw(const ViewProjection& view) {
 	models_[kModelBody]->Draw(worldTransformBody_, view);
 	models_[kModelHead]->Draw(worldTransformHead_, view);
-	models_[kModelLarm]->Draw(worldTransformLarm_, view);
-	models_[kModelRarm]->Draw(worldTransformRarm_, view);
+	//models_[kModelLarm]->Draw(worldTransformLarm_, view);
+	//models_[kModelRarm]->Draw(worldTransformRarm_, view);
 	if (isAtack) {
 		models_[kModelHammer]->Draw(worldTransformHammer_, view);
 	}
@@ -356,7 +356,7 @@ void Player::BehaviorDashUpdate()
 	if (!isDash_) {
 		isDash_ = true;
 		workDash_.currentcooltime_ = 0;
-		
+
 		if (Input::GetInstance()->GetJoystickState(0, joystate)) {
 			workDash_.move_ = {
 				(float)joystate.Gamepad.sThumbLX / SHRT_MAX, 0.0f,

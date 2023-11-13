@@ -55,8 +55,8 @@ void Enemy::Draw(const ViewProjection& view)
 	if (isAlive_ == true) {
 		models_[kModelBody]->Draw(worldTransformBody_, view);
 		models_[kModelHead]->Draw(worldTransformHead_, view);
-		models_[kModelLarm]->Draw(worldTransformLarm_, view);
-		models_[kModelRarm]->Draw(worldTransformRarm_, view);
+		//models_[kModelLarm]->Draw(worldTransformLarm_, view);
+		//models_[kModelRarm]->Draw(worldTransformRarm_, view);
 	}
 }
 
