@@ -414,7 +414,7 @@ inline Vector3 GetFrontVectorFromModelMatrix(const Matrix4x4& modelMatrix) {
 // クォータニオンを使用してベクトルを回転させる関数
 inline Vector3 rotateVectorWithQuaternion(const Quaternion& q, const Vector3& v) {
 	// クォータニオンの回転行列を取得
-	Matrix4x4 rotationMatrix = QuaternionToMatrix(q);
+	Matrix4x4 rotationMatrix = quaternionToMatrix(q);
 
 	// ベクトルを4次元ベクトルに変換
 	float vector4[4] = { v.x, v.y, v.z, 1.0f };
