@@ -3,13 +3,13 @@
 
 void Enemy::Initialize(const std::vector<Model*>& models) {
 	ICharacter::Initialize(models);
+	
 	models_[kModelHead] = models[kModelHead];
 	models_[kModelBody] = models[kModelBody];
 	models_[kModelLarm] = models[kModelLarm];
 	models_[kModelRarm] = models[kModelRarm];
 	input_ = Input::GetInstance();
 
-	//worldTransform_.Initialize();
 	InitializeFloatGimmick();
 
 	worldTransform_.translation_.y = 5.0f;
@@ -17,41 +17,39 @@ void Enemy::Initialize(const std::vector<Model*>& models) {
 	worldTransformHead_.translation_ = { 0.0f, 1.0f, 0.0f };
 	worldTransformLarm_.translation_ = { -0.2f, 1.0f, 0.0f };
 	worldTransformRarm_.translation_ = { 0.2f, 1.0f, 0.0f };
+	
 	worldTransform_.Initialize();
 	worldTransformBase_.Initialize();
 	worldTransformBody_.Initialize();
 	worldTransformHead_.Initialize();
 	worldTransformLarm_.Initialize();
 	worldTransformRarm_.Initialize();
+	
 	SetParent(&GetWorldTransformBody());
+	
 	models_[kModelHead] = models[kModelHead];
 	models_[kModelBody] = models[kModelBody];
 	models_[kModelLarm] = models[kModelLarm];
 	models_[kModelRarm] = models[kModelRarm];
+	
 	SetCollisionAttribute(CollisionConfig::kCollisionAttributeEnemy);
 	SetCollisionMask(~CollisionConfig::kCollisionAttributeEnemy);
+	
 	move_ = { 0.3f,0.0f,0.0f };
 	isAlive_ = true;
 }
 
-void Enemy::Update()
-{
+void Enemy::Update() {
 	if (isAlive_ == true) {
 		structSphere_.center = worldTransformBody_.GetWorldPosition();
 		structSphere_.radius = 1.5f;
 		UpdateFloatGimmick();
 		Move();
 		ModelUpdateMatrix();
-
 	}
 }
 
-
-
-
-
-void Enemy::Draw(const ViewProjection& view)
-{
+void Enemy::Draw(const ViewProjection& view) {
 	if (isAlive_ == true) {
 		models_[kModelBody]->Draw(worldTransformBody_, view);
 		models_[kModelHead]->Draw(worldTransformHead_, view);
@@ -60,26 +58,23 @@ void Enemy::Draw(const ViewProjection& view)
 	}
 }
 
-void Enemy::OnCollision()
-{
+void Enemy::OnCollision() {
 
 }
 
-void Enemy::IsDead()
-{
+void Enemy::IsDead() {
 	isAlive_ = false;
 }
 
-void Enemy::Move()
-{
+void Enemy::Move() {
 	worldTransformBody_.translation_ = Add(worldTransformBody_.translation_, move_);
+	
 	if (worldTransformBody_.translation_.x >= 9.5f || worldTransformBody_.translation_.x <= -9.5) {
 		move_ = Multiply(-1.0f, move_);
 	}
 }
 
-void Enemy::SetParent(const WorldTransform* parent)
-{
+void Enemy::SetParent(const WorldTransform* parent) {
 	worldTransformBase_.parent_ = parent;
 	worldTransformHead_.parent_ = parent;
 	worldTransformRarm_.parent_ = parent;
@@ -87,23 +82,19 @@ void Enemy::SetParent(const WorldTransform* parent)
 	worldTransform_.parent_ = parent;
 }
 
-void Enemy::ModelUpdateMatrix()
-{
+void Enemy::ModelUpdateMatrix() {
 	worldTransformBase_.UpdateMatrix();
 	worldTransformBody_.UpdateMatrix();
 	worldTransformHead_.UpdateMatrix();
 	worldTransformRarm_.UpdateMatrix();
 	worldTransformLarm_.UpdateMatrix();
-
 }
 
-void Enemy::InitializeFloatGimmick()
-{
+void Enemy::InitializeFloatGimmick() {
 	floatingParametor_ = 0.0f;
 }
 
-void Enemy::UpdateFloatGimmick()
-{
+void Enemy::UpdateFloatGimmick() {
 	uint16_t T = 120;
 
 	float step = 2.0f * (float)M_PI / T;
@@ -111,8 +102,6 @@ void Enemy::UpdateFloatGimmick()
 
 	floatingParametor_ += step;
 	floatingParametor_ = (float)std::fmod(floatingParametor_, 2.0f * M_PI);
-
-
 
 	worldTransformBody_.translation_.y = std::sin(floatingParametor_) * floatingAmplitude + 1.0f;
 

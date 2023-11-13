@@ -3,60 +3,70 @@
 
 void Player::Initialize(const std::vector<Model*>& models) {
 	ICharacter::Initialize(models);
-	//worldTransformBody_.translation_ = { 0.0f,2.0f,50.0f };
+	
 	worldTransformHead_.translation_ = { 0.0f, 1.0f, 0.0f };
 	worldTransformLarm_.translation_ = { -0.2f, 1.0f, 0.0f };
 	worldTransformRarm_.translation_ = { 0.2f, 1.0f, 0.0f };
+	
 	worldTransform_.Initialize();
 	worldTransformBody_.Initialize();
 	worldTransformHead_.Initialize();
 	worldTransformLarm_.Initialize();
 	worldTransformRarm_.Initialize();
 	worldTransformHammer_.Initialize();
+	
 	SetParentModel(&GetWorldTransformBody());
+	
 	input_ = Input::GetInstance();
+	
 	models_[kModelHead] = models[kModelHead];
 	models_[kModelBody] = models[kModelBody];
 	models_[kModelLarm] = models[kModelLarm];
 	models_[kModelRarm] = models[kModelRarm];
+	
 	models_[kModelHammer] = models[kModelHammer];
 	isHit_ = false;
 	SetCollisionAttribute(CollisionConfig::kCollisionAttributePlayer);
 	SetCollisionMask(~CollisionConfig::kCollisionAttributePlayer);
+	
 	color = { 1.0f,1.0f,1.0f,1.0f };
 	worldTransform_.translation_ = { 1.0f,2.5f,1.0f };
+	
 	GlobalVariables* globalVariables{};
 	globalVariables = GlobalVariables::GetInstance();
+	
 	quaternion_ = CreateQuaternion(0.0f, { 0.0f,1.0f,0.0f });
 	quaternion_ = Normalize(quaternion_);
+	
 	const char* groupName = "Player";
 	GlobalVariables::GetInstance()->CreateGroup(groupName);
 	globalVariables->AddItem(groupName, "HammerScale", worldTransformHammer_.scale_);
 	globalVariables->AddItem(groupName, "HammerPos", worldTransformHammer_.translation_);
 	globalVariables->AddItem(groupName, "DashSpeed", workDash_.velocity_);
 	globalVariables->AddItem(groupName, "DashCoolTime", (float)workDash_.cooltime_);
+	
 	worldTransformHammer_.scale_ = globalVariables->GetVector3Value(groupName, "HammerScale");
 	worldTransformHammer_.translation_ = globalVariables->GetVector3Value(groupName, "HammerPos");
+	
 	ApplyGlobalVariables();
 	moveSpeed_ = 0.1f;
 }
 
-void Player::Update()
-{
+void Player::Update() {
 	ApplyGlobalVariables();
 	XINPUT_STATE joyState;
 	collisionObb_.center = worldTransformHammer_.GetWorldPosition();
-	//collisionObb_.center.y += 1.0f;
+	
 	GetOrientations(MakeRotateXYZMatrix(worldTransformHammer_.rotation_), collisionObb_.orientation);
 	collisionObb_.size = { 1.0f,3.0f,1.0f };
+	
 	if (!Input::GetInstance()->GetJoystickState(0, joyState)) {
 		return;
 	}
+	
 	if (worldTransform_.GetWorldPosition().y < -10.0f) {
 		gameOver = true;
 	}
-
-
 
 	structSphere_.center = worldTransformBody_.GetWorldPosition();
 	structSphere_.radius = 1.5f;
@@ -91,6 +101,7 @@ void Player::Update()
 		}
 		behaviorRequest_ = std::nullopt;
 	}
+
 	switch (behavior_) {
 	case Behavior::kRoot:
 	default:
@@ -110,41 +121,32 @@ void Player::Update()
 	Vector3 b = worldTransform_.GetWorldPosition();
 
 	ModelUpdateMatrix();
-
-
 }
 
 void Player::Draw(const ViewProjection& view) {
 	models_[kModelBody]->Draw(worldTransformBody_, view);
 	models_[kModelHead]->Draw(worldTransformHead_, view);
-	//models_[kModelLarm]->Draw(worldTransformLarm_, view);
-	//models_[kModelRarm]->Draw(worldTransformRarm_, view);
+	
 	if (isAtack) {
 		models_[kModelHammer]->Draw(worldTransformHammer_, view);
 	}
 }
 
-void Player::IsFall()
-{
+void Player::IsFall() {
 	worldTransform_.translation_.y -= 0.1f;
 	worldTransformBody_.translation_ = worldTransform_.GetWorldPosition();
 }
 
-void Player::OnCollision()
-{
+void Player::OnCollision() {
 	gameOver = true;
 }
 
-void Player::Setparent(const WorldTransform* parent)
-{
-
+void Player::Setparent(const WorldTransform* parent) {
 	worldTransform_.parent_ = parent;
 	worldTransformBody_.parent_ = parent;
-
 }
 
-void Player::IsCollision(const WorldTransform& worldtransform)
-{
+void Player::IsCollision(const WorldTransform& worldtransform) {
 	if (!worldTransform_.parent_) {
 
 		worldTransform_.translation_.y = worldtransform.translation_.y + worldtransform.scale_.y + worldTransform_.scale_.y;
@@ -162,8 +164,7 @@ void Player::IsCollision(const WorldTransform& worldtransform)
 	}
 }
 
-void Player::DeleteParent()
-{
+void Player::DeleteParent() {
 	if (worldTransform_.parent_) {
 		worldTransform_.translation_ = worldTransformBody_.GetWorldPosition();
 		worldTransformBody_.translation_ = worldTransform_.GetWorldPosition();
@@ -172,8 +173,7 @@ void Player::DeleteParent()
 	}
 }
 
-void Player::Move()
-{
+void Player::Move() {
 	XINPUT_STATE joystate;
 
 	if (Input::GetInstance()->GetJoystickState(0, joystate)) {
@@ -182,12 +182,14 @@ void Player::Move()
 		Vector3 move = {
 			(float)joystate.Gamepad.sThumbLX / SHRT_MAX, 0.0f,
 			(float)joystate.Gamepad.sThumbLY / SHRT_MAX };
+
 		if (CompereVector3(move, { 0.0f,0.0f,0.0f })) {
 			isMove_ = false;
 		}
 		else {
 			isMove_ = true;
 		}
+
 		if (isMove_ == true) {
 			Matrix4x4 rotateMatrix = MakeRotateMatrix(viewProjection_->rotation_);
 			move = TransformNormal(move, rotateMatrix);
@@ -223,7 +225,6 @@ void Player::Move()
 			}
 
 			preMove_ = move;
-
 		}
 
 		worldTransformBody_.quaternion_ = Slerp(0.3f, worldTransformBody_.quaternion_, quaternion_);
@@ -233,8 +234,7 @@ void Player::Move()
 }
 
 
-void Player::SetParentModel(const WorldTransform* parent)
-{
+void Player::SetParentModel(const WorldTransform* parent) {
 	worldTransformHead_.parent_ = parent;
 	worldTransformRarm_.parent_ = parent;
 	worldTransformLarm_.parent_ = parent;
@@ -242,8 +242,7 @@ void Player::SetParentModel(const WorldTransform* parent)
 	worldTransformHammer_.parent_ = parent;
 }
 
-void Player::ModelUpdateMatrix()
-{
+void Player::ModelUpdateMatrix() {
 	worldTransform_.UpdateQuaternionMatrix();
 	worldTransformBody_.UpdateQuaternionMatrix();
 	worldTransformHead_.UpdateMatrix();
@@ -252,13 +251,11 @@ void Player::ModelUpdateMatrix()
 	worldTransformHammer_.UpdateMatrix();
 }
 
-void Player::InitializeFloatGimmick()
-{
+void Player::InitializeFloatGimmick() {
 	floatingParametor_ = 0.0f;
 }
 
-void Player::UpdateFloatGimmick()
-{
+void Player::UpdateFloatGimmick() {
 	uint16_t T = 120;
 
 	float step = 2.0f * (float)M_PI / T;
@@ -267,18 +264,18 @@ void Player::UpdateFloatGimmick()
 	floatingParametor_ += step;
 	floatingParametor_ = (float)std::fmod(floatingParametor_, 2.0f * M_PI);
 
-
 	if (!isHit_ || worldTransformBody_.GetWorldPosition().y < 0.0f) {
 		IsFall();
 	}
-
 	else {
 		worldTransform_.translation_.y = objectPos_.translation_.y + objectPos_.scale_.y + worldTransform_.scale_.y;
 		worldTransformBody_.translation_.y = std::sin(floatingParametor_) * floatingAmplitude + 1.0f;
 	}
+
 	worldTransformLarm_.rotation_.x = std::sin(floatingParametor_) * 0.75f;
 	worldTransformRarm_.rotation_.x = std::sin(floatingParametor_) * 0.75f;
 }
+
 void Player::BehaviorRootUpdate() {
 	Move();
 	UpdateFloatGimmick();
@@ -302,7 +299,6 @@ void Player::BehaviorAtackUpdate() {
 	}
 
 	animationFrame++;
-
 }
 
 void Player::BehaviorRootInitialize() {
@@ -332,8 +328,7 @@ void Player::BehaviorAtackInitialize() {
 	workDash_.currentcooltime_ = 0;
 }
 
-void Player::ApplyGlobalVariables()
-{
+void Player::ApplyGlobalVariables() {
 	GlobalVariables* globalVariables = GlobalVariables::GetInstance();
 
 	const char* groupName = "Player";
@@ -342,14 +337,12 @@ void Player::ApplyGlobalVariables()
 	workDash_.cooltime_ = (uint32_t)globalVariables->GetFloatValue(groupName, "DashCoolTime");
 }
 
-void Player::BehaviorDashInitialize()
-{
+void Player::BehaviorDashInitialize() {
 	workDash_.dashParameter_ = 0;
 	isAtack = false;
 }
 
-void Player::BehaviorDashUpdate()
-{
+void Player::BehaviorDashUpdate() {
 	const uint32_t behaviorDashTime = 30;
 	XINPUT_STATE joystate;
 
@@ -390,14 +383,10 @@ void Player::BehaviorDashUpdate()
 		quaternion_ = Normalize(quaternion_);
 		newquaternion_ = Normalize(newquaternion_);
 		quaternion_ = Multiply(quaternion_, newquaternion_);
-
 	}
 
 	if (++workDash_.dashParameter_ >= behaviorDashTime) {
 		behaviorRequest_ = Behavior::kRoot;
 		isDash_ = false;
-
 	}
 }
-
-

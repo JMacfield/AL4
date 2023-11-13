@@ -14,22 +14,27 @@ public:
 	void Initialize(const std::vector<Model*>& models) override;
 	void Update()override;
 	void Draw(const ViewProjection& view)override;
+	
 	WorldTransform GetWorldTransform()override { return worldTransformBody_; }
 	const WorldTransform& GetWorldTransformBase() { return worldTransformBody_; }
+	
 	void SetViewProjection(const ViewProjection* view) { viewProjection_ = view; }
 	void IsFall();
+	
 	StructSphere GetStructSphere() { return structSphere_; }
 	bool isHit_;
 	bool isGameover() { return gameOver; }
+	
 	void OnCollision() override;
 	void Setparent(const WorldTransform* parent);
 	void IsCollision(const WorldTransform& worldtransform);
 	void DeleteParent();
 	void SetObjectPosition(const WorldTransform& worldtransform) { objectPos_ = worldtransform; }
+	
 	const WorldTransform& GetWorldTransformBody() { return worldTransformBody_; }
 	OBB getcollsionObb() { return collisionObb_; }
+	
 	bool GetIsAtack() { return isAtack; }
-
 	bool GetIsDash() { return isDash_; }
 
 private:
@@ -50,6 +55,7 @@ private:
 	WorkDash workDash_;
 	Vector4 color;
 	Input* input_ = nullptr;
+
 	const ViewProjection* viewProjection_ = nullptr;
 	StructSphere structSphere_;
 	bool gameOver = false;
@@ -61,17 +67,20 @@ private:
 	WorldTransform worldTransformBody_;
 	WorldTransform worldTransformHammer_;
 	WorldTransform objectPos_;
+	
 	float floatingParametor_ = 0.0f;
 	int animationFrame;
 
 	Behavior behavior_ = Behavior::kRoot;
 	std::optional<Behavior> behaviorRequest_ = std::nullopt;
 	float cosin;
+	
 	OBB collisionObb_;
 	Matrix4x4 Direction_;
 	Quaternion quaternion_;
 	Vector3 preMove_;
 	Quaternion preQuaternion_;
+	
 	bool isDash_;
 	bool isAtack;
 	bool isMove_;
