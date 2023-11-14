@@ -59,11 +59,9 @@ void GameScene::Update() {
 	groundmanager_->Update();
 
 	enemy_->Update();
-
 	if (player_->isGameover() == true) {
 		Initialize();
 	}
-	
 	player_->isHit_ = false;
 
 	goal_->Update();

@@ -43,7 +43,6 @@ private:
 		kAtack,
 		kDash,
 	};
-
 	struct WorkDash {
 		uint32_t dashParameter_ = 0;
 		Vector3 move_;
@@ -51,7 +50,6 @@ private:
 		uint32_t currentcooltime_;
 		float velocity_;
 	};
-
 	WorkDash workDash_;
 	Vector4 color;
 	Input* input_ = nullptr;
@@ -85,7 +83,6 @@ private:
 	bool isAtack;
 	bool isMove_;
 	float moveSpeed_;
-
 private:
 	void Move();
 	void SetParentModel(const WorldTransform* parent);
@@ -104,3 +101,4 @@ private:
 
 	void BehaviorDashUpdate();
 };
+
