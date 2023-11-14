@@ -1,15 +1,15 @@
 #pragma once
-
 #include "3D/WorldTransform.h"
 #include "3D/Model.h"
 #include "EngineManager/Input/Input.h"
-#include "3D/ViewProjection.h"
+#include "EngineManager/Input/Input.h"
 #include "EngineManager/Collision/Collider.h"
 #include "EngineManager/Collision/CollisionConfig.h"
 #include "Object/ICharacter.h"
 #include "EngineManager/GlobalVariables/GlobalVariables.h"
+#include <optional>
 
-class Player : public Collider, public ICharacter {
+class Player :public Collider, public ICharacter {
 public:
 	void Initialize(const std::vector<Model*>& models) override;
 	void Update()override;
@@ -17,25 +17,19 @@ public:
 	
 	WorldTransform GetWorldTransform()override { return worldTransformBody_; }
 	const WorldTransform& GetWorldTransformBase() { return worldTransformBody_; }
-	
 	void SetViewProjection(const ViewProjection* view) { viewProjection_ = view; }
 	void IsFall();
-	
 	StructSphere GetStructSphere() { return structSphere_; }
 	bool isHit_;
 	bool isGameover() { return gameOver; }
-	
 	void OnCollision() override;
 	void Setparent(const WorldTransform* parent);
 	void IsCollision(const WorldTransform& worldtransform);
 	void DeleteParent();
-	void SetObjectPosition(const WorldTransform& worldtransform) { objectPos_ = worldtransform; }
-	
+	void SetObjectPos(const WorldTransform& worldtransform) { objectPos_ = worldtransform; }
 	const WorldTransform& GetWorldTransformBody() { return worldTransformBody_; }
 	OBB getcollsionObb() { return collisionObb_; }
-	
 	bool GetIsAtack() { return isAtack; }
-	bool GetIsDash() { return isDash_; }
 
 private:
 	enum class Behavior {
@@ -43,6 +37,7 @@ private:
 		kAtack,
 		kDash,
 	};
+
 	struct WorkDash {
 		uint32_t dashParameter_ = 0;
 		Vector3 move_;
@@ -50,10 +45,10 @@ private:
 		uint32_t currentcooltime_;
 		float velocity_;
 	};
+
 	WorkDash workDash_;
 	Vector4 color;
 	Input* input_ = nullptr;
-
 	const ViewProjection* viewProjection_ = nullptr;
 	StructSphere structSphere_;
 	bool gameOver = false;
@@ -65,24 +60,23 @@ private:
 	WorldTransform worldTransformBody_;
 	WorldTransform worldTransformHammer_;
 	WorldTransform objectPos_;
-	
 	float floatingParametor_ = 0.0f;
 	int animationFrame;
 
 	Behavior behavior_ = Behavior::kRoot;
 	std::optional<Behavior> behaviorRequest_ = std::nullopt;
 	float cosin;
-	
 	OBB collisionObb_;
 	Matrix4x4 Direction_;
 	Quaternion quaternion_;
 	Vector3 preMove_;
 	Quaternion preQuaternion_;
-	
+
 	bool isDash_;
 	bool isAtack;
 	bool isMove_;
 	float moveSpeed_;
+
 private:
 	void Move();
 	void SetParentModel(const WorldTransform* parent);
@@ -101,4 +95,3 @@ private:
 
 	void BehaviorDashUpdate();
 };
-

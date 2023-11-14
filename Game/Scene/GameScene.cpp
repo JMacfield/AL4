@@ -1,5 +1,4 @@
-#include "gameScene.h"
-
+#include "GameScene.h"
 
 GameScene::~GameScene() {
 
@@ -14,34 +13,26 @@ void GameScene::Initialize() {
 	collisionManager_ = make_unique<CollisionManager>();
 	input_ = Input::GetInstance();
 	int a = textureManager_->Load("Resource/tex.png");
-	
 	viewProjection_.Initialize();
 	viewProjection_.translation_ = { 0.0f,0.0f,-5.0f };
-	
-	playerModel_.reset(Model::CreateModelFromObj("Resource/CUBE", "cube.obj"));
+	playerModel_.reset(Model::CreateModelFromObj("Resource/CUBE", "CUBE.obj"));
 	player_ = make_unique<Player>();
-	
 	enemyBodyModel.reset(Model::CreateModelFromObj("Resource/float_Body", "float_Body.obj"));
 	enemyHeadModel.reset(Model::CreateModelFromObj("Resource/float_Head", "float_head.obj"));
 	enemyL_armModel.reset(Model::CreateModelFromObj("Resource/float_L_arm", "float_L_arm.obj"));
 	enemyR_armModel.reset(Model::CreateModelFromObj("Resource/float_R_arm", "float_R_arm.obj"));
-	
-	player_Hammer_.reset(Model::CreateModelFromObj("Resource/hammer", "hammer.obj"));
+	player_Hammer_.reset(Model::CreateModelFromObj("Resource/Hammer", "hammer.obj"));
 	std::vector<Model*>playerModels = { enemyBodyModel.get(),enemyHeadModel.get(),enemyL_armModel.get(),enemyR_armModel.get(),player_Hammer_.get() };
 	player_->Initialize(playerModels);
-	player_->SetViewProjection(&followCamera_->GetViewProjection());
-
 	followCamera_ = std::make_unique<FollowCamera>();
 	followCamera_->Initialize();
 	followCamera_->SetTarget(&player_->GetWorldTransformBase());
-	
-	skyDomeModel_.reset(Model::CreateModelFromObj("Resource/Skydome", "SkyDome.obj"));
+	player_->SetViewProjection(&followCamera_->GetViewProjection());
+	skyDomeModel_.reset(Model::CreateModelFromObj("Resource/SkyDome", "SkyDome.obj"));
 	skyDome_ = make_unique<SkyDome>();
 	skyDome_->Initialize(skyDomeModel_.get());
-
 	groundmanager_ = make_unique<GroundManager>();
 	groundmanager_->Initialize();
-
 	goal_ = make_unique<Goal>();
 	goal_->Initialize({ 0.0f,2.0f,62.0f }, { 1.0f,1.0f,1.0f });
 	enemy_ = make_unique<Enemy>();
@@ -54,7 +45,8 @@ void GameScene::Initialize() {
 	count_ = 0;
 }
 
-void GameScene::Update() {
+void GameScene::Update()
+{
 	count_++;
 	groundmanager_->Update();
 
@@ -69,7 +61,7 @@ void GameScene::Update() {
 		for (int i = 0; i < 2; i++) {
 			if (IsCollision(groundmanager_->GetOBB(i), player_->GetStructSphere())) {
 				player_->isHit_ = true;
-				player_->SetObjectPosition(groundmanager_->GetGround(i)->GetWorldTransform());
+				player_->SetObjectPos(groundmanager_->GetGround(i)->GetWorldTransform());
 			}
 		}
 
@@ -88,36 +80,36 @@ void GameScene::Update() {
 			}
 		}
 	}
-
 	player_->Update();
-	
 	viewProjection_.UpdateMatrix();
 	followCamera_->Update();
 	viewProjection_.matView = followCamera_->GetViewProjection().matView;
 	viewProjection_.matProjection = followCamera_->GetViewProjection().matProjection;
 	viewProjection_.TransferMatrix();
 
+
 	if (sceneNum > 1) {
 		sceneNum = 1;
 	}
 
+
 	collisionManager_->ClearColliders();
 	collisionManager_->AddCollider(player_.get());
 	collisionManager_->AddCollider(goal_.get());
-
 	if (enemy_) {
 		if (enemy_->GetisAlive()) {
 			collisionManager_->AddCollider(enemy_.get());
 		}
 	}
-	
 	if (count_ >= 20) {
 		collisionManager_->CheckAllCollision();
 	}
 }
 
 
-void GameScene::Draw() {
+void GameScene::Draw()
+{
+
 	//3D描画準備
 	engine_->ModelPreDraw();
 	Draw3D();
@@ -126,24 +118,33 @@ void GameScene::Draw() {
 	Draw2D();
 }
 
-void GameScene::Draw3D() {
+void GameScene::Draw3D()
+{
 	skyDome_->Draw(viewProjection_);
 	player_->Draw(viewProjection_);
 	groundmanager_->Draw(viewProjection_);
 	goal_->Draw(viewProjection_);
 	enemy_->Draw(viewProjection_);
+
 }
 
-void GameScene::ApplyGlobalVariables() {
+void GameScene::ApplyGlobalVariables()
+{
 	GlobalVariables* globalVariables = GlobalVariables::GetInstance();
 
 	const char* groupName = "Player";
+
 }
 
 void GameScene::Draw2D() {
 	engine_->SetBlendMode(blendCount_);
-}
 
-void GameScene::Finalize() {
 
 }
+void GameScene::Finalize()
+{
+
+
+
+}
+

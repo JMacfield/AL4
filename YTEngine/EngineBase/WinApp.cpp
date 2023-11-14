@@ -23,8 +23,8 @@ void WinApp::CreateGameWindow(const wchar_t* title, int32_t clientWidth, int32_t
 	wc_.hInstance = GetModuleHandle(nullptr);
 	wc_.hCursor = LoadCursor(nullptr, IDC_ARROW);
 	
-	HICON loadedIcon = LoadIcon(wc_.hInstance, MAKEINTRESOURCE(IDI_ICON1));
-	wc_.hIcon = loadedIcon;
+	/*HICON loadedIcon = LoadIcon(wc_.hInstance, MAKEINTRESOURCE(IDI_ICON1));
+	wc_.hIcon = loadedIcon;*/
 
 	RegisterClass(&wc_);
 	

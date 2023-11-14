@@ -49,9 +49,12 @@ void WorldTransform::UpdateRotateMatrix(const Matrix4x4& rotateMat) {
 void WorldTransform::UpdateQuaternionMatrix() {
 	Matrix4x4 quart_ = quaternionToMatrix(quaternion_);
 	Matrix4x4 Afine = MakeQuatAffineMatrix(scale_, quart_, translation_);
+	
 	matWorld_ = Afine;
+	
 	if (parent_) {
 		matWorld_ = Multiply(matWorld_, parent_->matWorld_);
 	}
+
 	TransferMatrix();
 }

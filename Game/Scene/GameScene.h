@@ -1,16 +1,16 @@
 #pragma once
-
 #include "EngineBase/YTEngine.h"
 #include "EngineManager/Input/Input.h"
 #include "MyMath/MyMath.h"
 #include "2D/Triangle.h"
 #include "IScene.h"
 #include "2D/Sprite.h"
-#include "EngineManager/Texture/TextureManager.h"
+#include "3D/Sphere.h"
 #include "3D/Model.h"
 #include "3D/WorldTransform.h"
 #include "3D/ViewProjection.h"
 #include "EngineManager/Collision/CollisionManager.h"
+#include "EngineManager/Texture/TextureManager.h"
 #include "EngineManager/GlobalVariables/GlobalVariables.h"
 #include "Object/SkyDome/SkyDome.h"
 #include "Object/Player/Player.h"
@@ -29,11 +29,9 @@ public:
 
 	void Draw()override;
 	void Finalize()override;
-
 private:
 #pragma region 基本機能
 	YTEngine* engine_;
-
 	DirectXCommon* directXCommon_;
 	Sprite* sprite_;
 	TextureManager* textureManager_;
@@ -44,7 +42,6 @@ private:
 	void Draw3D();
 	void ApplyGlobalVariables();
 #pragma endregion
-
 #pragma region ゲームの機能
 	int count_;
 	unique_ptr<SkyDome> skyDome_ = nullptr;
@@ -52,12 +49,11 @@ private:
 	unique_ptr<Model> playerModel_ = nullptr;
 	unique_ptr<Player> player_;
 	unique_ptr<FollowCamera> followCamera_;
-	
+	//unique_ptr<ground> ground_;
 	unique_ptr<GroundManager> groundmanager_;
 	unique_ptr<CollisionManager> collisionManager_;
 	unique_ptr<Goal> goal_;
-	unique_ptr<Enemy> enemy_;
-	
+	unique_ptr<Enemy>enemy_;
 	std::unique_ptr<Model> enemyHeadModel = nullptr;
 	std::unique_ptr<Model> enemyBodyModel = nullptr;
 	std::unique_ptr<Model> enemyL_armModel = nullptr;
@@ -65,3 +61,4 @@ private:
 	std::unique_ptr<Model> player_Hammer_ = nullptr;
 #pragma endregion
 };
+
