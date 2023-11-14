@@ -40,7 +40,7 @@ void FollowCamera::Update() {
 
 		//回転量
 		Vector3 rotation = {
-			(float)joyState.Gamepad.sThumbRY / SHRT_MAX,
+			0.0f,
 			(float)joyState.Gamepad.sThumbRX / SHRT_MAX,
 			0.0f
 		};
