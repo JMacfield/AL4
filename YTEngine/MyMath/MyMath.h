@@ -525,3 +525,29 @@ inline bool CompareVector3(const Vector3& q1, const Vector3& q2) {
 		return false;
 	}
 }
+
+inline Vector3 Lerp(const Vector3& v1, const Vector3& v2, float t) {
+	Vector3 result{};
+	result.x = v1.x + t * (v2.x - v1.x);
+	result.y = v1.y + t * (v2.y - v1.y);
+	result.z = v1.z + t * (v2.z - v1.z);
+	return result;
+}
+
+inline float LerpShortAngle(const float& a, const float& b, float t) {
+	//角度差分を求める
+	float diff = b - a;
+	//角度を[-2PI,+2PI]に補正する
+	float PI = 3.14159265359f;
+	float PI2 = 2.0f * 3.14159265359f;
+	float theta = std::fmod(diff, PI2);
+	//角度を[-PI,PI]に補正する
+	if (theta >= PI) {
+		theta -= PI2;
+	}
+	if (theta <= -PI) {
+		theta += PI2;
+	}
+
+	return a + theta * t;
+}

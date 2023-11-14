@@ -1,7 +1,7 @@
 {
     "Player": {
-        "DashCoolTime": 0.0,
-        "DashSpeed": 0.0,
+        "DashCoolTime": 9.895999908447266,
+        "DashSpeed": 0.5210000276565552,
         "HammerPos": [
             0.0,
             0.0,
@@ -9,7 +9,7 @@
         ],
         "HammerScale": [
             1.0,
-            0.0,
+            1.600000023841858,
             1.0
         ],
         "Test": 90.0,

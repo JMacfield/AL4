@@ -48,7 +48,7 @@ void Player::Initialize(const std::vector<Model*>& models) {
 	worldTransformHammer_.scale_ = globalVariables->GetVector3Value(groupName, "HammerScale");
 	worldTransformHammer_.translation_ = globalVariables->GetVector3Value(groupName, "HammerPos");
 	
-	ApplyGlobalVariables();
+	Player::ApplyGlobalVariables();
 	moveSpeed_ = 0.1f;
 }
 
@@ -76,7 +76,7 @@ void Player::Update() {
 		behaviorRequest_ = Behavior::kAtack;
 	}
 
-	if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_A) {
+	if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER) {
 		if (workDash_.cooltime_ <= workDash_.currentcooltime_) {
 			behaviorRequest_ = Behavior::kDash;
 		}

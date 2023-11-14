@@ -128,12 +128,8 @@ void GameScene::Draw3D()
 
 }
 
-void GameScene::ApplyGlobalVariables()
-{
-	GlobalVariables* globalVariables = GlobalVariables::GetInstance();
-
-	const char* groupName = "Player";
-
+void GameScene::ApplyGlobalVariables() {
+	
 }
 
 void GameScene::Draw2D() {

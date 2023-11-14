@@ -1,12 +1,14 @@
-
 #pragma once
+
 #include "MyMath/MyMath.h"
 #include <variant>
 #include <string>
 #include <map>
 #include <json.hpp>
+
 class GlobalVariables {
 	using json = nlohmann::json;
+
 public:
 	static GlobalVariables* GetInstance();
     void Update();
@@ -40,5 +42,5 @@ public:
 		std::map<std::string, Item> items;
 	};
 	std::map<std::string, Group> datas_;
-	const std::string kDirectoryPath = "Resource/GlovalVariables/";
+	const std::string kDirectoryPath = "Resource/GlobalVariables/";
 };
