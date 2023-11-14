@@ -29,6 +29,7 @@ public:
 
 	void Draw()override;
 	void Finalize()override;
+
 private:
 #pragma region 基本機能
 	YTEngine* engine_;
@@ -37,11 +38,14 @@ private:
 	TextureManager* textureManager_;
 	Input* input_;
 	ViewProjection viewProjection_;
+	
 	int blendCount_;
+
 	void Draw2D();
 	void Draw3D();
 	void ApplyGlobalVariables();
 #pragma endregion
+
 #pragma region ゲームの機能
 	int count_;
 	unique_ptr<SkyDome> skyDome_ = nullptr;
@@ -49,11 +53,12 @@ private:
 	unique_ptr<Model> playerModel_ = nullptr;
 	unique_ptr<Player> player_;
 	unique_ptr<FollowCamera> followCamera_;
-	//unique_ptr<ground> ground_;
+	
 	unique_ptr<GroundManager> groundmanager_;
 	unique_ptr<CollisionManager> collisionManager_;
 	unique_ptr<Goal> goal_;
 	unique_ptr<Enemy>enemy_;
+	
 	std::unique_ptr<Model> enemyHeadModel = nullptr;
 	std::unique_ptr<Model> enemyBodyModel = nullptr;
 	std::unique_ptr<Model> enemyL_armModel = nullptr;
@@ -61,4 +66,3 @@ private:
 	std::unique_ptr<Model> player_Hammer_ = nullptr;
 #pragma endregion
 };
-

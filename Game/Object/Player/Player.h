@@ -14,22 +14,28 @@ public:
 	void Initialize(const std::vector<Model*>& models) override;
 	void Update()override;
 	void Draw(const ViewProjection& view)override;
-	
+
+	void IsCollision(const WorldTransform& worldtransform);
+	void OnCollision() override;
+
+	void IsFall();
+	bool isHit_;
+
+	const WorldTransform& GetWorldTransformBody() { return worldTransformBody_; }
 	WorldTransform GetWorldTransform()override { return worldTransformBody_; }
 	const WorldTransform& GetWorldTransformBase() { return worldTransformBody_; }
-	void SetViewProjection(const ViewProjection* view) { viewProjection_ = view; }
-	void IsFall();
+	
 	StructSphere GetStructSphere() { return structSphere_; }
-	bool isHit_;
-	bool isGameover() { return gameOver; }
-	void OnCollision() override;
-	void Setparent(const WorldTransform* parent);
-	void IsCollision(const WorldTransform& worldtransform);
-	void DeleteParent();
+	OBB GetCollsionObb() { return collisionObb_; }
+
+	void SetViewProjection(const ViewProjection* view) { viewProjection_ = view; }
 	void SetObjectPos(const WorldTransform& worldtransform) { objectPos_ = worldtransform; }
-	const WorldTransform& GetWorldTransformBody() { return worldTransformBody_; }
-	OBB getcollsionObb() { return collisionObb_; }
+
+	void Setparent(const WorldTransform* parent);
+	void DeleteParent();
+	
 	bool GetIsAtack() { return isAtack; }
+	bool isGameover() { return gameOver; }
 
 private:
 	enum class Behavior {
@@ -49,6 +55,7 @@ private:
 	WorkDash workDash_;
 	Vector4 color;
 	Input* input_ = nullptr;
+
 	const ViewProjection* viewProjection_ = nullptr;
 	StructSphere structSphere_;
 	bool gameOver = false;
@@ -60,12 +67,14 @@ private:
 	WorldTransform worldTransformBody_;
 	WorldTransform worldTransformHammer_;
 	WorldTransform objectPos_;
+
 	float floatingParametor_ = 0.0f;
 	int animationFrame;
 
 	Behavior behavior_ = Behavior::kRoot;
 	std::optional<Behavior> behaviorRequest_ = std::nullopt;
 	float cosin;
+
 	OBB collisionObb_;
 	Matrix4x4 Direction_;
 	Quaternion quaternion_;

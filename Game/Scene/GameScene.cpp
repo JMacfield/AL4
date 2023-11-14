@@ -75,7 +75,7 @@ void GameScene::Update()
 
 
 		if (player_->GetIsAtack()) {
-			if (IsCollision(player_->getcollsionObb(), enemy_->GetStructSphere())) {
+			if (IsCollision(player_->GetCollsionObb(), enemy_->GetStructSphere())) {
 				enemy_->IsDead();
 			}
 		}

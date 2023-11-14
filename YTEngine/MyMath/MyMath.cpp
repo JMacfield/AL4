@@ -474,7 +474,7 @@ Vector3 Normalise(const Vector3& v) {
 float Length(const Vector2& a) {
 	return sqrtf(a.x * a.x + a.y * a.y);
 }
-Vector2 Vec2Normalise(const Vector2& v)
+Vector2 Vec2Normalize(const Vector2& v)
 {
 	float len = Length(v);
 	if (len != 0) {
@@ -499,7 +499,7 @@ float Length(const Vector3& v) {
 	return sqrtf(Dot(v, v));
 
 }
-Vector3 vectorTransform(const Vector3& vector, const Matrix4x4& matrix) {
+Vector3 VectorTransform(const Vector3& vector, const Matrix4x4& matrix) {
 	Vector3 result;
 	result.x = vector.x * matrix.m[0][0] + vector.y * matrix.m[1][0] + vector.z * matrix.m[2][0] + 1.0f * matrix.m[3][0];
 	result.y = vector.x * matrix.m[0][1] + vector.y * matrix.m[1][1] + vector.z * matrix.m[2][1] + 1.0f * matrix.m[3][1];
@@ -614,7 +614,7 @@ Matrix4x4 DirectiontoDirection(const Vector3& to, const Vector3& from)
 	result.m[3][3] = 1;
 	return result;
 }
-Quaternion createQuaternion(float Radian, Vector3 axis)
+Quaternion CreateQuaternion(float Radian, Vector3 axis)
 {
 	Quaternion quat;
 	float halfAngle = Radian * 0.5f;
@@ -628,7 +628,7 @@ Quaternion createQuaternion(float Radian, Vector3 axis)
 	return quat;
 }
 
-Vector3 quaternionToEulerAngles(const Quaternion& quat)
+Vector3 QuaternionToEulerAngles(const Quaternion& quat)
 {
 	Vector3 euler;
 	// ロール (X軸周りの回転)
