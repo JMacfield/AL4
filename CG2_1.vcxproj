@@ -190,7 +190,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Game\Scene\GameScene.h" />
     <ClInclude Include="Game\Scene\IScene.h" />
     <ClInclude Include="Game\Scene\TitleScene.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="YTEngine\2D\Sprite.h" />
     <ClInclude Include="YTEngine\2D\Triangle.h" />
     <ClInclude Include="YTEngine\3D\Model.h" />
