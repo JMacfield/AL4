@@ -36,7 +36,7 @@ public:
 private:
 	Microsoft::WRL::ComPtr< ID3D12Debug1> debugController_;
 	
-	WNDCLASSEX wc_{};
+	WNDCLASS wc_{};
 	RECT wrc_ = { 0,0,kClientWidth,kClientHeight };
 	HWND hwnd_;
 	
