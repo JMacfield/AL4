@@ -464,7 +464,7 @@ Matrix4x4 MakeViewportMatrix(float left, float top, float width, float height, f
 	return result;
 }
 
-Vector3 Normalise(const Vector3& v) {
+Vector3 Normalize(const Vector3& v) {
 	float len = Length(v);
 	if (len != 0) {
 		return { v.x / len,v.y / len,v.z / len };
@@ -538,7 +538,7 @@ Vector3 Distance(const Vector3& v1, const Vector3& v2) {
 }
 
 Vector3 Slerp(float t, const Vector3& s, const Vector3& e) {
-	float dot = Dot(Normalise(s), Normalise(e));
+	float dot = Dot(Normalize(s), Normalize(e));
 	
 	if (std::abs(dot) > 0.999f) {
 		return Lerp(t, s, e);
@@ -598,7 +598,7 @@ Matrix4x4 DirectiontoDirection(const Vector3& to, const Vector3& from) {
 	float cosin_ = Dot(to, from);
 	float sin_ = Length(Cross(to, from));
 	
-	Vector3 Direction = Normalise(to * from);
+	Vector3 Direction = Normalize(to * from);
 	Matrix4x4 result;
 
 	if (to.x != 0 || to.y != 0) {
@@ -677,7 +677,7 @@ Matrix4x4 MakeQuatAffineMatrix(const Vector3& scale, const Matrix4x4& rotate, co
 }
 
 Matrix4x4 MakeRotateAxisAngle(Vector3 axis, float angle) {
-	axis = Normalise(axis);
+	axis = Normalize(axis);
 	Matrix4x4 result;
 
 	float cos = std::cos(angle);

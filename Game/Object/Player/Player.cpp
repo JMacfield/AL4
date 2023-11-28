@@ -194,7 +194,7 @@ void Player::Move() {
 		if (isMove_ == true) {
 			Matrix4x4 rotateMatrix = MakeRotateMatrix(viewProjection_->rotation_);
 			move = TransformNormal(move, rotateMatrix);
-			move = Multiply(kCharctorSpeed, Normalise(move));
+			move = Multiply(kCharctorSpeed, Normalize(move));
 			worldTransform_.translation_ = Add(move, worldTransform_.translation_);
 
 			preQuaternion_ = quaternion_;
@@ -205,8 +205,8 @@ void Player::Move() {
 			//プレイヤーの現在の向き
 			Direction = TransformNormal({ 1.0f,0.0f,0.0f }, QuaternionToMatrix(quaternion_));
 
-			Direction = Normalise(Direction);
-			Vector3 newDirection = Normalise(newPos);
+			Direction = Normalize(Direction);
+			Vector3 newDirection = Normalize(newPos);
 			float cosin = Dot(Direction, newDirection);
 
 			//行きたい方向のQuaternionの作成
@@ -358,7 +358,7 @@ void Player::BehaviorDashUpdate() {
 				(float)joystate.Gamepad.sThumbLX / SHRT_MAX, 0.0f,
 				(float)joystate.Gamepad.sThumbLY / SHRT_MAX };
 
-			workDash_.move_ = Multiply(workDash_.velocity_, Normalise(workDash_.move_));
+			workDash_.move_ = Multiply(workDash_.velocity_, Normalize(workDash_.move_));
 			Matrix4x4 rotateMatrix = MakeRotateMatrix(viewProjection_->rotation_);
 			workDash_.move_ = TransformNormal(workDash_.move_, rotateMatrix);
 		}
@@ -374,8 +374,8 @@ void Player::BehaviorDashUpdate() {
 		//プレイヤーの現在の向き
 		Direction = TransformNormal({ 1.0f,0.0f,0.0f }, QuaternionToMatrix(quaternion_));
 
-		Direction = Normalise(Direction);
-		Vector3 newDirection = Normalise(newPos);
+		Direction = Normalize(Direction);
+		Vector3 newDirection = Normalize(newPos);
 		float cosin = Dot(Direction, newDirection)/**3.14159265f/2.0f*/;
 
 		//行きたい方向のQuaternionの作成

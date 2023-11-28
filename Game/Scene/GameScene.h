@@ -65,7 +65,8 @@ private:
 	std::unique_ptr<Model> enemyR_armModel = nullptr;
 	std::unique_ptr<Model> player_Hammer_ = nullptr;*/
 
-	Vector3 axis = Normalise({ 1.0f,1.0f,1.0f });
-	float angle = 0.44f;
+	Matrix4x4 rotateMatrix0;
+	Matrix4x4 rotateMatrix1;
+	Matrix4x4 rotateMatrix2;
 #pragma endregion
 };

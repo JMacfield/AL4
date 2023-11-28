@@ -18,5 +18,5 @@ void DirectionalLight::Initialize() {
 }
 
 void DirectionalLight::Update() {
-	directionalLightData->direction = Normalise(directionalLightData->direction);
+	directionalLightData->direction = Normalize(directionalLightData->direction);
 }
