@@ -41,6 +41,8 @@ struct ViewProjection {
 	// 射影行列
 	Matrix4x4 matProjection;
 
+	Quaternion quaternion_;
+
 	/// <summary>
 	/// 初期化
 	/// </summary>
@@ -69,4 +71,6 @@ struct ViewProjection {
 	/// 射影行列を更新する
 	/// </summary>
 	void UpdateProjectionMatrix();
+
+	void UpdateQuaternionMatrix();
 };

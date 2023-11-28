@@ -16,152 +16,8 @@
     <Filter Include="imgui">
       <UniqueIdentifier>{cfd9c7c9-4710-42b3-aca1-f60d4c7600a3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\YTEngine">
-      <UniqueIdentifier>{dffa2246-2a4c-46b6-bf8d-055599a4835d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\YTEngine\2D">
-      <UniqueIdentifier>{21bb0c97-7d9d-43be-9d22-1d61cff9fb10}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\YTEngine\3D">
-      <UniqueIdentifier>{de108b8f-30bc-41eb-acb5-3b32e270ae41}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\YTEngine\EngineBase">
-      <UniqueIdentifier>{b0dd7680-320b-4db5-a2c0-3a0e88145e5c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\YTEngine\EngineManager">
-      <UniqueIdentifier>{1bc3a57d-90b4-465f-b41a-465bf09e7d2d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\YTEngine\EngineManager\Audio">
-      <UniqueIdentifier>{9c7a4734-ad53-4ffa-89c9-3c1e3b2a2b89}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\YTEngine\EngineManager\Collision">
-      <UniqueIdentifier>{dc19941d-e19b-4807-83ad-743c3e74ed77}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\YTEngine\EngineManager\GlobalVariables">
-      <UniqueIdentifier>{c63ab591-c1b5-408c-9dd8-e3eef7097191}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\YTEngine">
-      <UniqueIdentifier>{33844122-27bf-447b-a404-91f8a782b124}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\YTEngine\2D">
-      <UniqueIdentifier>{e7365753-ba89-43b7-b5ca-5a35c6c4539d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\YTEngine\3D">
-      <UniqueIdentifier>{c68a00f8-04b5-4239-b71f-6dc7b87e21ae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\YTEngine\EngineBase">
-      <UniqueIdentifier>{61d9da02-ca18-436d-a87c-f3dc76625aa2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\YTEngine\EngineManager">
-      <UniqueIdentifier>{cd46e701-c2fa-4c3a-9f7c-522b7680f0de}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\YTEngine\EngineManager\Audio">
-      <UniqueIdentifier>{f8bfacab-3613-4c0b-8072-56b4a4562621}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\YTEngine\EngineManager\Collision">
-      <UniqueIdentifier>{1fae8bc7-5993-4ed8-8ea7-e056a1a31459}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\YTEngine\EngineManager\GlobalVariables">
-      <UniqueIdentifier>{717ac06e-98cc-472a-b9a8-8b5b4935f925}</UniqueIdentifier>
-    </Filter>
     <Filter Include="リソース ファイル\Shader">
       <UniqueIdentifier>{b44bb85a-5eb2-4a41-867c-5e198d6b8c24}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\YTEngine\EngineManager\Input">
-      <UniqueIdentifier>{04edb43e-b521-4120-9b45-0c03fbaeb284}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\YTEngine\EngineManager\Input">
-      <UniqueIdentifier>{baa5e079-61f6-41ca-9f86-a57abe21e02c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\YTEngine\EngineManager\Light">
-      <UniqueIdentifier>{6518c996-3fd5-4948-aba7-d59cb62db6c5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\YTEngine\EngineManager\Light">
-      <UniqueIdentifier>{b8959b85-e126-4428-ac55-1bb57a3a8bce}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\YTEngine\EngineManager\Texture">
-      <UniqueIdentifier>{e7634841-b4c3-420c-8420-0592aaf9a744}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\YTEngine\EngineManager\Texture">
-      <UniqueIdentifier>{0b88daca-f7f4-4ed7-aa46-047814be594f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\YTEngine\EngineManager\MyMath">
-      <UniqueIdentifier>{43963da1-3611-4850-8cbd-6f9794afcfd1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\YTEngine\EngineManager\MyMath">
-      <UniqueIdentifier>{fa6bee87-ed34-4f5a-9d09-187e0127e8f0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\YTEngine\EngineManager\MyUtilities">
-      <UniqueIdentifier>{7e238c04-06f7-4832-a8df-fa3d347d90bb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\YTEngine\EngineManager\MyUtilities">
-      <UniqueIdentifier>{daf98bc9-5a01-47e1-ab0d-afeaf08481e7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Game">
-      <UniqueIdentifier>{13e6b3a8-2759-47a0-883d-07a2480a786c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Game">
-      <UniqueIdentifier>{3e44b02f-d04c-4448-aa55-0efc3eee1082}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Game\Camera">
-      <UniqueIdentifier>{e59990d8-05ab-49d1-a8b1-c12f53f19838}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Game\Camera">
-      <UniqueIdentifier>{56eae0bb-a6e2-4339-a922-b1642e479c8c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Game\Scene">
-      <UniqueIdentifier>{205fe5e3-5f87-4cbd-802b-561243fe830a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Game\Scene">
-      <UniqueIdentifier>{b0220c0c-56ca-43ca-b52b-84b0d7e9b6b7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Game\Manager">
-      <UniqueIdentifier>{1025e046-772b-43bc-b44c-7186dda7fa18}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Game\Manager">
-      <UniqueIdentifier>{f873bc1f-53aa-431d-b9a4-2a5b95a6f19a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Game\Object">
-      <UniqueIdentifier>{d161a214-d95d-44a1-816b-0f051f6adfb6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Game\Object">
-      <UniqueIdentifier>{4ac001bb-d2f8-4068-9d6e-b6f520679e9a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Game\Object\Enemy">
-      <UniqueIdentifier>{49eafc25-deea-4885-b48a-bb2b2c5f37e2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Game\Object\Enemy">
-      <UniqueIdentifier>{d47de41c-edef-46df-8e59-2fee81e522a3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Game\Object\Goal">
-      <UniqueIdentifier>{0f62e3eb-58d9-446c-8fe0-787e73374ae5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Game\Object\Goal">
-      <UniqueIdentifier>{0bc73a29-3acd-4ccf-9b6e-80e962eb9b00}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Game\Object\Player">
-      <UniqueIdentifier>{e3ddb4c7-a5d1-471c-a9c2-48bea1084db3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Game\Object\Player">
-      <UniqueIdentifier>{1ec66160-b29d-46b4-a28b-004b108ff5dc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Game\Object\SkyDome">
-      <UniqueIdentifier>{c8d64186-3776-41bb-8ea5-31bab1e0ad71}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Game\Object\SkyDome">
-      <UniqueIdentifier>{a917b9df-6763-4fa0-b727-18c250f8d9b9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Game\Object\Ground">
-      <UniqueIdentifier>{b768b960-66ad-468d-a600-90ac94aa161b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Game\Object\Ground">
-      <UniqueIdentifier>{a8d69059-090e-469d-9698-63474822e308}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Game\Object\Ground\Manager">
-      <UniqueIdentifier>{59495a29-6237-4403-adfd-8387f7cedd14}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Game\Object\Ground\Manager">
-      <UniqueIdentifier>{9a76607f-68e8-45c0-b38d-c4e95b34fee1}</UniqueIdentifier>
     </Filter>
     <Filter Include="リソース ファイル\Icon">
       <UniqueIdentifier>{0942f794-5286-4122-99a5-67c667cf5236}</UniqueIdentifier>
@@ -189,103 +45,100 @@
     <ClCompile Include="externals\imgui\imgui_widgets.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="YTEngine\2D\Triangle.cpp">
-      <Filter>ソース ファイル\YTEngine\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="YTEngine\2D\Sprite.cpp">
-      <Filter>ソース ファイル\YTEngine\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="YTEngine\3D\Model.cpp">
-      <Filter>ソース ファイル\YTEngine\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="YTEngine\3D\Plane.cpp">
-      <Filter>ソース ファイル\YTEngine\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="YTEngine\3D\Sphere.cpp">
-      <Filter>ソース ファイル\YTEngine\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="YTEngine\3D\ViewProjection.cpp">
-      <Filter>ソース ファイル\YTEngine\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="YTEngine\3D\WorldTransform.cpp">
-      <Filter>ソース ファイル\YTEngine\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="YTEngine\EngineBase\DirectXCommon.cpp">
-      <Filter>ソース ファイル\YTEngine\EngineBase</Filter>
-    </ClCompile>
-    <ClCompile Include="YTEngine\EngineBase\ImGuiManager.cpp">
-      <Filter>ソース ファイル\YTEngine\EngineBase</Filter>
-    </ClCompile>
-    <ClCompile Include="YTEngine\EngineBase\WinApp.cpp">
-      <Filter>ソース ファイル\YTEngine\EngineBase</Filter>
-    </ClCompile>
-    <ClCompile Include="YTEngine\EngineBase\YTEngine.cpp">
-      <Filter>ソース ファイル\YTEngine\EngineBase</Filter>
-    </ClCompile>
-    <ClCompile Include="YTEngine\EngineManager\Audio\Audio.cpp">
-      <Filter>ソース ファイル\YTEngine\EngineManager\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="YTEngine\EngineManager\Collision\CollisionManager.cpp">
-      <Filter>ソース ファイル\YTEngine\EngineManager\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="YTEngine\EngineManager\GlobalVariables\GlobalVariables.cpp">
-      <Filter>ソース ファイル\YTEngine\EngineManager\GlobalVariables</Filter>
-    </ClCompile>
-    <ClCompile Include="YTEngine\EngineManager\Input\Input.cpp">
-      <Filter>ソース ファイル\YTEngine\EngineManager\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="YTEngine\EngineManager\Light\DirectionalLight.cpp">
-      <Filter>ソース ファイル\YTEngine\EngineManager\Light</Filter>
-    </ClCompile>
-    <ClCompile Include="YTEngine\EngineManager\Texture\TextureManager.cpp">
-      <Filter>ソース ファイル\YTEngine\EngineManager\Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="YTEngine\MyMath\MyMath.cpp">
-      <Filter>ソース ファイル\YTEngine\EngineManager\MyMath</Filter>
-    </ClCompile>
-    <ClCompile Include="YTEngine\MyUtility\Convert.cpp">
-      <Filter>ソース ファイル\YTEngine\EngineManager\MyUtilities</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Camera\FollowCamera.cpp">
-      <Filter>ソース ファイル\Game\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Scene\GameScene.cpp">
-      <Filter>ソース ファイル\Game\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Scene\IScene.cpp">
-      <Filter>ソース ファイル\Game\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Scene\TitleScene.cpp">
-      <Filter>ソース ファイル\Game\Scene</Filter>
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Game\Manager\SceneManager.cpp">
-      <Filter>ソース ファイル\Game\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Object\ICharacter.cpp">
-      <Filter>ソース ファイル\Game\Object</Filter>
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Game\Object\Enemy\Enemy.cpp">
-      <Filter>ソース ファイル\Game\Object\Enemy</Filter>
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Game\Object\Goal\Goal.cpp">
-      <Filter>ソース ファイル\Game\Object\Goal</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Object\Player\Player.cpp">
-      <Filter>ソース ファイル\Game\Object\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Object\SkyDome\SkyDome.cpp">
-      <Filter>ソース ファイル\Game\Object\SkyDome</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Object\Ground\MoveGround.cpp">
-      <Filter>ソース ファイル\Game\Object\Ground</Filter>
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Game\Object\Ground\Ground.cpp">
-      <Filter>ソース ファイル\Game\Object\Ground</Filter>
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Game\Object\Ground\Manager\GroundManager.cpp">
-      <Filter>ソース ファイル\Game\Object\Ground\Manager</Filter>
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="Game\Object\Ground\MoveGround.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Object\ICharacter.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Object\Player\Player.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Object\SkyDome\SkyDome.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Scene\GameScene.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Scene\IScene.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Scene\TitleScene.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\2D\Sprite.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\2D\Triangle.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\3D\Model.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\3D\Plane.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\3D\Sphere.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\3D\ViewProjection.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\3D\WorldTransform.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\EngineBase\DirectXCommon.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\EngineBase\ImGuiManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\EngineBase\WinApp.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\EngineBase\YTEngine.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\EngineManager\Audio\Audio.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\EngineManager\Collision\CollisionManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\EngineManager\GlobalVariables\GlobalVariables.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\EngineManager\Input\Input.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\EngineManager\Light\DirectionalLight.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\EngineManager\Texture\TextureManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\MyMath\MyMath.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="YTEngine\MyUtility\Convert.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Game\Camera\LockOn.cpp">
@@ -295,6 +148,9 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="YTEngine\EngineBase\SrvDescriptorHeap.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -323,109 +179,106 @@
     <ClInclude Include="externals\imgui\imstb_truetype.h">
       <Filter>imgui</Filter>
     </ClInclude>
-    <ClInclude Include="YTEngine\2D\Triangle.h">
-      <Filter>ヘッダー ファイル\YTEngine\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="YTEngine\2D\Sprite.h">
-      <Filter>ヘッダー ファイル\YTEngine\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="YTEngine\3D\Model.h">
-      <Filter>ヘッダー ファイル\YTEngine\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="YTEngine\3D\Plane.h">
-      <Filter>ヘッダー ファイル\YTEngine\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="YTEngine\3D\Sphere.h">
-      <Filter>ヘッダー ファイル\YTEngine\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="YTEngine\3D\ViewProjection.h">
-      <Filter>ヘッダー ファイル\YTEngine\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="YTEngine\3D\WorldTransform.h">
-      <Filter>ヘッダー ファイル\YTEngine\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="YTEngine\EngineBase\DirectXCommon.h">
-      <Filter>ヘッダー ファイル\YTEngine\EngineBase</Filter>
-    </ClInclude>
-    <ClInclude Include="YTEngine\EngineBase\ImGuiManager.h">
-      <Filter>ヘッダー ファイル\YTEngine\EngineBase</Filter>
-    </ClInclude>
-    <ClInclude Include="YTEngine\EngineBase\WinApp.h">
-      <Filter>ヘッダー ファイル\YTEngine\EngineBase</Filter>
-    </ClInclude>
-    <ClInclude Include="YTEngine\EngineBase\YTEngine.h">
-      <Filter>ヘッダー ファイル\YTEngine\EngineBase</Filter>
-    </ClInclude>
-    <ClInclude Include="YTEngine\EngineManager\Audio\Audio.h">
-      <Filter>ヘッダー ファイル\YTEngine\EngineManager\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="YTEngine\EngineManager\Collision\CollisionManager.h">
-      <Filter>ヘッダー ファイル\YTEngine\EngineManager\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="YTEngine\EngineManager\Collision\Collider.h">
-      <Filter>ヘッダー ファイル\YTEngine\EngineManager\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="YTEngine\EngineManager\Collision\CollisionConfig.h">
-      <Filter>ヘッダー ファイル\YTEngine\EngineManager\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="YTEngine\EngineManager\GlobalVariables\GlobalVariables.h">
-      <Filter>ヘッダー ファイル\YTEngine\EngineManager\GlobalVariables</Filter>
-    </ClInclude>
-    <ClInclude Include="YTEngine\EngineManager\Input\Input.h">
-      <Filter>ヘッダー ファイル\YTEngine\EngineManager\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="YTEngine\EngineManager\Light\DirectionalLight.h">
-      <Filter>ヘッダー ファイル\YTEngine\EngineManager\Light</Filter>
-    </ClInclude>
-    <ClInclude Include="YTEngine\EngineManager\Texture\TextureManager.h">
-      <Filter>ヘッダー ファイル\YTEngine\EngineManager\Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="YTEngine\MyMath\MyMath.h">
-      <Filter>ヘッダー ファイル\YTEngine\EngineManager\MyMath</Filter>
-    </ClInclude>
-    <ClInclude Include="YTEngine\MyUtility\Convert.h">
-      <Filter>ヘッダー ファイル\YTEngine\EngineManager\MyUtilities</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Camera\FollowCamera.h">
-      <Filter>ヘッダー ファイル\Game\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Scene\TitleScene.h">
-      <Filter>ヘッダー ファイル\Game\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Scene\IScene.h">
-      <Filter>ヘッダー ファイル\Game\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Scene\GameScene.h">
-      <Filter>ヘッダー ファイル\Game\Scene</Filter>
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Game\Manager\SceneManager.h">
-      <Filter>ヘッダー ファイル\Game\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Object\ICharacter.h">
-      <Filter>ヘッダー ファイル\Game\Object</Filter>
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Game\Object\Enemy\Enemy.h">
-      <Filter>ヘッダー ファイル\Game\Object\Enemy</Filter>
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Game\Object\Goal\Goal.h">
-      <Filter>ヘッダー ファイル\Game\Object\Goal</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Object\Player\Player.h">
-      <Filter>ヘッダー ファイル\Game\Object\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Object\SkyDome\SkyDome.h">
-      <Filter>ヘッダー ファイル\Game\Object\SkyDome</Filter>
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Game\Object\Ground\Ground.h">
-      <Filter>ヘッダー ファイル\Game\Object\Ground</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Object\Ground\MoveGround.h">
-      <Filter>ヘッダー ファイル\Game\Object\Ground</Filter>
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Game\Object\Ground\Manager\GroundManager.h">
-      <Filter>ヘッダー ファイル\Game\Object\Ground\Manager</Filter>
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="Game\Object\Ground\MoveGround.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Object\ICharacter.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Object\Player\Player.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Object\SkyDome\SkyDome.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Scene\GameScene.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Scene\IScene.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Scene\TitleScene.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\2D\Sprite.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\2D\Triangle.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\3D\Model.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\3D\Plane.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\3D\Sphere.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\3D\ViewProjection.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\3D\WorldTransform.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\EngineBase\DirectXCommon.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\EngineBase\ImGuiManager.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\EngineBase\WinApp.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\EngineBase\YTEngine.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\EngineManager\Audio\Audio.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\EngineManager\Collision\Collider.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\EngineManager\Collision\CollisionConfig.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\EngineManager\Collision\CollisionManager.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\EngineManager\GlobalVariables\GlobalVariables.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\EngineManager\Input\Input.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\EngineManager\Light\DirectionalLight.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\EngineManager\Texture\TextureManager.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\MyMath\MyMath.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YTEngine\MyUtility\Convert.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Game\Camera\LockOn.h">
@@ -456,12 +309,21 @@
     <None Include="YTEngine\Shader\Object2d.PS.hlsl">
       <Filter>リソース ファイル\Shader</Filter>
     </None>
+    <None Include="YTEngine\Shader\Particle.hlsli">
+      <Filter>リソース ファイル\Shader</Filter>
+    </None>
+    <None Include="YTEngine\Shader\Particle.VS.hlsl">
+      <Filter>リソース ファイル\Shader</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="YTEngine\Shader\Object3d.PS.hlsl">
       <Filter>リソース ファイル\Shader</Filter>
     </FxCompile>
     <FxCompile Include="YTEngine\Shader\Object3d.VS.hlsl">
+      <Filter>リソース ファイル\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="YTEngine\Shader\Particle.PS.hlsl">
       <Filter>リソース ファイル\Shader</Filter>
     </FxCompile>
   </ItemGroup>

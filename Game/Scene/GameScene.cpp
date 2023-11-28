@@ -18,20 +18,20 @@ void GameScene::Initialize() {
 	viewProjection_.Initialize();
 	viewProjection_.translation_ = { 0.0f,0.0f,-5.0f };
 	
-	playerModel_.reset(Model::CreateModelFromObj("Resource", "saikoro.obj"));
+	playerModel_.reset(Model::CreateModelFromObj("Resource/CUBE", "CUBE.obj"));
 	player_ = make_unique<Player>();
 	
-	enemyBodyModel.reset(Model::CreateModelFromObj("Resource", "float_Body.obj"));
-	enemyHeadModel.reset(Model::CreateModelFromObj("Resource", "float_head.obj"));
-	enemyL_armModel.reset(Model::CreateModelFromObj("Resource", "float_L_arm.obj"));
-	enemyR_armModel.reset(Model::CreateModelFromObj("Resource", "float_R_arm.obj"));
+	enemyBodyModel.reset(Model::CreateModelFromObj("Resource/float_Body", "float_Body.obj"));
+	enemyHeadModel.reset(Model::CreateModelFromObj("Resource/float_Head", "float_Head.obj"));
+	enemyL_armModel.reset(Model::CreateModelFromObj("Resource/float_L_arm", "float_L_arm.obj"));
+	enemyR_armModel.reset(Model::CreateModelFromObj("Resource/float_R_arm", "float_R_arm.obj"));
 	
-	BodyModel.reset(Model::CreateModelFromObj("Resource", "float_Body.obj"));
-	HeadModel.reset(Model::CreateModelFromObj("Resource", "float_head.obj"));
-	L_armModel.reset(Model::CreateModelFromObj("Resource", "float_L_arm.obj"));
-	R_armModel.reset(Model::CreateModelFromObj("Resource", "float_R_arm.obj"));
+	BodyModel.reset(Model::CreateModelFromObj("Resource/float_Body/", "float_Body.obj"));
+	HeadModel.reset(Model::CreateModelFromObj("Resource/float_Head/", "float_Head.obj"));
+	L_armModel.reset(Model::CreateModelFromObj("Resource/float_L_arm", "float_L_arm.obj"));
+	R_armModel.reset(Model::CreateModelFromObj("Resource/float_R_arm", "float_R_arm.obj"));
 	
-	player_Hammer_.reset(Model::CreateModelFromObj("resource", "Hammer.obj"));
+	player_Hammer_.reset(Model::CreateModelFromObj("Resource/Hammer", "hammer.obj"));
 	std::vector<Model*>playerModels = { BodyModel.get(),HeadModel.get(),L_armModel.get(),R_armModel.get(),player_Hammer_.get() };
 	player_->Initialize(playerModels, { 10.0f,0.0f,0.0f });
 	
@@ -41,7 +41,7 @@ void GameScene::Initialize() {
 	
 	player_->SetViewProjection(&followCamera_->GetViewProjection());
 	
-	skyDomeModel_.reset(Model::CreateModelFromObj("Resource", "skyDome.obj"));
+	skyDomeModel_.reset(Model::CreateModelFromObj("Resource/SkyDome", "SkyDome.obj"));
 	skyDome_ = make_unique<SkyDome>();
 	skyDome_->Initialize(skyDomeModel_.get());
 	
