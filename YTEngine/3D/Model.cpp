@@ -15,6 +15,8 @@ void Model::Initialize( const std::string& directoryPath, const std::string& fil
 	
     CreateVartexData();
 	SetColor();
+
+    material_->enableLighting = true;
 }
 
 void Model::Draw(const WorldTransform& transform, const ViewProjection& viewProjection) {

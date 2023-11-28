@@ -1,12 +1,12 @@
 #pragma once
 
+
 #include "DirectXCommon.h"
 #include "MyMath/MyMath.h"
 
 #pragma region standardInclude
 #include <dxcapi.h>
 #include<vector>
-
 #pragma comment(lib,"dxcompiler.lib")
 #pragma endregion
 
@@ -25,16 +25,16 @@ enum BlendMode {
 
 class YTEngine {
 public:
-	~YTEngine();
-	
 	static YTEngine* GetInstance();
 
-	void variableInitialize();
+	void VariableInitialize();
 	void Initialize(int32_t width, int32_t height);
 	void BeginFrame();
 	void EndFrame();
 	void Finalize();
 	
+	~YTEngine();
+
 	DirectXCommon* GetDirectXCommon() { return directXCommon_; }
 
 	void ModelPreDraw();
@@ -78,7 +78,6 @@ private:
 	IDxcBlob* pixelShaderBlob2D_;
 	
 	Microsoft::WRL::ComPtr<ID3D12PipelineState>graphicsPipelineState2D_[5];
-	
 	D3D12_RASTERIZER_DESC rasterizerDesc2D_{};
 	D3D12_INPUT_ELEMENT_DESC inputElementDescs2D_[2];
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc2D_{};

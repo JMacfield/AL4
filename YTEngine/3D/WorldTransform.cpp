@@ -63,3 +63,24 @@ Vector3 WorldTransform::GetCenter() {
 	const Vector3 offset = { 0.2f,2.0f,0.0f };
 	return VectorTransform(offset, matWorld_);
 }
+
+void WorldTransform::UpdateMatrix(RotationType rotationType)
+{
+	switch (rotationType)
+	{
+	case RotationType::Euler:
+		matWorld_ = MakeAffineMatrix(scale_, rotation_, translation_);
+		break;
+
+	case RotationType::Quaternion:
+		matWorld_ = MakeAffineMatrix(scale_, quaternion_, translation_);
+		break;
+	}
+
+	if (parent_)
+	{
+		matWorld_ = Multiply(matWorld_, parent_->matWorld_);
+	}
+
+	TransferMatrix();
+}

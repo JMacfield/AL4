@@ -5,40 +5,30 @@ void YTEngine::Initialize(int32_t width, int32_t height) {
 	winApp_ = WinApp::GetInstance();
 	directXCommon_ = DirectXCommon::GetInstance();
 	directXCommon_->Initialize(winApp_, winApp_->kClientWidth, winApp_->kClientHeight);
-
-
 	PSO2DCount_ = 0;
-	
 	InitializeDxcCompiler();
-	
 	CreateRootSignature3D();
 	CreateInputlayOut();
-	
 	SettingBlendState();
 	SettingRasterizerState3D();
 	SettingDepth();
-	
 	InitializePSO3D();
 	InitializePSO3DWireFrame();
 
 	CreateRootSignature2D();
 	CreateInputlayOut2D();
-	
 	SettingRasterizerState2D();
 	
 	for (int i = 0; i < 5; i++) {
-
 		InitializePSO2D();
 	}
-	
+
 	CreateRootSignatureParticle();
 	CreateInputlayOutParticle();
-	
 	SettingRasterizerStateParticle();
-	
 	InitializePSOParticle();
-
 	SettingViePort();
+
 	SettingScissor();
 }
 
@@ -90,7 +80,7 @@ IDxcBlob* YTEngine::CompileShader(const std::wstring& filePath, const wchar_t* p
 		//警告・エラーダメ絶対
 		assert(false);
 	}
-	
+
 	//コンパイル結果から実行用のバイナリ部分を取得
 	IDxcBlob* shaderBlob = nullptr;
 	directXCommon_->SetHr(shaderResult->GetOutput(DXC_OUT_OBJECT, IID_PPV_ARGS(&shaderBlob), nullptr));
@@ -122,7 +112,6 @@ void YTEngine::InitializeDxcCompiler() {
 	hr = dxcUtils_->CreateDefaultIncludeHandler(&includeHandler_);
 	assert(SUCCEEDED(hr));
 }
-
 void YTEngine::CreateRootSignature3D() {
 	//RootSignature作成
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
@@ -173,19 +162,20 @@ void YTEngine::CreateRootSignature3D() {
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 	descriptionRootSignature.pStaticSamplers = staticSamplers;
 	descriptionRootSignature.NumStaticSamplers = _countof(staticSamplers);
-	
+
 	//シリアライズしてバイナリにする
 	signatureBlob3D_ = nullptr;
 	errorBlob3D_ = nullptr;
-	
+
 	HRESULT hr;
 	hr = D3D12SerializeRootSignature(&descriptionRootSignature,
 		D3D_ROOT_SIGNATURE_VERSION_1, &signatureBlob3D_, &errorBlob3D_);
-	
+
 	if (FAILED(directXCommon_->GetHr())) {
 		Log(reinterpret_cast<char*>(errorBlob3D_->GetBufferPointer()));
 		assert(false);
 	}
+
 	//バイナリを元に生成
 
 	hr = directXCommon_->GetDevice()->CreateRootSignature(0, signatureBlob3D_->GetBufferPointer(),
@@ -213,7 +203,6 @@ void YTEngine::CreateInputlayOut() {
 	inputLayoutDesc_.pInputElementDescs = inputElementDescs3D_;
 	inputLayoutDesc_.NumElements = _countof(inputElementDescs3D_);
 }
-
 void YTEngine::SettingBlendState() {
 	//すべての色要素を書き込む
 	//ノーマルブレンド
@@ -386,7 +375,7 @@ YTEngine* YTEngine::GetInstance() {
 	return &instance;
 }
 
-void YTEngine::variableInitialize() {
+void YTEngine::VariableInitialize() {
 
 }
 
@@ -395,8 +384,10 @@ void YTEngine::BeginFrame() {
 	directXCommon_->GetCommandList()->RSSetScissorRects(1, &scissorRect_);//scirssorを設定
 	//RootSignatureを設定。PS0に設定しているけど別途設定が必要
 
+
 	directXCommon_->PreDraw();
 }
+
 void YTEngine::EndFrame() {
 	directXCommon_->PostDraw();
 }
@@ -423,7 +414,7 @@ void YTEngine::ModelPreDrawWireFrame() {
 	directXCommon_->GetCommandList()->SetPipelineState(graphicsPipelineState3DWireFrame_.Get());//PS0を設定
 }
 
-void YTEngine::SpritePreDraw() {
+void YTEngine::SpritePreDraw(){
 	directXCommon_->GetCommandList()->SetGraphicsRootSignature(rootSignature2D_.Get());
 	directXCommon_->GetCommandList()->SetPipelineState(graphicsPipelineState2D_[kBlendModeNormal].Get());//PS0を設定
 }
@@ -440,7 +431,6 @@ void YTEngine::SetBlendMode(int BlendModeNum) {
 	if (BlendModeNum < 0) {
 		BlendModeNum = 0;
 	}
-
 	directXCommon_->GetCommandList()->SetGraphicsRootSignature(rootSignature2D_.Get());
 	directXCommon_->GetCommandList()->SetPipelineState(graphicsPipelineState2D_[BlendModeNum].Get());//PS0を設定
 }
@@ -491,6 +481,7 @@ void YTEngine::SettingRasterizerState2D() {
 		L"vs_6_0", dxcUtils_, dxcCompiler_, includeHandler_);
 	assert(vertexShaderBlob2D_ != nullptr);
 
+
 	pixelShaderBlob2D_ = CompileShader(L"YTEngine/Shader/Object2d.PS.hlsl",
 		L"ps_6_0", dxcUtils_, dxcCompiler_, includeHandler_);
 	assert(pixelShaderBlob2D_ != nullptr);
@@ -516,7 +507,6 @@ void YTEngine::CreateRootSignature2D() {
 	descriptoraRange[0].NumDescriptors = 1;
 	descriptoraRange[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;//SRVを使用
 	descriptoraRange[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;//Offsetを自動計算
-	
 	rootParameters[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;//Descriptortableを使う
 	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;//PixcelShaderを使う
 	rootParameters[2].DescriptorTable.pDescriptorRanges = descriptoraRange;//tableの中身の配列を指定
@@ -568,14 +558,11 @@ void YTEngine::CreateInputlayOut2D() {
 	inputElementDescs2D_[1].Format = DXGI_FORMAT_R32G32_FLOAT;
 	inputElementDescs2D_[1].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
 
-
-
 	inputLayoutDesc2D_.pInputElementDescs = inputElementDescs2D_;
 	inputLayoutDesc2D_.NumElements = _countof(inputElementDescs2D_);
 }
 
 #pragma endregion
-
 #pragma region Particle用のパイプライン
 void YTEngine::CreateRootSignatureParticle() {
 	//RootSignature作成
@@ -638,11 +625,12 @@ void YTEngine::CreateRootSignatureParticle() {
 	HRESULT hr;
 	hr = D3D12SerializeRootSignature(&descriptionRootSignature,
 		D3D_ROOT_SIGNATURE_VERSION_1, &signatureBlobParticle_, &errorBlobParticle_);
+	
 	if (FAILED(directXCommon_->GetHr())) {
 		Log(reinterpret_cast<char*>(errorBlobParticle_->GetBufferPointer()));
 		assert(false);
 	}
-
+	
 	//バイナリを元に生成
 	hr = directXCommon_->GetDevice()->CreateRootSignature(0, signatureBlobParticle_->GetBufferPointer(),
 		signatureBlobParticle_->GetBufferSize(), IID_PPV_ARGS(&rootSignatureParticle_));
@@ -660,7 +648,6 @@ void YTEngine::SettingRasterizerStateParticle() {
 		L"vs_6_0", dxcUtils_, dxcCompiler_, includeHandler_);
 	assert(vertexShaderBlobParticle_ != nullptr);
 
-
 	pixelShaderBlobParticle_ = CompileShader(L"YTEngine/Shader/Particle.PS.hlsl",
 		L"ps_6_0", dxcUtils_, dxcCompiler_, includeHandler_);
 	assert(pixelShaderBlobParticle_ != nullptr);
@@ -676,21 +663,17 @@ void YTEngine::InitializePSOParticle() {
 		pixelShaderBlobParticle_->GetBufferSize() };//pixcelShader
 	graphicsPipelineStateDesc.BlendState = blendDesc_[kBlendModeAdd];//BlendState
 	graphicsPipelineStateDesc.RasterizerState = rasterizerDescParticle_;//rasterizerState
-	
 	//書き込むRTVの情報
 	graphicsPipelineStateDesc.NumRenderTargets = 1;
 	graphicsPipelineStateDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
-	
 	//利用するトポロジ（形状）のタイプ。三角形
 	graphicsPipelineStateDesc.PrimitiveTopologyType =
 		D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
-	
 	//どのように画面に色を打ち込むのかの設定（気にしなく良い）
 	graphicsPipelineStateDesc.SampleDesc.Count = 1;
 	graphicsPipelineStateDesc.SampleMask = D3D12_DEFAULT_SAMPLE_MASK;
 	graphicsPipelineStateDesc.DepthStencilState = depthStencilDescParticle;
 	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
-	
 	//実際に生成
 	graphicsPipelineStateParticle_ = nullptr;
 	HRESULT hr = directXCommon_->GetDevice()->CreateGraphicsPipelineState(&graphicsPipelineStateDesc,

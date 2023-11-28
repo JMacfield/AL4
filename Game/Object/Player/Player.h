@@ -28,6 +28,7 @@ struct ConstAttack {
 	//攻撃振りの速度
 	float swingSpeed;
 };
+
 static const float anticipationRotate = 3.642f;
 static const float anticipationRotateHammer = 0.5f;
 
@@ -50,22 +51,18 @@ public:
 	
 	bool isHit_;
 	bool isGameover() { return gameOver; }
-	
 	void OnCollision() override;
-	void IsCollision(const WorldTransform& worldtransform);
-
-	void Setparent(const WorldTransform* parent);
-	void DeleteParent();
 	
+	void Setparent(const WorldTransform* parent);
+	void IsCollision(const WorldTransform& worldtransform);
+	void DeleteParent();
 	void SetObjectPos(const WorldTransform& worldtransform) { objectPos_ = worldtransform; }
+	
 	const WorldTransform& GetWorldTransformBody() { return worldTransformBody_; }
 	
 	OBB getcollsionObb() { return collisionObb_; }
-	
 	bool GetIsAtack() { return isAtack; }
-	
 	void SetLockOn(LookOn* lock) { LockOn_ = lock; }
-	
 	bool GetIsHitAtack() { return workAtack_.isAtack; }
 	void SetIsHitAtack() { workAtack_.isAtack = true; }
 	bool GetIsCombo() { return workAtack_.Combo; }
@@ -87,7 +84,7 @@ private:
 		uint32_t currentcooltime_;
 		float velocity_;
 	};
-
+	
 	struct WorkAtack {
 		uint32_t Time;
 		float rotate;
@@ -99,13 +96,12 @@ private:
 		bool isAtack;
 		bool Combo;
 	};
-
+	
 	WorkDash workDash_;
 	WorkAtack workAtack_;
-	
 	Vector4 color;
-	Input* input_ = nullptr;
 	
+	Input* input_ = nullptr;
 	const ViewProjection* viewProjection_ = nullptr;
 	StructSphere structSphere_;
 	bool gameOver = false;
@@ -120,7 +116,10 @@ private:
 	
 	float floatingParametor_ = 0.0f;
 	float animationFrame;
-
+	bool isJump_;
+	float velo;
+	int jumpCount;
+	
 	Behavior behavior_ = Behavior::kRoot;
 	std::optional<Behavior> behaviorRequest_ = std::nullopt;
 	
@@ -136,6 +135,7 @@ private:
 	bool isMove_;
 	
 	float moveSpeed_;
+	
 	LookOn* LockOn_;
 	XINPUT_STATE prejoy;
 

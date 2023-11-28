@@ -7,21 +7,20 @@
 #include "EngineManager/Input/Input.h"
 #include "3D/ViewProjection.h"
 #include "Object/ICharacter.h"
+#include "2D/Particle.h"
 
 class Enemy :public ICharacter, public Collider {
 public:
 	void Initialize(const std::vector<Model*>& models, Vector3 pos) override;
-	void Update() override;
-	void Draw(const ViewProjection& view)override;
 
+
+	void Update()override;
 	StructSphere GetStructSphere() { return structSphere_; }
-
+	void Draw(const ViewProjection& view)override;
 	void OnCollision() override;
 	void IsCollision();
-
 	const WorldTransform& GetWorldTransformBody() { return worldTransformBody_; }
 	WorldTransform GetWorldTransform()override { return worldTransformBase_; }
-
 	void IsDead();
 	bool GetisAlive() { return isAlive_; }
 	void ResetHP() { HP = 3; }
@@ -33,21 +32,19 @@ private:
 	WorldTransform worldTransformLarm_;
 	WorldTransform worldTransformRarm_;
 	WorldTransform worldTransformBody_;
-
 	Input* input_ = nullptr;
-	
 	const ViewProjection* viewProjection_ = nullptr;
 	float floatingParametor_ = 0.0f;
 	int animationFrame;
-	
 	Vector3 move_;
 	StructSphere structSphere_;
-	
 	bool isAlive_ = true;
 	int32_t HP = 3;
 	Vector4 color;
 	Vector3 knockBacvelo;
 	bool knockback;
+
+	std::list<std::unique_ptr<Particle>> particles_;
 
 private:
 	void Move();

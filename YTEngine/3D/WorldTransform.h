@@ -7,6 +7,12 @@ struct ConstBufferDataWorldTransform {
 	Matrix4x4 matWorld; // ローカル → ワールド変換行列
 };
 
+enum class RotationType
+{
+	Euler,
+	Quaternion
+};
+
 struct WorldTransform {
 	// 定数バッファ
 	Microsoft::WRL::ComPtr<ID3D12Resource> constBuff_;
@@ -23,7 +29,7 @@ struct WorldTransform {
 	// 親となるワールド変換へのポインタ
 	const WorldTransform* parent_ = nullptr;
 
-	Quaternion quaternion_;
+	Quaternion quaternion_ = { 0.0f,0.0f,0.0f,1.0f };
 
 	/// <summary>
 	/// 初期化
@@ -55,4 +61,6 @@ struct WorldTransform {
 	void UpdateQuaternionMatrix();
 
 	Vector3 GetCenter();
+
+	void UpdateMatrix(RotationType rotationType);
 };
