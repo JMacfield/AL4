@@ -69,6 +69,25 @@ struct MaterialData {
 	std::string textureFilePath;
 };
 
+struct Emitter {
+	Transform transform;
+};
+
+struct ParticleData {
+	Transform transform;
+	Vector3 velocity;
+	Vector4 color;
+	Emitter emitter;
+	float lifeTime;
+	float currentTime;
+	bool isAlive;
+};
+
+struct ParticleForGPU {
+	Matrix4x4 World;
+	Vector4 Color;
+};
+
 struct ModelData {
 	std::vector<VertexData> vertices;
 	MaterialData material;
@@ -550,4 +569,42 @@ inline float LerpShortAngle(const float& a, const float& b, float t) {
 	}
 
 	return a + theta * t;
+}
+
+inline Matrix4x4 MakeBillBoardMatrix(const Vector3& scale, Matrix4x4 billboard, const Vector3& translate) {
+	Matrix4x4 scaleMat = MakeScaleMatrix(scale);
+	Matrix4x4 transmat = MakeTranslateMatrix(translate);
+
+	return Multiply(scaleMat, Multiply(billboard, transmat));
+}
+
+inline float Lerp(float t, const float& s, const float& e) {
+	float result;
+	float es = e - s;
+	result = s + t * es;
+	return result;
+}
+
+inline float Cross(Vector2 a, Vector2 b) {
+	return a.x * b.y - a.y * b.x;
+}
+
+inline float Angle(Vector3 from, Vector3 to) {
+	from = Normalise(from);
+	to = Normalise(to);
+	Vector2 from2 = { from.x,from.z };
+	Vector2 to2 = { to.x,to.z };
+	float dot = Dot(from, to);
+	if (dot >= 1.0f) {
+		return 0.0f;
+	}
+	if (dot <= -1.0f) {
+		return 180.0f * (2.0f / 180.0f);
+	}
+	if (Cross(from2, to2) > 0) {
+		return -std::acosf(dot);
+	}
+	else {
+		return std::acosf(dot);
+	}
 }

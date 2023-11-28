@@ -1,41 +1,77 @@
 #pragma once
+
 #include "3D/WorldTransform.h"
 #include "3D/Model.h"
 #include "EngineManager/Input/Input.h"
-#include "EngineManager/Input/Input.h"
+#include "3D/ViewProjection.h"
 #include "EngineManager/Collision/Collider.h"
 #include "EngineManager/Collision/CollisionConfig.h"
 #include "Object/ICharacter.h"
 #include "EngineManager/GlobalVariables/GlobalVariables.h"
 #include <optional>
 
+class LookOn;
+
+struct ConstAttack {
+	//振りかぶり
+	uint32_t anticipationTIme;
+	//ため
+	uint32_t chargeTime;
+	//攻撃振り
+	uint32_t swingTime;
+	//硬直
+	uint32_t recoveryTime;
+	//振りかぶりの速度
+	float anticipationSpeed;
+	//ための速度
+	float chargeSpeed;
+	//攻撃振りの速度
+	float swingSpeed;
+};
+static const float anticipationRotate = 3.642f;
+static const float anticipationRotateHammer = 0.5f;
+
+static const float swingRotate = 1.542f;
+static const float swingRotateHammer = -1.6f;
+
 class Player :public Collider, public ICharacter {
 public:
-	void Initialize(const std::vector<Model*>& models) override;
+	void Initialize(const std::vector<Model*>& models, Vector3 pos) override;
 	void Update()override;
 	void Draw(const ViewProjection& view)override;
-
-	void IsCollision(const WorldTransform& worldtransform);
-	void OnCollision() override;
-
-	void IsFall();
-	bool isHit_;
-
-	const WorldTransform& GetWorldTransformBody() { return worldTransformBody_; }
+	
 	WorldTransform GetWorldTransform()override { return worldTransformBody_; }
 	const WorldTransform& GetWorldTransformBase() { return worldTransformBody_; }
 	
-	StructSphere GetStructSphere() { return structSphere_; }
-	OBB GetCollsionObb() { return collisionObb_; }
-
 	void SetViewProjection(const ViewProjection* view) { viewProjection_ = view; }
-	void SetObjectPos(const WorldTransform& worldtransform) { objectPos_ = worldtransform; }
+	void IsFall();
+	
+	StructSphere GetStructSphere() { return structSphere_; }
+	
+	bool isHit_;
+	bool isGameover() { return gameOver; }
+	
+	void OnCollision() override;
+	void IsCollision(const WorldTransform& worldtransform);
 
 	void Setparent(const WorldTransform* parent);
 	void DeleteParent();
 	
+	void SetObjectPos(const WorldTransform& worldtransform) { objectPos_ = worldtransform; }
+	const WorldTransform& GetWorldTransformBody() { return worldTransformBody_; }
+	
+	OBB getcollsionObb() { return collisionObb_; }
+	
 	bool GetIsAtack() { return isAtack; }
-	bool isGameover() { return gameOver; }
+	
+	void SetLockOn(LookOn* lock) { LockOn_ = lock; }
+	
+	bool GetIsHitAtack() { return workAtack_.isAtack; }
+	void SetIsHitAtack() { workAtack_.isAtack = true; }
+	bool GetIsCombo() { return workAtack_.Combo; }
+	
+	static const int comboNum = 3;
+	static const std::array<ConstAttack, comboNum> kConstAttacks_;
 
 private:
 	enum class Behavior {
@@ -52,10 +88,24 @@ private:
 		float velocity_;
 	};
 
+	struct WorkAtack {
+		uint32_t Time;
+		float rotate;
+		float hammerRotate;
+		int32_t comboIndex = 0;
+		int32_t inComboPhase = 0;
+		bool comboNext = false;
+		int32_t hitAtack;
+		bool isAtack;
+		bool Combo;
+	};
+
 	WorkDash workDash_;
+	WorkAtack workAtack_;
+	
 	Vector4 color;
 	Input* input_ = nullptr;
-
+	
 	const ViewProjection* viewProjection_ = nullptr;
 	StructSphere structSphere_;
 	bool gameOver = false;
@@ -67,24 +117,27 @@ private:
 	WorldTransform worldTransformBody_;
 	WorldTransform worldTransformHammer_;
 	WorldTransform objectPos_;
-
+	
 	float floatingParametor_ = 0.0f;
-	int animationFrame;
+	float animationFrame;
 
 	Behavior behavior_ = Behavior::kRoot;
 	std::optional<Behavior> behaviorRequest_ = std::nullopt;
+	
 	float cosin;
-
 	OBB collisionObb_;
 	Matrix4x4 Direction_;
 	Quaternion quaternion_;
 	Vector3 preMove_;
 	Quaternion preQuaternion_;
-
+	
 	bool isDash_;
 	bool isAtack;
 	bool isMove_;
+	
 	float moveSpeed_;
+	LookOn* LockOn_;
+	XINPUT_STATE prejoy;
 
 private:
 	void Move();

@@ -1,19 +1,22 @@
 #include "Enemy.h"
 #include "EngineBase/ImGuiManager.h"
 
-void Enemy::Initialize(const std::vector<Model*>& models) {
-	ICharacter::Initialize(models);
+void Enemy::Initialize(const std::vector<Model*>& models, Vector3 pos) {
+	ICharacter::Initialize(models, pos);
 	
 	models_[kModelHead] = models[kModelHead];
 	models_[kModelBody] = models[kModelBody];
 	models_[kModelLarm] = models[kModelLarm];
 	models_[kModelRarm] = models[kModelRarm];
+	
 	input_ = Input::GetInstance();
 
 	InitializeFloatGimmick();
-
+	
+	worldTransform_.translation_ = pos;
 	worldTransform_.translation_.y = 5.0f;
-	worldTransformBody_.translation_ = { 0.0f,2.0f,50.0f };
+
+	worldTransformBody_.translation_ = { pos.x,2.0f,pos.z };
 	worldTransformHead_.translation_ = { 0.0f, 1.0f, 0.0f };
 	worldTransformLarm_.translation_ = { -0.2f, 1.0f, 0.0f };
 	worldTransformRarm_.translation_ = { 0.2f, 1.0f, 0.0f };
@@ -35,7 +38,8 @@ void Enemy::Initialize(const std::vector<Model*>& models) {
 	SetCollisionAttribute(CollisionConfig::kCollisionAttributeEnemy);
 	SetCollisionMask(~CollisionConfig::kCollisionAttributeEnemy);
 	
-	move_ = { 0.3f,0.0f,0.0f };
+	move_ = { 0.1f,0.0f,0.0f };
+	color = { 1.0f,1.0f,1.0f,1.0f };
 	isAlive_ = true;
 }
 
@@ -43,23 +47,41 @@ void Enemy::Update() {
 	if (isAlive_ == true) {
 		structSphere_.center = worldTransformBody_.GetWorldPosition();
 		structSphere_.radius = 1.5f;
+		
 		UpdateFloatGimmick();
-		Move();
 		ModelUpdateMatrix();
 	}
+
+	if (HP <= 0) {
+		knockback = true;
+
+	}
+	
+	if (knockback) {
+		KnockBack();
+	}
+	
+	models_[kModelBody]->SetColor(color);
+	models_[kModelHead]->SetColor(color);
+	models_[kModelLarm]->SetColor(color);
+	models_[kModelRarm]->SetColor(color);
 }
 
 void Enemy::Draw(const ViewProjection& view) {
 	if (isAlive_ == true) {
 		models_[kModelBody]->Draw(worldTransformBody_, view);
 		models_[kModelHead]->Draw(worldTransformHead_, view);
-		//models_[kModelLarm]->Draw(worldTransformLarm_, view);
-		//models_[kModelRarm]->Draw(worldTransformRarm_, view);
+		models_[kModelLarm]->Draw(worldTransformLarm_, view);
+		models_[kModelRarm]->Draw(worldTransformRarm_, view);
 	}
 }
 
 void Enemy::OnCollision() {
 
+}
+
+void Enemy::IsCollision() {
+	HP--;
 }
 
 void Enemy::IsDead() {
@@ -107,4 +129,17 @@ void Enemy::UpdateFloatGimmick() {
 
 	worldTransformLarm_.rotation_.x = std::sin(floatingParametor_) * 0.75f;
 	worldTransformRarm_.rotation_.x = std::sin(floatingParametor_) * 0.75f;
+}
+
+void Enemy::KnockBack() {
+	knockBacvelo = Multiply(1.0f, knockBacvelo);
+	
+	worldTransformBody_.translation_ = Add(worldTransformBody_.translation_, knockBacvelo);
+	worldTransformBase_.translation_ = worldTransformBody_.translation_;
+	
+	color.w -= 0.1f;
+	
+	if (color.w < 0.0f) {
+		IsDead();
+	}
 }

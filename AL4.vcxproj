@@ -135,6 +135,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Disabled</Optimization>
     </ClCompile>
     <ClCompile Include="Game\Camera\FollowCamera.cpp" />
+    <ClCompile Include="Game\Camera\LockOn.cpp" />
     <ClCompile Include="Game\Manager\SceneManager.cpp" />
     <ClCompile Include="Game\Object\Enemy\Enemy.cpp" />
     <ClCompile Include="Game\Object\Goal\Goal.cpp" />
@@ -148,6 +149,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Game\Scene\IScene.cpp" />
     <ClCompile Include="Game\Scene\TitleScene.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="YTEngine\2D\Particle.cpp" />
     <ClCompile Include="YTEngine\2D\Sprite.cpp" />
     <ClCompile Include="YTEngine\2D\Triangle.cpp" />
     <ClCompile Include="YTEngine\3D\Model.cpp" />
@@ -157,6 +159,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="YTEngine\3D\WorldTransform.cpp" />
     <ClCompile Include="YTEngine\EngineBase\DirectXCommon.cpp" />
     <ClCompile Include="YTEngine\EngineBase\ImGuiManager.cpp" />
+    <ClCompile Include="YTEngine\EngineBase\SrvDescriptorHeap.cpp" />
     <ClCompile Include="YTEngine\EngineBase\WinApp.cpp" />
     <ClCompile Include="YTEngine\EngineBase\YTEngine.cpp" />
     <ClCompile Include="YTEngine\EngineManager\Audio\Audio.cpp" />
@@ -178,6 +181,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="externals\imgui\imstb_textedit.h" />
     <ClInclude Include="externals\imgui\imstb_truetype.h" />
     <ClInclude Include="Game\Camera\FollowCamera.h" />
+    <ClInclude Include="Game\Camera\LockOn.h" />
     <ClInclude Include="Game\Manager\SceneManager.h" />
     <ClInclude Include="Game\Object\Enemy\Enemy.h" />
     <ClInclude Include="Game\Object\Goal\Goal.h" />
@@ -191,6 +195,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Game\Scene\IScene.h" />
     <ClInclude Include="Game\Scene\TitleScene.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="YTEngine\2D\Particle.h" />
     <ClInclude Include="YTEngine\2D\Sprite.h" />
     <ClInclude Include="YTEngine\2D\Triangle.h" />
     <ClInclude Include="YTEngine\3D\Model.h" />
@@ -200,6 +205,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="YTEngine\3D\WorldTransform.h" />
     <ClInclude Include="YTEngine\EngineBase\DirectXCommon.h" />
     <ClInclude Include="YTEngine\EngineBase\ImGuiManager.h" />
+    <ClInclude Include="YTEngine\EngineBase\SrvDescriptorHeap.h" />
     <ClInclude Include="YTEngine\EngineBase\WinApp.h" />
     <ClInclude Include="YTEngine\EngineBase\YTEngine.h" />
     <ClInclude Include="YTEngine\EngineManager\Audio\Audio.h" />

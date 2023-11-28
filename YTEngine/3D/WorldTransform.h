@@ -53,4 +53,6 @@ struct WorldTransform {
 	void UpdateRotateMatrix(const Matrix4x4& rotateMat);
 
 	void UpdateQuaternionMatrix();
+
+	Vector3 GetCenter();
 };

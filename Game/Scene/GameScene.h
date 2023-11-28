@@ -1,4 +1,5 @@
 #pragma once
+
 #include "EngineBase/YTEngine.h"
 #include "EngineManager/Input/Input.h"
 #include "MyMath/MyMath.h"
@@ -18,6 +19,9 @@
 #include "Object/Ground/Manager/GroundManager.h"
 #include "Object/Goal/Goal.h"
 #include "Object/Enemy/Enemy.h"
+#include "Camera/LockOn.h"
+#include "2D/Particle.h"
+#include <list>
 
 using namespace std;
 
@@ -26,7 +30,6 @@ public:
 	~GameScene();
 	void Initialize()override;
 	void Update()override;
-
 	void Draw()override;
 	void Finalize()override;
 
@@ -38,7 +41,6 @@ private:
 	TextureManager* textureManager_;
 	Input* input_;
 	ViewProjection viewProjection_;
-	
 	int blendCount_;
 
 	void Draw2D();
@@ -47,7 +49,10 @@ private:
 #pragma endregion
 
 #pragma region ゲームの機能
+	int a;
+	unique_ptr<Particle> particle;
 	int count_;
+
 	unique_ptr<SkyDome> skyDome_ = nullptr;
 	unique_ptr<Model> skyDomeModel_ = nullptr;
 	unique_ptr<Model> playerModel_ = nullptr;
@@ -57,12 +62,21 @@ private:
 	unique_ptr<GroundManager> groundmanager_;
 	unique_ptr<CollisionManager> collisionManager_;
 	unique_ptr<Goal> goal_;
+	
+	list<Enemy*> enemys_;
+	
 	unique_ptr<Enemy>enemy_;
+	unique_ptr<LookOn> lockOn_;
 	
 	std::unique_ptr<Model> enemyHeadModel = nullptr;
 	std::unique_ptr<Model> enemyBodyModel = nullptr;
 	std::unique_ptr<Model> enemyL_armModel = nullptr;
 	std::unique_ptr<Model> enemyR_armModel = nullptr;
+	std::unique_ptr<Model> HeadModel = nullptr;
+	std::unique_ptr<Model> BodyModel = nullptr;
+	std::unique_ptr<Model> L_armModel = nullptr;
+	std::unique_ptr<Model> R_armModel = nullptr;
 	std::unique_ptr<Model> player_Hammer_ = nullptr;
+	std::vector<Model*>enemyModels;
 #pragma endregion
 };
