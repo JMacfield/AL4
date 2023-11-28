@@ -47,7 +47,7 @@ private:
 #pragma endregion
 
 #pragma region ゲームの機能
-	int count_;
+	/*int count_;
 	unique_ptr<SkyDome> skyDome_ = nullptr;
 	unique_ptr<Model> skyDomeModel_ = nullptr;
 	unique_ptr<Model> playerModel_ = nullptr;
@@ -63,6 +63,9 @@ private:
 	std::unique_ptr<Model> enemyBodyModel = nullptr;
 	std::unique_ptr<Model> enemyL_armModel = nullptr;
 	std::unique_ptr<Model> enemyR_armModel = nullptr;
-	std::unique_ptr<Model> player_Hammer_ = nullptr;
+	std::unique_ptr<Model> player_Hammer_ = nullptr;*/
+
+	Vector3 axis = Normalise({ 1.0f,1.0f,1.0f });
+	float angle = 0.44f;
 #pragma endregion
 };

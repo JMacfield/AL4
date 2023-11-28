@@ -551,3 +551,5 @@ inline float LerpShortAngle(const float& a, const float& b, float t) {
 
 	return a + theta * t;
 }
+
+Matrix4x4 MakeRotateAxisAngle(Vector3 axis, float angle);

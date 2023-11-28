@@ -6,15 +6,15 @@ GameScene::~GameScene() {
 
 void GameScene::Initialize() {
 	engine_ = YTEngine::GetInstance();
-
 	directXCommon_ = DirectXCommon::GetInstance();
-
 	textureManager_ = TextureManager::GetInstance();
-	collisionManager_ = make_unique<CollisionManager>();
-	input_ = Input::GetInstance();
-	int a = textureManager_->Load("Resource/tex.png");
+	
 	viewProjection_.Initialize();
 	viewProjection_.translation_ = { 0.0f,0.0f,-5.0f };
+	
+	/*collisionManager_ = make_unique<CollisionManager>();
+	input_ = Input::GetInstance();
+	int a = textureManager_->Load("Resource/tex.png");
 	playerModel_.reset(Model::CreateModelFromObj("Resource/CUBE", "CUBE.obj"));
 	player_ = make_unique<Player>();
 	enemyBodyModel.reset(Model::CreateModelFromObj("Resource/float_Body", "float_Body.obj"));
@@ -42,23 +42,24 @@ void GameScene::Initialize() {
 	blendCount_ = 0;
 
 	ApplyGlobalVariables();
-	count_ = 0;
+	count_ = 0;*/
+
+	blendCount_ = 0;
 }
 
-void GameScene::Update()
-{
-	count_++;
+void GameScene::Update() {
+	/*count_++;
 	groundmanager_->Update();
 
 	enemy_->Update();
 	if (player_->isGameover() == true) {
 		Initialize();
-	}
-	player_->isHit_ = false;
+	//}
+	//player_->isHit_ = false;
 
-	goal_->Update();
-	if (count_ >= 5) {
-		for (int i = 0; i < 2; i++) {
+	//goal_->Update();
+	//if (count_ >= 5) {
+	//	for (int i = 0; i < 2; i++) {
 			if (IsCollision(groundmanager_->GetOBB(i), player_->GetStructSphere())) {
 				player_->isHit_ = true;
 				player_->SetObjectPos(groundmanager_->GetGround(i)->GetWorldTransform());
@@ -103,13 +104,25 @@ void GameScene::Update()
 	}
 	if (count_ >= 20) {
 		collisionManager_->CheckAllCollision();
+	}*/
+
+	Matrix4x4 rotateMatrix = MakeRotateAxisAngle(axis, angle);
+	std::string stringMatrix;
+
+	ImGui::Begin("RotateMatrix");
+	for (int x = 0; x < 4; x++) {
+		for (int y = 0; y < 4; y++) {
+			stringMatrix += std::to_string(rotateMatrix.m[x][y]) + ",";
+		}
+
+		stringMatrix += "\n";
 	}
+	ImGui::Text("%s", stringMatrix.c_str());
+	ImGui::End();
 }
 
 
-void GameScene::Draw()
-{
-
+void GameScene::Draw() {
 	//3D描画準備
 	engine_->ModelPreDraw();
 	Draw3D();
@@ -118,13 +131,12 @@ void GameScene::Draw()
 	Draw2D();
 }
 
-void GameScene::Draw3D()
-{
-	skyDome_->Draw(viewProjection_);
+void GameScene::Draw3D() {
+	/*skyDome_->Draw(viewProjection_);
 	player_->Draw(viewProjection_);
 	groundmanager_->Draw(viewProjection_);
 	goal_->Draw(viewProjection_);
-	enemy_->Draw(viewProjection_);
+	enemy_->Draw(viewProjection_);*/
 
 }
 
@@ -134,13 +146,7 @@ void GameScene::ApplyGlobalVariables() {
 
 void GameScene::Draw2D() {
 	engine_->SetBlendMode(blendCount_);
-
+}
+void GameScene::Finalize() {
 
 }
-void GameScene::Finalize()
-{
-
-
-
-}
-
