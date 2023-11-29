@@ -555,40 +555,31 @@ inline float LerpShortAngle(const float& a, const float& b, float t) {
 Matrix4x4 MakeRotateAxisAngle(Vector3 axis, float angle);
 
 inline Matrix4x4 DirectionToDirection(const Vector3& from, const Vector3& to) {
-	Matrix4x4 result;
-	Vector3 cross = Cross(from, to);
-	Vector3 n = Normalize(Cross(from, to));
-	
-	if (from.x == -to.x && from.y == -to.y && from.z == -to.z) {
+	Matrix4x4 result = MakeIdentity4x4();
+	Vector3 normal = Normalize(Cross(from, to));
+	if (from.x == -to.x &&from.y==-to.y&&from.z==-to.z) {
 		if (from.x != 0.0f || from.y != 0.0f) {
-			n = { from.y,-from.x,0.0f };
+			normal = { from.y,-from.x,0.0f };
 		}
 		else if (from.x != 0.0f || from.z != 0.0f) {
-			n = { from.z,0.0f,-from.x };
+			normal = { from.z,0.0f,-from.x };
 		}
+
 	}
+	float cos = Dot(from, to);
+	float sin = Length(Cross(from, to));
 
-	float costhata = Dot(from, to);
-	float sinthata = Length(cross);
-	result.m[0][0] = (n.x * n.x) * (1 - costhata) + costhata;
-	result.m[0][1] = (n.x * n.y) * (1 - costhata) + n.z * sinthata;
-	result.m[0][2] = (n.x * n.z) * (1 - costhata) - n.y * sinthata;
-	result.m[0][3] = 0;
+	result.m[0][0] = normal.x * normal.x * (1.0f - cos) + cos;
+	result.m[0][1] = normal.x * normal.y * (1.0f - cos) + normal.z * sin;
+	result.m[0][2] = normal.x * normal.z * (1.0f - cos) - normal.y * sin;
 
-	result.m[1][0] = (n.x * n.y) * (1 - costhata) - n.z * sinthata;
-	result.m[1][1] = (n.y * n.y) * (1 - costhata) + costhata;
-	result.m[1][2] = (n.y * n.z) * (1 - costhata) + n.x * sinthata;
-	result.m[1][3] = 0;
+	result.m[1][0] = normal.x * normal.y * (1.0f - cos) - normal.z * sin;
+	result.m[1][1] = normal.y * normal.y * (1.0f - cos) + cos;
+	result.m[1][2] = normal.y * normal.z * (1.0f - cos) + normal.x * sin;
 
-	result.m[2][0] = (n.x * n.z) * (1 - costhata) + n.y * sinthata;
-	result.m[2][1] = (n.y * n.z) * (1 - costhata) - n.x * sinthata;
-	result.m[2][2] = (n.z * n.z) * (1 - costhata) + costhata;
-	result.m[2][3] = 0;
-
-	result.m[3][0] = 0;
-	result.m[3][1] = 0;
-	result.m[3][2] = 0;
-	result.m[3][3] = 1;
+	result.m[2][0] = normal.x * normal.z * (1.0f - cos) + normal.y * sin;
+	result.m[2][1] = normal.y * normal.z * (1.0f - cos) - normal.x * sin;
+	result.m[2][2] = normal.z * normal.z * (1.0f - cos) + cos;
 
 	return result;
 }

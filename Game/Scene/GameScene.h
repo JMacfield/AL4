@@ -65,6 +65,11 @@ private:
 	std::unique_ptr<Model> enemyR_armModel = nullptr;
 	std::unique_ptr<Model> player_Hammer_ = nullptr;*/
 
+	Vector3 from0 = Normalize(Vector3{ 1.0f,0.7f,0.5f });
+	Vector3 to0 = -from0;
+	Vector3 from1 = Normalize(Vector3{ -0.6f,0.9f,0.2f });
+	Vector3 to1 = Normalize(Vector3{ 0.4f,0.7f,-0.5 });
+
 	Matrix4x4 rotateMatrix0;
 	Matrix4x4 rotateMatrix1;
 	Matrix4x4 rotateMatrix2;
