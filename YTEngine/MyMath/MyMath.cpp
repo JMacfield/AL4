@@ -1,5 +1,3 @@
-#pragma once
-
 #include"MyMath.h"
 
 Matrix4x4 MakeRotateXMatrix(float theta) {
@@ -560,8 +558,8 @@ Quaternion Lerp(float t, const Quaternion& s, const Quaternion& e) {
 }
 
 Quaternion Slerp(float t, const Quaternion& s, const Quaternion& e) {
-	Quaternion ns = Normalize(s);
-	Quaternion ne = Normalize(e);
+	Quaternion ns = Norm(s);
+	Quaternion ne = Norm(e);
 	float dot = ns.x * ne.x + ns.y * ne.y + ns.z * ne.z + ns.w * ne.w;
 	if (std::abs(dot) > 0.999f) {
 		return Lerp(t, ns, ne);

@@ -9,6 +9,8 @@
 #define _USE_MATH_DEFINES
 #include <algorithm>
 
+#include "MyMath/Quaternion.h"
+
 struct Vector4 {
 	float x;
 	float y;
@@ -392,7 +394,7 @@ inline float LengthQuaternion(const Quaternion& q) {
 	return std::sqrtf(q.w * q.w + q.x * q.x + q.y * q.y + q.z * q.z);
 }
 
-inline Quaternion Normalize(const Quaternion& q) {
+inline Quaternion Norm(const Quaternion& q) {
 	float len = LengthQuaternion(q);
 	Quaternion result;
 	if (len != 0.0f) {
@@ -499,14 +501,14 @@ inline Vector3 RotateVectorWithQuaternion(const Quaternion& q, const Vector3& v)
 }
 
 // クォータニオンの乗算（積）を行う関数
-inline Quaternion Multiply(const Quaternion& q1, const Quaternion& q2) {
-	Quaternion result;
-	result.w = q1.w * q2.w - q1.x * q2.x - q1.y * q2.y - q1.z * q2.z;
-	result.x = q1.w * q2.x + q1.x * q2.w + q1.y * q2.z - q1.z * q2.y;
-	result.y = q1.w * q2.y - q1.x * q2.z + q1.y * q2.w + q1.z * q2.x;
-	result.z = q1.w * q2.z + q1.x * q2.y - q1.y * q2.x + q1.z * q2.w;
-	return result;
-}
+//inline Quaternion Multiply(const Quaternion& q1, const Quaternion& q2) {
+//	Quaternion result;
+//	result.w = q1.w * q2.w - q1.x * q2.x - q1.y * q2.y - q1.z * q2.z;
+//	result.x = q1.w * q2.x + q1.x * q2.w + q1.y * q2.z - q1.z * q2.y;
+//	result.y = q1.w * q2.y - q1.x * q2.z + q1.y * q2.w + q1.z * q2.x;
+//	result.z = q1.w * q2.z + q1.x * q2.y - q1.y * q2.x + q1.z * q2.w;
+//	return result;
+//}
 
 inline bool CompareQuaternion(const Quaternion& q1, const Quaternion& q2) {
 	if (q1.x == q2.x && q1.y == q2.y && q1.z == q2.z && q1.w == q2.w) {

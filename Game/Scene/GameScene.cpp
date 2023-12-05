@@ -106,29 +106,34 @@ void GameScene::Update() {
 		collisionManager_->CheckAllCollision();
 	}*/
 
-	Matrix4x4 rotateMatrix0 = DirectionToDirection(
-		Normalize(Vector3{ 1.0f,0.0f,0.0f }), Normalize(Vector3{ -1.0f,0.0f,0.0f }));
-	Matrix4x4 rotateMatrix1 = DirectionToDirection(from0, to0);
-	Matrix4x4 rotateMatrix2 = DirectionToDirection(from1, to1);
+	Quaternion q1 = { 2.0f,3.0f,4.0f,1.0f };
+	Quaternion q2 = { 1.0f,3.0f,5.0f,2.0f };
 
-	ImGui::Begin("Show RotateMatrix");
-	ImGui::Text("rotateMatrix0");
-	ImGui::Text("%4.3f %4.3f %4.3f %4.3f", rotateMatrix0.m[0][0], rotateMatrix0.m[0][1], rotateMatrix0.m[0][2], rotateMatrix0.m[0][3]);
-	ImGui::Text("%4.3f %4.3f %4.3f %4.3f", rotateMatrix0.m[1][0], rotateMatrix0.m[1][1], rotateMatrix0.m[1][2], rotateMatrix0.m[1][3]);
-	ImGui::Text("%4.3f %4.3f %4.3f %4.3f", rotateMatrix0.m[2][0], rotateMatrix0.m[2][1], rotateMatrix0.m[2][2], rotateMatrix0.m[2][3]);
-	ImGui::Text("%4.3f %4.3f %4.3f %4.3f", rotateMatrix0.m[3][0], rotateMatrix0.m[3][1], rotateMatrix0.m[3][2], rotateMatrix0.m[3][3]);
-	ImGui::Text("");
-	ImGui::Text("rotateMatrix1");
-	ImGui::Text("%4.3f %4.3f %4.3f %4.3f", rotateMatrix1.m[0][0], rotateMatrix1.m[0][1], rotateMatrix1.m[0][2], rotateMatrix1.m[0][3]);
-	ImGui::Text("%4.3f %4.3f %4.3f %4.3f", rotateMatrix1.m[1][0], rotateMatrix1.m[1][1], rotateMatrix1.m[1][2], rotateMatrix1.m[1][3]);
-	ImGui::Text("%4.3f %4.3f %4.3f %4.3f", rotateMatrix1.m[2][0], rotateMatrix1.m[2][1], rotateMatrix1.m[2][2], rotateMatrix1.m[2][3]);
-	ImGui::Text("%4.3f %4.3f %4.3f %4.3f", rotateMatrix1.m[3][0], rotateMatrix1.m[3][1], rotateMatrix1.m[3][2], rotateMatrix1.m[3][3]);
-	ImGui::Text("");
-	ImGui::Text("rotateMatrix2");
-	ImGui::Text("%4.3f %4.3f %4.3f %4.3f", rotateMatrix2.m[0][0], rotateMatrix2.m[0][1], rotateMatrix2.m[0][2], rotateMatrix2.m[0][3]);
-	ImGui::Text("%4.3f %4.3f %4.3f %4.3f", rotateMatrix2.m[1][0], rotateMatrix2.m[1][1], rotateMatrix2.m[1][2], rotateMatrix2.m[1][3]);
-	ImGui::Text("%4.3f %4.3f %4.3f %4.3f", rotateMatrix2.m[2][0], rotateMatrix2.m[2][1], rotateMatrix2.m[2][2], rotateMatrix2.m[2][3]);
-	ImGui::Text("%4.3f %4.3f %4.3f %4.3f", rotateMatrix2.m[3][0], rotateMatrix2.m[3][1], rotateMatrix2.m[3][2], rotateMatrix2.m[3][3]);
+	Quaternion identity = IdentityQuaternion();
+	Quaternion conj = Conjugate(q1);
+	Quaternion inv = Inverse(q1);
+
+	Quaternion normal = Normalize(q1);
+	Quaternion mul1 = Multiply(q1, q2);
+	Quaternion mul2 = Multiply(q2, q1);
+
+	float norm = Norm(q1);
+
+	ImGui::Begin("MT4_01_03");
+	ImGui::Text("identity");
+	ImGui::Text("%4.2f %4.2f %4.2f %4.2f", identity.x, identity.y, identity.z, identity.w);
+	ImGui::Text("conjugate");
+	ImGui::Text("%4.2f %4.2f %4.2f %4.2f", conj.x, conj.y, conj.z, conj.w);
+	ImGui::Text("Inverse");
+	ImGui::Text("%4.2f %4.2f %4.2f %4.2f", inv.x, inv.y, inv.z, inv.w);
+	ImGui::Text("normalize");
+	ImGui::Text("%4.2f %4.2f %4.2f %4.2f", normal.x, normal.y, normal.z, normal.w);
+	ImGui::Text("mul1");
+	ImGui::Text("%4.2f %4.2f %4.2f %4.2f", mul1.x, mul1.y, mul1.z, mul1.w);
+	ImGui::Text("mul2");
+	ImGui::Text("%4.2f %4.2f %4.2f %4.2f", mul2.x, mul2.y, mul2.z, mul2.w);
+	ImGui::Text("norm");
+	ImGui::Text("%4.2f", norm);
 	ImGui::End();
 }
 

@@ -166,6 +166,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="YTEngine\EngineManager\Light\DirectionalLight.cpp" />
     <ClCompile Include="YTEngine\EngineManager\Texture\TextureManager.cpp" />
     <ClCompile Include="YTEngine\MyMath\MyMath.cpp" />
+    <ClCompile Include="YTEngine\MyMath\Quaternion.cpp" />
     <ClCompile Include="YTEngine\MyUtility\Convert.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -211,6 +212,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="YTEngine\EngineManager\Light\DirectionalLight.h" />
     <ClInclude Include="YTEngine\EngineManager\Texture\TextureManager.h" />
     <ClInclude Include="YTEngine\MyMath\MyMath.h" />
+    <ClInclude Include="YTEngine\MyMath\Quaternion.h" />
     <ClInclude Include="YTEngine\MyUtility\Convert.h" />
   </ItemGroup>
   <ItemGroup>
