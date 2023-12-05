@@ -85,12 +85,12 @@ void Player::Update()
 	structSphere_.center = worldTransformBody_.GetWorldPosition();
 	structSphere_.radius = 1.5f;
 
-	if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_B) {
+	if (joyState.Gamepad.bRightTrigger) {
 		if (!isAtack) {
 			behaviorRequest_ = Behavior::kAtack;
 		}
 	}
-	if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_A) {
+	if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_B) {
 		if (workDash_.cooltime_ <= workDash_.currentcooltime_) {
 			behaviorRequest_ = Behavior::kDash;
 
@@ -136,8 +136,8 @@ void Player::Update()
 	Vector3 a = worldTransformBody_.GetWorldPosition();
 	Vector3 b = worldTransform_.GetWorldPosition();
 	if (!isJump_) {
-		if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER) {
-			if (!(prejoy.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER)) {
+		if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_A) {
+			if (!(prejoy.Gamepad.wButtons & XINPUT_GAMEPAD_A)) {
 				isJump_ = true;
 				velo = 1.5f;
 				worldTransformBody_.translation_.y += 2.0f;
@@ -364,7 +364,7 @@ void Player::BehaviorAtackUpdate() {
 	{
 		if (Input::GetInstance()->GetJoystickState(0, joyState)) {
 
-			if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_B)
+			if (joyState.Gamepad.bRightTrigger)
 			{
 				if (workAtack_.Time >= 20) {
 					workAtack_.comboNext = true;
