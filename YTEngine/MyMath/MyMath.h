@@ -590,7 +590,7 @@ inline Matrix4x4 DirectionToDirection(const Vector3& from, const Vector3& to) {
 }
 
 // MT4_01_03
-inline Quaternion Multiply(const Quaternion& lhs, const Quaternion& rhs) {
+Quaternion Multiply(const Quaternion& lhs, const Quaternion& rhs) {
 	Quaternion result;
 	Vector3 cross = Cross({ lhs.x,lhs.y,lhs.z }, { rhs.x,rhs.y,rhs.z });
 	float dot = Dot({ lhs.x,lhs.y,lhs.z }, { rhs.x,rhs.y,rhs.z });
@@ -602,19 +602,19 @@ inline Quaternion Multiply(const Quaternion& lhs, const Quaternion& rhs) {
 	return result;
 }
 
-inline Quaternion IdentityQuaternion() {
+Quaternion IdentityQuaternion() {
 	return Quaternion({ 0.0f,0.0f,0.0f,1.0f });
 }
 
-inline Quaternion Conjugate(const Quaternion& quaternion) {
+Quaternion Conjugate(const Quaternion& quaternion) {
 	return Quaternion({ quaternion.x * -1.0f,quaternion.y * -1.0f ,quaternion.z * -1.0f ,quaternion.w });
 }
 
-inline float Norm(const Quaternion& quaternion) {
+float Norm(const Quaternion& quaternion) {
 	return sqrt(quaternion.x * quaternion.x + quaternion.y * quaternion.y + quaternion.z * quaternion.z + quaternion.w * quaternion.w);
 }
 
-inline Quaternion Normalize(const Quaternion& quaternion) {
+Quaternion Normalize(const Quaternion& quaternion) {
 	Quaternion result{};
 	float norm = Norm(quaternion);
 	if (norm != 0.0f) {
@@ -626,7 +626,7 @@ inline Quaternion Normalize(const Quaternion& quaternion) {
 	return result;
 }
 
-inline Quaternion Inverse(const Quaternion& quaternion) {
+Quaternion Inverse(const Quaternion& quaternion) {
 	Quaternion result;
 	float norm = Norm(quaternion);
 	norm = norm * norm;
