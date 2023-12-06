@@ -93,7 +93,10 @@ struct StructSphere {
 };
 
 struct Quaternion {
-	float w, x, y, z;
+	float x;
+	float y;
+	float z;
+	float w;
 };
 
 inline Vector3 operator-(const Vector3& v) {
@@ -394,20 +397,20 @@ inline float LengthQuaternion(const Quaternion& q) {
 	return std::sqrtf(q.w * q.w + q.x * q.x + q.y * q.y + q.z * q.z);
 }
 
-inline Quaternion Norm(const Quaternion& q) {
-	float len = LengthQuaternion(q);
-	Quaternion result;
-	if (len != 0.0f) {
-		result.w = q.w / len;
-		result.x = q.x / len;
-		result.y = q.y / len;
-		result.z = q.z / len;
-		return result;
-	}
-	else {
-		return q;
-	}
-}
+//inline Quaternion Norm(const Quaternion& q) {
+//	float len = LengthQuaternion(q);
+//	Quaternion result;
+//	if (len != 0.0f) {
+//		result.w = q.w / len;
+//		result.x = q.x / len;
+//		result.y = q.y / len;
+//		result.z = q.z / len;
+//		return result;
+//	}
+//	else {
+//		return q;
+//	}
+//}
 
 inline Vector3 ExtractEulerAnglesFromRotationMatrix(const Matrix4x4& rotationMatrix) {
 	Vector3 eulerAngle;
@@ -583,5 +586,56 @@ inline Matrix4x4 DirectionToDirection(const Vector3& from, const Vector3& to) {
 	result.m[2][1] = normal.y * normal.z * (1.0f - cos) - normal.x * sin;
 	result.m[2][2] = normal.z * normal.z * (1.0f - cos) + cos;
 
+	return result;
+}
+
+// MT4_01_03
+inline Quaternion Multiply(const Quaternion& lhs, const Quaternion& rhs) {
+	Quaternion result;
+	Vector3 cross = Cross({ lhs.x,lhs.y,lhs.z }, { rhs.x,rhs.y,rhs.z });
+	float dot = Dot({ lhs.x,lhs.y,lhs.z }, { rhs.x,rhs.y,rhs.z });
+	result.x = cross.x + rhs.w * lhs.x + lhs.w * rhs.x;
+	result.y = cross.y + rhs.w * lhs.y + lhs.w * rhs.y;
+	result.z = cross.z + rhs.w * lhs.z + lhs.w * rhs.z;
+	result.w = lhs.w * rhs.w - dot;
+
+	return result;
+}
+
+inline Quaternion IdentityQuaternion() {
+	return Quaternion({ 0.0f,0.0f,0.0f,1.0f });
+}
+
+inline Quaternion Conjugate(const Quaternion& quaternion) {
+	return Quaternion({ quaternion.x * -1.0f,quaternion.y * -1.0f ,quaternion.z * -1.0f ,quaternion.w });
+}
+
+inline float Norm(const Quaternion& quaternion) {
+	return sqrt(quaternion.x * quaternion.x + quaternion.y * quaternion.y + quaternion.z * quaternion.z + quaternion.w * quaternion.w);
+}
+
+inline Quaternion Normalize(const Quaternion& quaternion) {
+	Quaternion result{};
+	float norm = Norm(quaternion);
+	if (norm != 0.0f) {
+		result.x = quaternion.x / norm;
+		result.y = quaternion.y / norm;
+		result.z = quaternion.z / norm;
+		result.w = quaternion.w / norm;
+	}
+	return result;
+}
+
+inline Quaternion Inverse(const Quaternion& quaternion) {
+	Quaternion result;
+	float norm = Norm(quaternion);
+	norm = norm * norm;
+	Quaternion conj = Conjugate(quaternion);
+	if (norm != 0.0f) {
+		result.x = conj.x / norm;
+		result.y = conj.y / norm;
+		result.z = conj.z / norm;
+		result.w = conj.w / norm;
+	}
 	return result;
 }
