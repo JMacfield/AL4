@@ -1,47 +1,62 @@
 #include "TitleScene.h"
 #include "EngineBase/ImGuiManager.h"
 
-TitleScene::~TitleScene()
-{
+TitleScene::~TitleScene() {
+
 }
-void TitleScene::Initialize()
-{	
+
+void TitleScene::Initialize() {	
 	input = Input::GetInstance();
 	count = 0;
 
 }
 
-void TitleScene::Update()
-{
-	
+void TitleScene::Update() {
+	setlocale(LC_CTYPE, "");
+	try {
+		// Get
+		auto task = Get<json::value>(L"http://localhost:3000/swgames/");
+		const json::value j = task.get();
+		auto array = j.as_array();
+		for (int i = 0; i < j.size(); i++) {
+			std::wcout << array[i].at(U("ID")) << std::endl;
+		}
+	}
+	catch (const std::exception& e) {
+		printf("Error Exception:%s\n", e.what());
+	}
+
 	ImGui::Begin("SceneManager");
 	ImGui::InputInt("SceneNum", &sceneNum);
 	ImGui::Text("count %d",count);
 	ImGui::End();
+	
 	if (input->PushKey(DIK_SPACE)) {
 		sceneNum = GAME_SCENE;
 		count++;
 	}
+	
 	XINPUT_STATE joyState;
+	
 	if (!input->GetJoystickState(0, joyState)) {
 		return;
 	}
+	
 	if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_A) {
 		sceneNum = GAME_SCENE;
 	}
+
 	if (sceneNum < 0) {
 		sceneNum = 0;
-		
 	}
 }
 
-void TitleScene::Draw()
-{
+void TitleScene::Draw() {
 	ImGui::Begin("TITLE");
 	ImGui::Text("Push to A to Start");
 	ImGui::End();
 }
 
-void TitleScene::Finalize()
-{
+void TitleScene::Finalize() {
+
 }
