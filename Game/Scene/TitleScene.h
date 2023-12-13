@@ -2,6 +2,7 @@
 
 #include "Iscene.h"
 #include "EngineManager/Input/Input.h"
+#include "MyMath/MyMath.h"
 
 class TitleScene : public Iscene {
 public:
