@@ -1,5 +1,3 @@
-#pragma once
-
 #include <cpprest/filestream.h>
 #include <cpprest/http_client.h>
 
