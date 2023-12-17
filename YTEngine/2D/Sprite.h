@@ -1,43 +1,75 @@
 #pragma once
 
 #include "EngineBase/DirectXCommon.h"
-#include "MyMath/MyMath.h"
 #include "EngineBase/YTEngine.h"
 #include "3D/WorldTransform.h"
 #include "EngineManager/Texture/TextureManager.h"
-#include "EngineManager/Light/DirectionalLight.h"
+#include <wrl.h>
 
 class Sprite {
 public:
-	void Initialize(const Vector4& a, const Vector4& b);
-
-
-	void Draw( const Transform& transform, const Transform& uvTransform, const  Vector4& material, uint32_t texIndex );
-	
+	void Initialize(Vector2 size, uint32_t textureIndex, bool isFlipX, bool isFlipY);
+	void Draw(const Transform& transform, const Transform& uvTransform, const Vector4& material);
 	void Finalize();
+
+	//サイズ変更
+	void SetSize(Vector2 size);
+
+	//アンカーポイントの設定
+	void SetAnchor(Vector2 anchor);
+
+	//テクスチャ範囲指定
+	void SetTextureLTSize(Vector2 textureLeftTop, Vector2 textureSize);
+
+	//テクスチャの大きさと同じサイズに変更
+	void SetTextureInitialSize();
+
+	void SetZPoint(float Zpoint);
+
+	Vector2* GetSize() { return &size_; }
+	Vector2* GetTextureLeftTop() { return &textureLeftTop_; }
+	Vector2* GetTextureSize() { return &textureSize_; }
+
+	// 追加分
+	void SetColor(const Vector4& color) { materialData_->color = color; }
+
 private:
-	
 	DirectXCommon* dxCommon_;
 	TextureManager* textureManager_;
-	D3D12_VERTEX_BUFFER_VIEW vertexBufferView{};
-	Microsoft::WRL::ComPtr<ID3D12Resource> vertexResource;
-	VertexData* vertexData_;
-	
-	Microsoft::WRL::ComPtr<ID3D12Resource> materialResource_;
-	Material* materialData_;
-	YTEngine* engine_;
-	DirectionalLight* directionalLight_;
-	
-	Microsoft::WRL::ComPtr<ID3D12Resource> wvpResource_;
-	
-	Microsoft::WRL::ComPtr<ID3D12Resource> indexResource_;
-	D3D12_INDEX_BUFFER_VIEW indexBufferView{};
-	uint32_t* indexData_;
-	Matrix4x4* wvpData_;
-private:
-	void CreateVartexData(const Vector4& a, const Vector4& b);
-	void CreateTransform();
-	void SetColor();
-	
-};
 
+	D3D12_VERTEX_BUFFER_VIEW vertexBufferView_{};
+	Microsoft::WRL::ComPtr <ID3D12Resource> vertexResourceSprite_;
+	VertexData* vertexData_;
+
+	Microsoft::WRL::ComPtr <ID3D12Resource> materialResource_;
+	Material* materialData_;
+
+	YTEngine* engine_;
+
+	Microsoft::WRL::ComPtr <ID3D12Resource> indexResourceSprite_;
+	D3D12_INDEX_BUFFER_VIEW indexBufferViewSprite_{};
+	uint32_t* indexDataSprite_;
+
+	Microsoft::WRL::ComPtr<ID3D12Resource> wvpResource_;
+	Matrix4x4* wvpData_;
+
+	Vector2 size_;
+	Vector2 anchor_;
+	float Zpos_ = 0.0f;
+
+	Vector2 textureLeftTop_;
+	Vector2 textureSize_;
+
+	bool isFlipX_;
+	bool isFlipY_;
+
+	uint32_t index_;
+
+private:
+	void SettingVertex();
+	void SettingColor();
+	void SettingTransform();
+
+	//テクスチャサイズをイメージに合わせる
+	void AdjustTextureSize();
+};
