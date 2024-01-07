@@ -7,8 +7,8 @@ SceneManager::SceneManager() {
 
 SceneManager::~SceneManager() {
 	imguiManager_->Finalize();
-	audio_->xAudio2.Reset();
-	audio_->SoundUnload(&audio_->soundDatas[0]);
+	/*audio_->xAudio2.Reset();
+	audio_->SoundUnload(&audio_->soundDatas[0]);*/
 }
 
 void SceneManager::Run() {
@@ -85,6 +85,6 @@ void SceneManager::Initialize() {
 	sceneNumber_ = TITLE_SCENE;
 	sceneArr_[sceneNumber_]->Initialize();
 	
-	audio_ = Audio::GetInstance();
-	audio_->Initialize();
+	/*audio_ = Audio::GetInstance();
+	audio_->Initialize();*/
 }

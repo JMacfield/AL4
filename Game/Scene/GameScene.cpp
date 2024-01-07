@@ -16,6 +16,9 @@ void GameScene::Initialize() {
 	viewProjection_.Initialize();
 	viewProjection_.translation_ = { 0.0f,0.0f,-5.0f };
 
+	card_ = std::make_unique<Card>();
+	card_->Initialize();
+
 	//collisionManager_ = make_unique<CollisionManager>();
 	//
 	//a = textureManager_->Load("Resource/tex.png");
@@ -160,6 +163,8 @@ void GameScene::Update() {
 	//if (count_ >= 20) {
 	//	collisionManager_->CheckAllCollision();
 	//}
+
+	card_->Update();
 }
 
 
@@ -197,6 +202,7 @@ void GameScene::Draw2D() {
 	//engine_->SetBlendMode(kBlendModeNormal);
 	//lockOn_->Draw();
 
+	card_->Draw();
 }
 
 void GameScene::Finalize() {

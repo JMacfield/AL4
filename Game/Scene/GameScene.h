@@ -22,6 +22,7 @@
 #include "Camera/LockOn.h"
 #include "2D/Particle.h"
 #include <list>
+#include "Card/Card.h"
 
 using namespace std;
 
@@ -80,5 +81,6 @@ private:
 	//std::vector<Model*>enemyModels;
 
 	//std::unique_ptr<Model> particleModel_;
+	std::unique_ptr<Card> card_;
 #pragma endregion
 };
