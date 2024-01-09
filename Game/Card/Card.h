@@ -4,6 +4,7 @@
 #include "EngineManager/Input/Input.h"
 #include "EngineManager/Texture/TextureManager.h"
 #include "3D/Model.h"
+#include "2D/Particle.h"
 
 #include <memory>
 #include <string>
@@ -66,6 +67,8 @@ private:
 
 	std::unique_ptr<Model> table_;
 	WorldTransform tableTransform_;
+
+	std::list<std::unique_ptr<Particle>> particles_;
 
 	bool isShown[20];
 	int timer;

@@ -3,7 +3,7 @@
 void Particle::Initialize(Model* model, Vector3 position)
 {
 	assert(model);
-	model_ = model;
+	model_->CreateModelFromObj("Resource/Particle","particle");
 
 	isAlive_ = true;
 

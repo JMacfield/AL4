@@ -144,6 +144,20 @@ void Card::Initialize() {
 }
 
 void Card::Update() {
+	particles_.remove_if([](std::unique_ptr<Particle>& particle) {
+		if (particle->GetIsAlive() == false)
+		{
+			particle.reset();
+			return true;
+		}
+		return false;
+		});
+
+	for (const std::unique_ptr<Particle>& particle : particles_)
+	{
+		particle->Update();
+	}
+
 	for (int i = 0; i < 6; i++) {
 		redTransform_[i].UpdateMatrix();
 		blueTransform_[i].UpdateMatrix();
@@ -290,6 +304,12 @@ void Card::Update() {
 }
 
 void Card::Draw(const ViewProjection& viewProjection) {
+	//if (input_->PushKey(DIK_SPACE)) {
+		for (const std::unique_ptr<Particle>& particle : particles_) {
+			particle->Draw(viewProjection);
+		}
+	//}
+
 	table_->Draw(tableTransform_, viewProjection);
 
 	if (isShown[0] == true) {
