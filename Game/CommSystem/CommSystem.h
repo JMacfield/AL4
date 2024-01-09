@@ -19,3 +19,21 @@ pplx::task<T> Get(const std::wstring& url) {
 			}
 			});
 }
+
+//pplx::task<int> Post(const std::wstring& url) {
+//	return pplx::create_task([=] {
+//		json::value postData;
+//		postData[L"name"] = json::value::string(L"arguments");
+//
+//		http_client client(url);
+//		return client.request(methods::POST, L"",
+//			postData.serialize(), L"application/json"); })
+//
+//		.then([](http_response response) {
+//			if (response.status_code() == status_codes::OK) {
+//				return response.extract_json();
+//			} })
+//
+//			.then([](json::value json) {
+//				return json[L"ServerStatus"].as_integer(); });
+//}

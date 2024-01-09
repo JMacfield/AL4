@@ -54,33 +54,35 @@ private:
 #pragma endregion
 
 #pragma region ゲームの機能
-	//int a;
-	//unique_ptr<Particle> particle;
-	//int count_;
-	//unique_ptr<SkyDome> skyDome_ = nullptr;
-	//unique_ptr<Model> skyDomeModel_ = nullptr;
-	//unique_ptr<Model> playerModel_ = nullptr;
-	//unique_ptr<Player> player_;
-	//unique_ptr<FollowCamera> followCamera_;
-	////unique_ptr<ground> ground_;
-	//unique_ptr<GroundManager> groundmanager_;
-	//unique_ptr<CollisionManager> collisionManager_;
-	//unique_ptr<Goal> goal_;
-	//list<Enemy*> enemys_;
-	//unique_ptr<Enemy>enemy_;
-	//unique_ptr<LookOn> lockOn_;
-	//std::unique_ptr<Model> enemyHeadModel = nullptr;
-	//std::unique_ptr<Model> enemyBodyModel = nullptr;
-	//std::unique_ptr<Model> enemyL_armModel = nullptr;
-	//std::unique_ptr<Model> enemyR_armModel = nullptr;
-	//std::unique_ptr<Model> HeadModel = nullptr;
-	//std::unique_ptr<Model> BodyModel = nullptr;
-	//std::unique_ptr<Model> L_armModel = nullptr;
-	//std::unique_ptr<Model> R_armModel = nullptr;
-	//std::unique_ptr<Model> player_Hammer_ = nullptr;
-	//std::vector<Model*>enemyModels;
+	int a;
+	unique_ptr<Particle> particle;
+	int count_;
+	unique_ptr<SkyDome> skyDome_ = nullptr;
+	unique_ptr<Model> skyDomeModel_ = nullptr;
+	unique_ptr<Model> playerModel_ = nullptr;
+	unique_ptr<Player> player_;
+	unique_ptr<FollowCamera> followCamera_;
+	//unique_ptr<ground> ground_;
+	unique_ptr<GroundManager> groundmanager_;
+	unique_ptr<CollisionManager> collisionManager_;
+	unique_ptr<Goal> goal_;
+	list<Enemy*> enemys_;
+	unique_ptr<Enemy>enemy_;
+	unique_ptr<LookOn> lockOn_;
+	std::unique_ptr<Model> enemyHeadModel = nullptr;
+	std::unique_ptr<Model> enemyBodyModel = nullptr;
+	std::unique_ptr<Model> enemyL_armModel = nullptr;
+	std::unique_ptr<Model> enemyR_armModel = nullptr;
+	std::unique_ptr<Model> HeadModel = nullptr;
+	std::unique_ptr<Model> BodyModel = nullptr;
+	std::unique_ptr<Model> L_armModel = nullptr;
+	std::unique_ptr<Model> R_armModel = nullptr;
+	std::unique_ptr<Model> player_Hammer_ = nullptr;
+	std::vector<Model*>enemyModels;
 
-	//std::unique_ptr<Model> particleModel_;
+	std::unique_ptr<Model> particleModel_;
 	std::unique_ptr<Card> card_;
+	std::unique_ptr<Model> model_;
+	WorldTransform worldTransform_;
 #pragma endregion
 };
