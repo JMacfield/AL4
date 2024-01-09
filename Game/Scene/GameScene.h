@@ -51,14 +51,14 @@ private:
 	void Draw3D();
 	void ApplyGlobalVariables();
 
-	FollowCamera followCamera_;
+	//FollowCamera followCamera_;
 #pragma endregion
 
 #pragma region ゲームの機能
 	unique_ptr<SkyDome> skyDome_ = nullptr;
 	unique_ptr<Model> skyDomeModel_ = nullptr;
 	
-	unique_ptr<GroundManager> groundmanager_;
+	//unique_ptr<GroundManager> groundmanager_;
 	unique_ptr<Card> card_;
 #pragma endregion
 };

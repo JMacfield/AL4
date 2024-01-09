@@ -20,10 +20,10 @@ void GameScene::Initialize() {
 	skyDome_ = make_unique<SkyDome>();
 	skyDome_->Initialize(skyDomeModel_.get());
 	
-	groundmanager_ = make_unique<GroundManager>();
-	groundmanager_->Initialize();
+	//groundmanager_ = make_unique<GroundManager>();
+	//groundmanager_->Initialize();
 	
-	followCamera_.Initialize();
+	//followCamera_.Initialize();
 
 	GlobalVariables* globalVariables = GlobalVariables::GetInstance();
 	const char* groupName = "view";
