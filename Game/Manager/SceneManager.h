@@ -14,6 +14,7 @@
 #include <Scene/Iscene.h>
 #include <Scene/GameScene.h>
 #include <Scene/TitleScene.h>
+#include <Scene/ClearScene.h>
 #pragma endregion
 
 class SceneManager {
@@ -31,7 +32,7 @@ private:
 	TextureManager* textureManager_;
 	
 	Audio* audio_;
-	std::unique_ptr<Iscene> sceneArr_[2];
+	std::unique_ptr<Iscene> sceneArr_[3];
 	
 	GlobalVariables* glovalVariables_;
 	ImGuiManger* imguiManager_;

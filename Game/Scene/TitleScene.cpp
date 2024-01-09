@@ -12,19 +12,14 @@ void TitleScene::Initialize() {
 }
 
 void TitleScene::Update() {
-	XINPUT_STATE joyState;
 	
-	if (!input->GetJoystickState(0, joyState)) {
-		return;
-	}
+	
+	
 	
 	if (input->PressKey(DIK_SPACE)) {
 		sceneNum = GAME_SCENE;
 	}
 
-	if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_A) {
-		sceneNum = GAME_SCENE;
-	}
 
 	if (sceneNum < 0) {
 		sceneNum = 0;

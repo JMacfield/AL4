@@ -7,18 +7,18 @@ using namespace web::http;			   // 共通HTTP機能
 using namespace web::http::client;	   // HTTP クライアント機能
 using namespace concurrency::streams;  // 非同期ストリーム
 
-template <class T>
-pplx::task<T> Get(const std::wstring& url) {
-	return pplx::create_task([=] {
-		http_client client(url);
-		return client.request(methods::GET);
-		})
-		.then([](http_response response) {
-			if (response.status_code() == status_codes::OK) {
-				return response.extract_json();
-			}
-			});
-}
+//template <class T>
+//pplx::task<T> Get(const std::wstring& url) {
+//	return pplx::create_task([=] {
+//		http_client client(url);
+//		return client.request(methods::GET);
+//		})
+//		.then([](http_response response) {
+//			if (response.status_code() == status_codes::OK) {
+//				return response.extract_json();
+//			}
+//			});
+//}
 
 //pplx::task<int> Post(const std::wstring& url) {
 //	return pplx::create_task([=] {
