@@ -14,7 +14,7 @@ void GameScene::Initialize() {
 	input_ = Input::GetInstance();
 
 	viewProjection_.Initialize();
-	viewProjection_.translation_ = { 0.0f,0.0f,-5.0f };
+	viewProjection_.translation_ = { 0.0f,5.0f,-20.0f };
 
 	skyDomeModel_.reset(Model::CreateModelFromObj("Resource/SkyDome", "SkyDome.obj"));
 	skyDome_ = make_unique<SkyDome>();

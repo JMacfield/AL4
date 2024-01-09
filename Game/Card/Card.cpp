@@ -38,6 +38,9 @@ void Card::Initialize() {
 
 	nowTurn_ = PlayerTurn;
 
+	pTimer = 0;
+	pFlag = false;
+
 	isWin = false;
 
 	for (int i = 0; i < 20; i++) {
@@ -140,6 +143,10 @@ void Card::Initialize() {
 
 	select_ = 0;
 
+	//Particle* particle = new Particle();
+	//particle->Initialize({3.0f,0.0f,-1.0f});
+	//particles_.push_back(std::unique_ptr<Particle>(particle));
+
 	//StartCard();
 }
 
@@ -153,9 +160,21 @@ void Card::Update() {
 		return false;
 		});
 
-	for (const std::unique_ptr<Particle>& particle : particles_)
-	{
+	for (const std::unique_ptr<Particle>& particle : particles_) {
 		particle->Update();
+	}
+
+	if (pFlag == true) {
+		pTimer++;
+		
+		Particle* particle = new Particle();
+		particle->Initialize({3.0f,0.0f,-1.0f});
+		particles_.push_back(std::unique_ptr<Particle>(particle));
+	}
+
+	if (pTimer > 5) {
+		pFlag = false;
+		pTimer = 0;
 	}
 
 	for (int i = 0; i < 6; i++) {
@@ -190,6 +209,7 @@ void Card::Update() {
 		if (isShown[0] == true) {
 			if (input_->PushKey(DIK_SPACE) && arrowTransform_.translation_.x == -3.0f) {
 				isShown[0] = false;
+				pFlag = true;
 				blueTransform_[0].translation_ = { 3.0f,0.0f,-1.0f };
 				blueTransform_[0].rotation_ = { 1.3f,0.0f,0.0f };
 				nowTurn_ = EnemyTurn;
@@ -199,6 +219,7 @@ void Card::Update() {
 		if (isShown[2] == true && isShown[3] == false) {
 			if (input_->PushKey(DIK_SPACE) && arrowTransform_.translation_.x == 0.0f) {
 				isShown[5] = false;
+				pFlag = true;
 				yellowTransform_[3].translation_ = { 3.0f,0.0f,-1.0f };
 				yellowTransform_[3].rotation_ = { 1.3f,0.0f,0.0f };
 				nowTurn_ = EnemyTurn;
@@ -208,6 +229,7 @@ void Card::Update() {
 		if (isShown[3] == true && isShown[0] == false) {
 			if (input_->PushKey(DIK_SPACE) && arrowTransform_.translation_.x == 3.0f) {
 				isShown[4] = false;
+				pFlag = true;
 				yellowTransform_[2].translation_ = { 3.0f,0.0f,-1.0f };
 				yellowTransform_[2].rotation_ = { 1.3f,0.0f,0.0f };
 				nowTurn_ = EnemyTurn;
@@ -217,6 +239,7 @@ void Card::Update() {
 		if (isShown[7] == true && isShown[2] == false) {
 			if (input_->PushKey(DIK_SPACE) && arrowTransform_.translation_.x == 6.0f) {
 				isShown[6] = false;
+				pFlag = true;
 				greenTransform_[1].translation_ = { 3.0f,0.0f,-1.0f };
 				greenTransform_[1].rotation_ = { 1.3f,0.0f,0.0f };
 				nowTurn_ = EnemyTurn;
@@ -226,6 +249,7 @@ void Card::Update() {
 		if (isShown[8] == true && isShown[7] == false) {
 			if (input_->PushKey(DIK_SPACE) && arrowTransform_.translation_.x == -6.0f) {
 				isShown[7] = false;
+				pFlag = true;
 				redTransform_[1].translation_ = { 3.0f,0.0f,-1.0f };
 				redTransform_[1].rotation_ = { 1.3f,0.0f,0.0f };
 				//nowTurn_ = EnemyTurn;

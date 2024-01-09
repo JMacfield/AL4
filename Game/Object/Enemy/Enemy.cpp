@@ -94,9 +94,9 @@ void Enemy::Draw(const ViewProjection& view) {
 }
 
 void Enemy::OnCollision() {
-	Particle* particle = new Particle();
+	/*Particle* particle = new Particle();
 	particle->Initialize(models_[4], worldTransform_.translation_);
-	particles_.push_back(std::unique_ptr<Particle>(particle));
+	particles_.push_back(std::unique_ptr<Particle>(particle));*/
 }
 
 void Enemy::IsCollision() {

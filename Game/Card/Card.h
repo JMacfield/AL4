@@ -74,5 +74,8 @@ private:
 	int timer;
 	int count;
 
+	int pTimer;
+	bool pFlag;
+
 	bool isWin;
 };

@@ -1,15 +1,16 @@
 #include "Particle.h"
 
-void Particle::Initialize(Model* model, Vector3 position)
+void Particle::Initialize(Vector3 position)
 {
-	assert(model);
-	model_->CreateModelFromObj("Resource/Particle","particle");
+	//assert(model);
+	model_ = Model::CreateModelFromObj("Resource/Particle","particle.obj");
 
 	isAlive_ = true;
 
 	worldTransformParticle_.Initialize();
 
 	worldTransformParticle_.translation_ = position;
+	worldTransformParticle_.scale_ = { 0.1f,0.1f,0.1f };
 
 	speed_.x = RandomSpeed();
 	speed_.y = RandomSpeed();
