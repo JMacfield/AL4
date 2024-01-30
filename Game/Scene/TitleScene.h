@@ -35,4 +35,20 @@ private:
 
 	int fadeCounter_;
 	bool isStart_;
+
+	std::unique_ptr<Sprite> enemySprite_;
+	Transform enemyTransform_;
+	uint32_t enemyTexture_;
+
+	std::unique_ptr<Sprite> enemyHandSprite_;
+	Transform enemyHandTransform_;
+	uint32_t enemyHandTexture_;
+
+	float floatingParametor_ = 0.0f;
+
+	std::unique_ptr<Sprite> cardSprite_;
+	uint32_t cardTexture_;
+	Transform cardTransform_;
+
+	bool moveUp_;
 };

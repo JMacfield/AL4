@@ -83,4 +83,8 @@ private:
 	bool pFlag;
 
 	bool isWin;
+
+	bool moveRight;
+
+	float floatingParametor_ = 0.0f;
 };

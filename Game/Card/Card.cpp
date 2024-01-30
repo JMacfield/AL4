@@ -159,9 +159,21 @@ void Card::Initialize() {
 	//particles_.push_back(std::unique_ptr<Particle>(particle));
 
 	//StartCard();
+
+	moveRight = true;
 }
 
 void Card::Update() {
+	uint16_t T = 120;
+
+	float step = 2.0f * (float)M_PI / T;
+	float floatingAmplitude = 0.3f;
+
+	floatingParametor_ += step;
+	floatingParametor_ = (float)std::fmod(floatingParametor_, 2.0f * M_PI);
+
+	enemyTransform_.translation_.y = std::sin(floatingParametor_) * floatingAmplitude + 1.0f;
+
 	particles_.remove_if([](std::unique_ptr<Particle>& particle) {
 		if (particle->GetIsAlive() == false)
 		{
@@ -276,7 +288,6 @@ void Card::Update() {
 		if (nowTurn_ == EnemyTurn) {
 			timer++;
 
-			bool moveRight = true;
 			if (moveRight == true) {
 				if (timer % 60 == 0) {
 					enemyHandTransform_.translation_.x += 1.5f;
