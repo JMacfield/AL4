@@ -51,6 +51,11 @@ private:
 	std::unique_ptr<Model> yellowModel_[7];
 	std::unique_ptr<Model> greenModel_[7];
 
+	std::unique_ptr<Model> enemyModel_;
+	std::unique_ptr<Model> enemyHandModel_;
+	WorldTransform enemyTransform_;
+	WorldTransform enemyHandTransform_;
+
 	/*CardType red;
 	CardType blue;
 	CardType yellow;

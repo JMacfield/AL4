@@ -60,5 +60,14 @@ private:
 	
 	//unique_ptr<GroundManager> groundmanager_;
 	unique_ptr<Card> card_;
+
+	uint32_t fadeTexture_;
+	std::unique_ptr<Sprite> fade_;
+	Transform fadeTransform_;
+	Transform fadeUvTransform_;
+	Vector4 fadeMaterial_;
+	
+	int fadeCounter_;
+	bool isGameStart_;
 #pragma endregion
 };

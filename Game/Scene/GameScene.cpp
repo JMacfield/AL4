@@ -19,7 +19,19 @@ void GameScene::Initialize() {
 	skyDomeModel_.reset(Model::CreateModelFromObj("Resource/SkyDome", "SkyDome.obj"));
 	skyDome_ = make_unique<SkyDome>();
 	skyDome_->Initialize(skyDomeModel_.get());
+
+	fadeTexture_ = textureManager_->Load("Resource/black.png");
+	fade_ = make_unique<Sprite>();
+	Vector4 a = { 0.0f,0.0f,0.0f,1.0f };
+	Vector4 b = { 1280.0f,720.0f,0.0f,1.0f };
+	fade_->Initialize(a, b);
+	fadeTransform_ = { {1.0f,1.0f, 1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };
+	fadeUvTransform_ = { {1.0f,1.0f,1.0f}, {0.0f,0.0f,0.0f}, {0.0f,0.0f,0.0f} };
+	fadeMaterial_ = { 1.0f,1.0f,1.0f,1.0f };
 	
+	fadeCounter_ = 0;
+	isGameStart_ = false;
+
 	//groundmanager_ = make_unique<GroundManager>();
 	//groundmanager_->Initialize();
 	
@@ -38,7 +50,17 @@ void GameScene::Initialize() {
 }
 
 void GameScene::Update() {
-	card_->Update();
+	if (isGameStart_ == false) {
+		fadeMaterial_.w -= 0.01f;
+	}
+
+	if (fadeMaterial_.w <= 0.0f) {
+		isGameStart_ = true;
+	}
+
+	//if (isGameStart_ == true) {
+		card_->Update();
+	//}
 
 	if (card_->GetWin() == true) {
 		sceneNum = CLEAR_SCENE;
@@ -55,6 +77,7 @@ void GameScene::Draw() {
 	//2D描画準備
 	engine_->SpritePreDraw();
 	Draw2D();
+	fade_->Draw(fadeTransform_, fadeUvTransform_, fadeMaterial_, fadeTexture_);
 }
 
 void GameScene::Draw3D() {

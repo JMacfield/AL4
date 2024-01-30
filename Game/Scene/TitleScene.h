@@ -25,8 +25,14 @@ private:
 	int count;
 
 	uint32_t spriteTexture_;
+	uint32_t fadeTexture_;
 	std::unique_ptr<Sprite> sprite_;
+	std::unique_ptr<Sprite> fadeSprite_;
 	Transform spriteTransform_;
 	Transform spriteUvTransform_;
 	Vector4 spriteMaterial_;
+	Vector4 fadeMaterial_;
+
+	int fadeCounter_;
+	bool isStart_;
 };

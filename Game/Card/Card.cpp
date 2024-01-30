@@ -29,6 +29,17 @@ void Card::Initialize() {
 	arrowTransform_.Initialize();
 	arrowTransform_.translation_ = { 0.0f,2.0f,-8.0f };
 
+	enemyModel_ = std::make_unique<Model>();
+	enemyModel_.reset(Model::CreateModelFromObj("Resource/Enemy", "plane.obj"));
+	enemyTransform_.Initialize();
+	enemyTransform_.translation_ = { 0.0f,4.0f,16.0f };
+	enemyTransform_.scale_ = { 6.0f,6.0f,6.0f };
+
+	enemyHandModel_ = std::unique_ptr<Model>();
+	enemyHandModel_.reset(Model::CreateModelFromObj("Resource/EnemyHand", "plane.obj"));
+	enemyHandTransform_.Initialize();
+	enemyHandTransform_.translation_ = { 0.0f,4.0f,-8.0f };
+
 	table_ = std::make_unique<Model>();
 	table_.reset(Model::CreateModelFromObj("Resource/Wall", "plane.obj"));
 	tableTransform_.Initialize();
@@ -186,6 +197,8 @@ void Card::Update() {
 
 	arrowTransform_.UpdateMatrix();
 	tableTransform_.UpdateMatrix();
+	enemyTransform_.UpdateMatrix();
+	enemyHandTransform_.UpdateMatrix();
 
 	if (nowTurn_ == PlayerTurn) {
 		spriteMaterial_[1] = { 1.0f,1.0f,1.0f,0.4f };
@@ -262,6 +275,27 @@ void Card::Update() {
 	case EnemyTurn:
 		if (nowTurn_ == EnemyTurn) {
 			timer++;
+
+			bool moveRight = true;
+			if (moveRight == true) {
+				if (timer % 60 == 0) {
+					enemyHandTransform_.translation_.x += 1.5f;
+				}
+				if (enemyHandTransform_.translation_.x > 3.0f) {
+					moveRight = false;
+					enemyHandTransform_.translation_.x = 3.0f;
+				}
+			}
+
+			if (moveRight == false) {
+				if (timer % 60 == 0) {
+					enemyHandTransform_.translation_.x -= 1.5f;
+				}
+				if (enemyHandTransform_.translation_.x < -3.0f) {
+					moveRight = true;
+					enemyHandTransform_.translation_.x = -3.0f;
+				}
+			}
 		}
 
 		if (timer > 300 && count == 0) {
@@ -324,6 +358,7 @@ void Card::Update() {
 	ImGui::DragFloat3("Rotate", &tableTransform_.rotation_.x, 0.1f);
 	ImGui::DragInt("Timer", &timer);
 	ImGui::DragInt("Count", &count);
+	ImGui::DragFloat3("Trans", &enemyHandTransform_.translation_.x, 0.1f);
 	ImGui::End();
 }
 
@@ -334,6 +369,12 @@ void Card::Draw(const ViewProjection& viewProjection) {
 		}
 	//}
 
+	enemyModel_->Draw(enemyTransform_, viewProjection);
+
+	//if (nowTurn_ == EnemyTurn) {
+		enemyHandModel_->Draw(enemyHandTransform_, viewProjection);
+	//}
+	
 	table_->Draw(tableTransform_, viewProjection);
 
 	if (isShown[0] == true) {
