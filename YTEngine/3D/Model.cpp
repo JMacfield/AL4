@@ -52,7 +52,7 @@ void Model::Finalize() {
    
 }
 
-Model* Model::CreateModelFromObj(const std::string& directoryPath, const std::string& filename) {
+Model* Model::CreateModelFromFile(const std::string& directoryPath, const std::string& filename) {
     Model* model = new Model();
     model->Initialize(directoryPath, filename);
 

@@ -18,7 +18,7 @@ void GameScene::Initialize() {
 	viewProjection_.Initialize();
 	viewProjection_.translation_ = { 0.0f,0.0f,-5.0f };
 
-	planeModel_.reset(Model::CreateModelFromObj("Resource/Plane", "plane.gltf"));
+	planeModel_.reset(Model::CreateModelFromFile("Resource/Plane", "plane.gltf"));
 	planeModel_->SetColor({ 1.0f,1.0f,1.0f,1.0f });
 
 	planeTransform.Initialize();

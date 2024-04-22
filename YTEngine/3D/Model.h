@@ -22,7 +22,7 @@ public:
 	void Draw(const WorldTransform& transform, const ViewProjection& viewProjection);
 	void Finalize();
 
-	static Model* CreateModelFromObj(const std::string& directoryPath, const std::string& filename);
+	static Model* CreateModelFromFile(const std::string& directoryPath, const std::string& filename);
 	
 	MaterialData LoadMaterialTemplateFile(const std::string& directoryPath,const std::string&filename);
 	void SetColor(Vector4 color) { color_ = color; }
