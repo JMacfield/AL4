@@ -11,14 +11,22 @@ void GameScene::Initialize() {
 
 	textureManager_ = TextureManager::GetInstance();
 	
-	collisionManager_ = make_unique<CollisionManager>();
+	//collisionManager_ = make_unique<CollisionManager>();
 	
 	input_ = Input::GetInstance();
 	
 	viewProjection_.Initialize();
 	viewProjection_.translation_ = { 0.0f,0.0f,-5.0f };
 
-	a = textureManager_->Load("Resource/tex.png");
+	planeModel_.reset(Model::CreateModelFromObj("Resource/Plane", "plane.obj"));
+	planeModel_->SetColor({ 1.0f,1.0f,1.0f,1.0f });
+
+	planeTransform.Initialize();
+	planeTransform.scale_ = { 5.0f,5.0f,5.0f };
+	planeTransform.rotation_ = { 0.0f,0.0f,0.0f };
+	planeTransform.translation_ = { 0.0f,0.0f,0.0f };
+	
+	/*a = textureManager_->Load("Resource/tex.png");
 	
 	playerModel_.reset(Model::CreateModelFromObj("Resource/CUBE", "CUBE.obj"));
 	player_ = make_unique<Player>();
@@ -72,94 +80,101 @@ void GameScene::Initialize() {
 	
 	player_->SetLockOn(lockOn_.get());
 	
-	followCamera_->SetLockOn(lockOn_.get());
+	followCamera_->SetLockOn(lockOn_.get());*/
 	
 	//particle = make_unique<Particle>();
 	//particle->Initialize(1000);
 	
 	ApplyGlobalVariables();
-	count_ = 0;
+	//count_ = 0;
 }
 
 void GameScene::Update() {
-	count_++;
-	groundmanager_->Update();
-	for (std::list<Enemy*>::iterator enemy = enemys_.begin(); enemy != enemys_.end(); enemy++) {
-		if ((*enemy)->GetisAlive()) {
-			(*enemy)->Update();
-		}
-	}
-	if (player_->isGameover() == true) {
-		Finalize();
-		Initialize();
-	}
-	player_->isHit_ = false;
+	ImGui::Begin("Debug");
+	ImGui::DragFloat3("PlaneTranslate", &planeTransform.translation_.x, 0.1f);
+	ImGui::DragFloat3("PlaneRotate", &planeTransform.rotation_.x, 0.01f);
+	ImGui::End();
 
-	goal_->Update();
+	//count_++;
+	//groundmanager_->Update();
+	//for (std::list<Enemy*>::iterator enemy = enemys_.begin(); enemy != enemys_.end(); enemy++) {
+	//	if ((*enemy)->GetisAlive()) {
+	//		(*enemy)->Update();
+	//	}
+	//}
+	//if (player_->isGameover() == true) {
+	//	Finalize();
+	//	Initialize();
+	//}
+	//player_->isHit_ = false;
 
-
-	if (count_ >= 5) {
-		for (int i = 0; i < 2; i++) {
-			if (IsCollision(groundmanager_->GetOBB(i), player_->GetStructSphere())) {
-				player_->isHit_ = true;
-				player_->SetObjectPos(groundmanager_->GetGround(i)->GetWorldTransform());
-			}
-		}
+	//goal_->Update();
 
 
-		if (player_->GetIsAtack()) {
-			int i = 0;
-			for (Enemy* enemy : enemys_) {
-				if (enemy->GetisAlive()) {
-					if (IsCollision(player_->getcollsionObb(), enemy->GetStructSphere())) {
-						enemy->OnCollision();
-
-						if (!player_->GetIsHitAtack()) {
-							Transform t = { {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},enemy->GetWorldTransformBody().translation_ };
-							//particle->AddParticle({ t }, 35);
-							player_->SetIsHitAtack();
-							enemy->IsCollision();
-							enemy->SetVelocity(Normalise(Subtract(enemy->GetWorldTransform().GetWorldPosition(), player_->GetWorldTransform().GetWorldPosition())));
-						}
-					}
-
-					if (!player_->GetIsCombo()) {
-						enemy->ResetHP();
-					}
-				}
-
-			}
-		}
-
-		player_->Update();
-		viewProjection_.UpdateMatrix();
-		followCamera_->Update();
-		viewProjection_.matView = followCamera_->GetViewProjection().matView;
-		viewProjection_.matProjection = followCamera_->GetViewProjection().matProjection;
-		viewProjection_.TransferMatrix();
-		lockOn_->Update(enemys_, viewProjection_);
-		//particle->Update();
-		if (sceneNum > 1) {
-			sceneNum = 1;
-		}
+	//if (count_ >= 5) {
+	//	for (int i = 0; i < 2; i++) {
+	//		if (IsCollision(groundmanager_->GetOBB(i), player_->GetStructSphere())) {
+	//			player_->isHit_ = true;
+	//			player_->SetObjectPos(groundmanager_->GetGround(i)->GetWorldTransform());
+	//		}
+	//	}
 
 
-		collisionManager_->ClearColliders();
-		collisionManager_->AddCollider(player_.get());
-		collisionManager_->AddCollider(goal_.get());
-	
-		for (std::list<Enemy*>::iterator enemy = enemys_.begin(); enemy != enemys_.end(); enemy++) {
+	//	if (player_->GetIsAtack()) {
+	//		int i = 0;
+	//		for (Enemy* enemy : enemys_) {
+	//			if (enemy->GetisAlive()) {
+	//				if (IsCollision(player_->getcollsionObb(), enemy->GetStructSphere())) {
+	//					enemy->OnCollision();
 
-			if ((*enemy)) {
-				if ((*enemy)->GetisAlive()) {
-					collisionManager_->AddCollider((*enemy));
-				}
-			}
-		}
-	}
-	if (count_ >= 20) {
-		collisionManager_->CheckAllCollision();
-	}
+	//					if (!player_->GetIsHitAtack()) {
+	//						Transform t = { {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},enemy->GetWorldTransformBody().translation_ };
+	//						//particle->AddParticle({ t }, 35);
+	//						player_->SetIsHitAtack();
+	//						enemy->IsCollision();
+	//						enemy->SetVelocity(Normalise(Subtract(enemy->GetWorldTransform().GetWorldPosition(), player_->GetWorldTransform().GetWorldPosition())));
+	//					}
+	//				}
+
+	//				if (!player_->GetIsCombo()) {
+	//					enemy->ResetHP();
+	//				}
+	//			}
+
+	//		}
+	//	}
+
+	//	player_->Update();
+	//	viewProjection_.UpdateMatrix();
+	//	followCamera_->Update();
+	//	viewProjection_.matView = followCamera_->GetViewProjection().matView;
+	//	viewProjection_.matProjection = followCamera_->GetViewProjection().matProjection;
+	//	viewProjection_.TransferMatrix();
+	//	lockOn_->Update(enemys_, viewProjection_);
+	//	//particle->Update();
+	//	if (sceneNum > 1) {
+	//		sceneNum = 1;
+	//	}
+
+
+	//	collisionManager_->ClearColliders();
+	//	collisionManager_->AddCollider(player_.get());
+	//	collisionManager_->AddCollider(goal_.get());
+	//
+	//	for (std::list<Enemy*>::iterator enemy = enemys_.begin(); enemy != enemys_.end(); enemy++) {
+
+	//		if ((*enemy)) {
+	//			if ((*enemy)->GetisAlive()) {
+	//				collisionManager_->AddCollider((*enemy));
+	//			}
+	//		}
+	//	}
+	//}
+	//if (count_ >= 20) {
+	//	collisionManager_->CheckAllCollision();
+	//}
+
+	planeTransform.UpdateMatrix();
 }
 
 
@@ -177,16 +192,17 @@ void GameScene::Draw()
 
 void GameScene::Draw3D()
 {
-	skyDome_->Draw(viewProjection_);
+	/*skyDome_->Draw(viewProjection_);
 	player_->Draw(viewProjection_);
 	groundmanager_->Draw(viewProjection_);
 	goal_->Draw(viewProjection_);
 	for (std::list<Enemy*>::iterator enemy = enemys_.begin(); enemy != enemys_.end(); enemy++) {
 		(*enemy)->Draw(viewProjection_);
 	}
-	engine_->PariclePreDraw();
+	engine_->PariclePreDraw();*/
 	//particle->Draw(viewProjection_, { 1.0f,1.0f,1.0f,1.0f }, a);
 
+	planeModel_->Draw(planeTransform, viewProjection_);
 }
 
 void GameScene::ApplyGlobalVariables()
@@ -199,7 +215,7 @@ void GameScene::ApplyGlobalVariables()
 
 void GameScene::Draw2D() {
 	engine_->SetBlendMode(kBlendModeNormal);
-	lockOn_->Draw();
+	//lockOn_->Draw();
 
 }
 void GameScene::Finalize()

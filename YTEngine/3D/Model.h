@@ -4,6 +4,10 @@
 #include <string>
 #pragma endregion
 
+#include <assimp/include/assimp/Importer.hpp>
+#include <assimp/include/assimp/scene.h>
+#include <assimp/include/assimp/postprocess.h>
+
 #include "Enginebase/DirectXCommon.h"
 #include "MyMath/MyMath.h"
 #include "EngineBase/YTEngine.h"
@@ -19,10 +23,14 @@ public:
 	void Finalize();
 
 	static Model* CreateModelFromObj(const std::string& directoryPath, const std::string& filename);
+	
 	MaterialData LoadMaterialTemplateFile(const std::string& directoryPath,const std::string&filename);
 	void SetColor(Vector4 color) { color_ = color; }
 
+	Node ReadNode(aiNode* node);
+
 	ModelData modelData_;
+	ModelData LoadModelFile(const std::string& directoryPath, const std::string& filename);
 	ModelData LoadObjFile(const std::string& directoryPath, const std::string& filename);
 
 private:

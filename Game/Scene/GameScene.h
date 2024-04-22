@@ -80,5 +80,8 @@ private:
 	std::vector<Model*>enemyModels;
 
 	std::unique_ptr<Model> particleModel_;
+
+	std::unique_ptr<Model> planeModel_;
+	WorldTransform planeTransform;
 #pragma endregion
 };
