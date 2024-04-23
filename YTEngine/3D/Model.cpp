@@ -23,10 +23,15 @@ void Model::Initialize( const std::string& directoryPath, const std::string& fil
 
 void Model::Draw(const WorldTransform& transform, const ViewProjection& viewProjection) {
     Transform uvTransform = { { 1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f}, {0.0f,0.0f,0.0f} };
+    //Matrix4x4 worldMatrix = MakeAffineMatrix(transform.scale_, transform.rotation_, transform.translation_);
+    //Matrix4x4 projectionmatrix = MakeOrthographicMatrix(0.0f, 0.0f, (float)directXCommon_->GetWin()->kClientWidth, (float)directXCommon_->GetWin()->kClientHeight, 0.0f, 100.0f);
 
     Matrix4x4 uvtransformMtrix = MakeScaleMatrix(uvTransform.scale);
     uvtransformMtrix = Multiply(uvtransformMtrix, MakeRotateZMatrix(uvTransform.rotate.z));
     uvtransformMtrix = Multiply(uvtransformMtrix, MakeTranslateMatrix(uvTransform.translate));
+
+    //wvpData_->WVP = Multiply(modelData_.rootNode.localMatrix, Multiply(worldMatrix, projectionmatrix));
+    //wvpData_->World = Multiply(modelData_.rootNode.localMatrix, worldMatrix);
 
     *material_ = { color_,true };
     material_->uvTransform = uvtransformMtrix;
@@ -109,6 +114,8 @@ ModelData Model::LoadModelFile(const std::string& directoryPath, const std::stri
             modelData.material.textureFilePath = directoryPath + "/" + textureFilePath.C_Str();
         }
     }
+
+    modelData.rootNode = ReadNode(scene->mRootNode);
 
     return modelData;
 }
