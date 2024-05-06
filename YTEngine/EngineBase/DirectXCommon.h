@@ -11,6 +11,7 @@
 #pragma endregion
 
 #include "WinApp.h"
+#include "MyMath/MyMath.h"
 #include "MyUtility/Convert.h"
 
 #pragma comment(lib, "d3d12.lib")
@@ -55,6 +56,8 @@ public:
 	
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> GetDsvHeap() { return dsvDescriptorHeap_; }
 	D3D12_RENDER_TARGET_VIEW_DESC getRtvDesc() { return rtvDesc; }
+
+	Microsoft::WRL::ComPtr<ID3D12Resource> CreateRenderTextureResource(Microsoft::WRL::ComPtr<ID3D12Device> device, uint32_t width, uint32_t height, DXGI_FORMAT format, const Vector4& clearColor);
 
 private:
 	D3D12_RENDER_TARGET_VIEW_DESC rtvDesc{};
