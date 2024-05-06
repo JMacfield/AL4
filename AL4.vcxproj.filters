@@ -326,6 +326,7 @@
     <FxCompile Include="YTEngine\Shader\Particle.PS.hlsl">
       <Filter>リソース ファイル\Shader</Filter>
     </FxCompile>
+    <FxCompile Include="YTEngine\Shader\Grayscale.PS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="YTEngine\EngineManager\Icon\Icon.rc">
