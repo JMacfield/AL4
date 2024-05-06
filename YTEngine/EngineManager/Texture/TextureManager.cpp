@@ -75,10 +75,10 @@ void TextureManager::LoadTexture(const std::string& filePath, uint32_t index) {
 
 	//metaDataを元にSRVの設定
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
-	srvDesc.Format = metadata.format;
+	srvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
 	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
 	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;//2Dテクスチャ
-	srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
+	srvDesc.Texture2D.MipLevels = 1;
 
 	//SRVを作成するDescripterHeapの場所を決める
 	textureSrvHandleGPU_[index] = GettextureSrvHandleGPU(dirctXCommon_->GetSrvHeap().Get(), descriptorSizeSRV, index + 1);//direct_->GetSrvHeap()->GetGPUDescriptorHandleForHeapStart();
@@ -87,6 +87,7 @@ void TextureManager::LoadTexture(const std::string& filePath, uint32_t index) {
 	//先頭はIMGUIが使ってるからその次を使う
 	textureSrvHandleCPU_[index].ptr += dirctXCommon_->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 	textureSrvHandleGPU_[index].ptr += dirctXCommon_->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+
 	dirctXCommon_->GetDevice()->CreateShaderResourceView(textureResource_[index].Get(), &srvDesc, textureSrvHandleCPU_[index]);
 }
 

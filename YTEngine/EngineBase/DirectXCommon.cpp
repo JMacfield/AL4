@@ -180,21 +180,36 @@ void DirectXCommon::CreateSwapChain() {
 }
 
 // レンダーターゲット生成
+//void DirectXCommon::CreateFinalRenderTargets() {
+//	//RTVの設定
+//	rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;//出力結果をSRGBに変換して書き込む
+//	rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;//2Dテクスチャとして書き込む
+//
+//	//ディスクリプタの先頭を取得する
+//	D3D12_CPU_DESCRIPTOR_HANDLE rtvStartHandle = rtvDescriptorHeap_->GetCPUDescriptorHandleForHeapStart();
+//
+//	//まず一つ目を作る。一つ目は最初のところに作る。作る場所をこちらで指定
+//	rtvHandles_[0] = rtvStartHandle;
+//	device_->CreateRenderTargetView(backBuffers_[0].Get(), &rtvDesc, rtvHandles_[0]);
+//	//2つ目のディスクリプタハンドルを得る（自力で）
+//	rtvHandles_[1].ptr = rtvHandles_[0].ptr + device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+//	//2つ目を作る
+//	device_->CreateRenderTargetView(backBuffers_[1].Get(), &rtvDesc, rtvHandles_[1]);
+//}
+
 void DirectXCommon::CreateFinalRenderTargets() {
-	//RTVの設定
-	rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;//出力結果をSRGBに変換して書き込む
-	rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;//2Dテクスチャとして書き込む
+	rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+	rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
 
-	//ディスクリプタの先頭を取得する
+	const Vector4 kRenderTargetClearView{ 1.0f,0.0f,0.0f,1.0f };
+	auto renderTextureResource = CreateRenderTextureResource(device_, backBufferWidth_, backBufferHeight_, DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, kRenderTargetClearView);
+
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvStartHandle = rtvDescriptorHeap_->GetCPUDescriptorHandleForHeapStart();
-
-	//まず一つ目を作る。一つ目は最初のところに作る。作る場所をこちらで指定
 	rtvHandles_[0] = rtvStartHandle;
-	device_->CreateRenderTargetView(backBuffers_[0].Get(), &rtvDesc, rtvHandles_[0]);
-	//2つ目のディスクリプタハンドルを得る（自力で）
 	rtvHandles_[1].ptr = rtvHandles_[0].ptr + device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
-	//2つ目を作る
-	device_->CreateRenderTargetView(backBuffers_[1].Get(), &rtvDesc, rtvHandles_[1]);
+
+	device_->CreateRenderTargetView(renderTextureResource.Get(), &rtvDesc, rtvHandles_[0]);
+	device_->CreateRenderTargetView(renderTextureResource.Get(), &rtvDesc, rtvHandles_[1]);
 }
 
 // フェンス生成
