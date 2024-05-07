@@ -315,6 +315,7 @@
     <None Include="YTEngine\Shader\Particle.VS.hlsl">
       <Filter>リソース ファイル\Shader</Filter>
     </None>
+    <None Include="Resource\Shader\Fullscreen.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="YTEngine\Shader\Object3d.PS.hlsl">
@@ -326,6 +327,9 @@
     <FxCompile Include="YTEngine\Shader\Particle.PS.hlsl">
       <Filter>リソース ファイル\Shader</Filter>
     </FxCompile>
+    <FxCompile Include="Resource\Shader\Fullscreen.VS.hlsl" />
+    <FxCompile Include="Resource\Shader\Fullscreen.PS.hlsl" />
+    <FxCompile Include="Resource\Shader\Grayscale.PS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="YTEngine\EngineManager\Icon\Icon.rc">

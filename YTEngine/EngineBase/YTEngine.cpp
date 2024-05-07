@@ -272,11 +272,11 @@ void YTEngine::SettingRasterizerState3D() {
 	rasterizerDesc3DWireFrame_.FillMode = D3D12_FILL_MODE_WIREFRAME;
 
 	//Shaderをコンパイルする
-	vertexShaderBlob3D_ = CompileShader(L"YTEngine/Shader/Object3d.VS.hlsl",
+	vertexShaderBlob3D_ = CompileShader(L"Resource/Shader/Object3d.VS.hlsl",
 		L"vs_6_0", dxcUtils_, dxcCompiler_, includeHandler_);
 	assert(vertexShaderBlob3D_ != nullptr);
 
-	pixelShaderBlob3D_ = CompileShader(L"YTEngine/Shader/Object3d.PS.hlsl",
+	pixelShaderBlob3D_ = CompileShader(L"Resource/Shader/Object3d.PS.hlsl",
 		L"ps_6_0", dxcUtils_, dxcCompiler_, includeHandler_);
 	assert(pixelShaderBlob3D_ != nullptr);
 }
@@ -477,12 +477,12 @@ void YTEngine::SettingRasterizerState2D() {
 	rasterizerDesc2D_.FillMode = D3D12_FILL_MODE_SOLID;
 
 	//Shaderをコンパイルする
-	vertexShaderBlob2D_ = CompileShader(L"YTEngine/Shader/Object2d.VS.hlsl",
+	vertexShaderBlob2D_ = CompileShader(L"Resource/Shader/Object2d.VS.hlsl",
 		L"vs_6_0", dxcUtils_, dxcCompiler_, includeHandler_);
 	assert(vertexShaderBlob2D_ != nullptr);
 
 
-	pixelShaderBlob2D_ = CompileShader(L"YTEngine/Shader/Object2d.PS.hlsl",
+	pixelShaderBlob2D_ = CompileShader(L"Resource/Shader/Object2d.PS.hlsl",
 		L"ps_6_0", dxcUtils_, dxcCompiler_, includeHandler_);
 	assert(pixelShaderBlob2D_ != nullptr);
 }
@@ -644,11 +644,11 @@ void YTEngine::SettingRasterizerStateParticle() {
 	rasterizerDescParticle_.FillMode = D3D12_FILL_MODE_SOLID;
 
 	//Shaderをコンパイルする
-	vertexShaderBlobParticle_ = CompileShader(L"YTEngine/Shader/Particle.VS.hlsl",
+	vertexShaderBlobParticle_ = CompileShader(L"Resource/Shader/Particle.VS.hlsl",
 		L"vs_6_0", dxcUtils_, dxcCompiler_, includeHandler_);
 	assert(vertexShaderBlobParticle_ != nullptr);
 
-	pixelShaderBlobParticle_ = CompileShader(L"YTEngine/Shader/Particle.PS.hlsl",
+	pixelShaderBlobParticle_ = CompileShader(L"Resource/Shader/Particle.PS.hlsl",
 		L"ps_6_0", dxcUtils_, dxcCompiler_, includeHandler_);
 	assert(pixelShaderBlobParticle_ != nullptr);
 }
