@@ -23,7 +23,7 @@ void GameScene::Initialize() {
 
 	planeTransform.Initialize();
 	planeTransform.scale_ = { 5.0f,5.0f,5.0f };
-	planeTransform.rotation_ = { 0.0f,0.0f,0.0f };
+	planeTransform.rotation_ = { 0.0f,0.0f,3.14f };
 	planeTransform.translation_ = { 0.0f,0.0f,0.0f };
 	
 	/*a = textureManager_->Load("Resource/tex.png");
