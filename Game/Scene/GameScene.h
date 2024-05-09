@@ -1,5 +1,6 @@
 #pragma once
 
+#include "EngineManager/Animation/Animation.h"
 #include "EngineBase/YTEngine.h"
 #include "EngineManager/Input/Input.h"
 #include "MyMath/MyMath.h"
@@ -83,5 +84,9 @@ private:
 
 	std::unique_ptr<Model> planeModel_;
 	WorldTransform planeTransform;
+
+	std::unique_ptr<Model> model;
+	WorldTransform modelTransform;
+	//Animation animation;
 #pragma endregion
 };

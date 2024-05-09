@@ -18,6 +18,10 @@ void GameScene::Initialize() {
 	viewProjection_.Initialize();
 	viewProjection_.translation_ = { 0.0f,0.0f,-5.0f };
 
+	model.reset(Model::CreateModelFromFile("Resource/AnimatedCube", "AnimatedCube.gltf"));
+	modelTransform.Initialize();
+	modelTransform.translation_ = { 0.0f,0.0f,0.0f };
+	
 	planeModel_.reset(Model::CreateModelFromFile("Resource/Plane", "plane.gltf"));
 	planeModel_->SetColor({ 1.0f,1.0f,1.0f,1.0f });
 
@@ -175,6 +179,7 @@ void GameScene::Update() {
 	//}
 
 	planeTransform.UpdateMatrix();
+	modelTransform.UpdateMatrix();
 }
 
 
@@ -202,7 +207,8 @@ void GameScene::Draw3D()
 	engine_->PariclePreDraw();*/
 	//particle->Draw(viewProjection_, { 1.0f,1.0f,1.0f,1.0f }, a);
 
-	planeModel_->Draw(planeTransform, viewProjection_);
+	//planeModel_->Draw(planeTransform, viewProjection_);
+	model->Draw(modelTransform, viewProjection_);
 }
 
 void GameScene::ApplyGlobalVariables()

@@ -166,6 +166,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="YTEngine\EngineBase\SrvDescriptorHeap.cpp" />
     <ClCompile Include="YTEngine\EngineBase\WinApp.cpp" />
     <ClCompile Include="YTEngine\EngineBase\YTEngine.cpp" />
+    <ClCompile Include="YTEngine\EngineManager\Animation\Animation.cpp" />
     <ClCompile Include="YTEngine\EngineManager\Audio\Audio.cpp" />
     <ClCompile Include="YTEngine\EngineManager\Collision\CollisionManager.cpp" />
     <ClCompile Include="YTEngine\EngineManager\GlobalVariables\GlobalVariables.cpp" />
@@ -211,6 +212,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="YTEngine\EngineBase\SrvDescriptorHeap.h" />
     <ClInclude Include="YTEngine\EngineBase\WinApp.h" />
     <ClInclude Include="YTEngine\EngineBase\YTEngine.h" />
+    <ClInclude Include="YTEngine\EngineManager\Animation\Animation.h" />
     <ClInclude Include="YTEngine\EngineManager\Audio\Audio.h" />
     <ClInclude Include="YTEngine\EngineManager\Collision\Collider.h" />
     <ClInclude Include="YTEngine\EngineManager\Collision\CollisionConfig.h" />
