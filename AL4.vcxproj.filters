@@ -330,6 +330,7 @@
     <FxCompile Include="Resource\Shader\Fullscreen.VS.hlsl" />
     <FxCompile Include="Resource\Shader\Fullscreen.PS.hlsl" />
     <FxCompile Include="Resource\Shader\Grayscale.PS.hlsl" />
+    <FxCompile Include="Resource\Shader\Vignetting.PS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="YTEngine\EngineManager\Icon\Icon.rc">

@@ -18,11 +18,11 @@ void GameScene::Initialize() {
 	viewProjection_.Initialize();
 	viewProjection_.translation_ = { 0.0f,0.0f,-5.0f };
 
-	planeModel_.reset(Model::CreateModelFromFile("Resource/Plane", "plane.gltf"));
+	planeModel_.reset(Model::CreateModelFromFile("Resource/Plane", "plane.obj"));
 	planeModel_->SetColor({ 1.0f,1.0f,1.0f,1.0f });
 
 	planeTransform.Initialize();
-	planeTransform.scale_ = { 5.0f,5.0f,5.0f };
+	planeTransform.scale_ = { 36.9f,20.8f,5.0f };
 	planeTransform.rotation_ = { 0.0f,0.0f,3.14f };
 	planeTransform.translation_ = { 0.0f,0.0f,0.0f };
 	
@@ -91,6 +91,7 @@ void GameScene::Initialize() {
 
 void GameScene::Update() {
 	ImGui::Begin("Debug");
+	ImGui::DragFloat3("PlaneScale", &planeTransform.scale_.x, 0.1f);
 	ImGui::DragFloat3("PlaneTranslate", &planeTransform.translation_.x, 0.1f);
 	ImGui::DragFloat3("PlaneRotate", &planeTransform.rotation_.x, 0.01f);
 	ImGui::End();
