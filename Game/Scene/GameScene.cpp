@@ -94,10 +94,12 @@ void GameScene::Initialize() {
 }
 
 void GameScene::Update() {
+#ifdef _DEBUG
 	ImGui::Begin("Debug");
 	ImGui::DragFloat3("PlaneTranslate", &planeTransform.translation_.x, 0.1f);
 	ImGui::DragFloat3("PlaneRotate", &planeTransform.rotation_.x, 0.01f);
 	ImGui::End();
+#endif // DEBUG
 
 	//count_++;
 	//groundmanager_->Update();
