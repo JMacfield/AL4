@@ -95,8 +95,8 @@ void GameScene::Initialize() {
 
 void GameScene::Update() {
 	ImGui::Begin("Debug");
-	ImGui::DragFloat3("PlaneTranslate", &planeTransform.translation_.x, 0.1f);
-	ImGui::DragFloat3("PlaneRotate", &planeTransform.rotation_.x, 0.01f);
+	ImGui::DragFloat3("PlaneTranslate", &modelTransform.translation_.x, 0.1f);
+	ImGui::DragFloat3("PlaneRotate", &modelTransform.rotation_.x, 0.01f);
 	ImGui::End();
 
 	//count_++;
